@@ -1,0 +1,53 @@
+<div class="mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
+
+    <!-- Id Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+    </ng-container>
+
+        <!-- ETA Column -->
+        <ng-container matColumnDef="will_arrive">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>ETA</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.will_arrive}}</mat-cell>
+        </ng-container>
+
+
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="short_description">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.short_description}}</mat-cell>
+    </ng-container>
+        <!-- Place of Dispatch Column -->
+        <ng-container matColumnDef="dispatch_place">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Dispatch</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.dispatch_place.name}}</mat-cell>
+        </ng-container>
+        <!-- Place of Destination Column -->
+        <ng-container matColumnDef="destination_place">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Destination</mat-header-cell>
+          <mat-cell *matCellDef="let row"><h3>{{row.destination_place.name}}</h3></mat-cell>
+        </ng-container>
+                <!-- Shipments of Order Column -->
+                <ng-container matColumnDef="shipments">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Shipments</mat-header-cell>
+                  <!-- <mat-cell *matCellDef="let row"><span *ngFor="let sh of row.shipments">{{sh.name}}, </span></mat-cell> -->
+                  <mat-cell *matCellDef="let row"><span color="red">{{row.shipments.length}}</span></mat-cell>
+                </ng-container>
+
+ 
+    <mat-header-row *matHeaderRowDef="displayedColumns" ></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="rowClickHandler(row)"></mat-row>
+    
+     
+  </mat-table>
+
+  <mat-paginator #paginator
+    [length]="dataSource.data.length" 
+    [pageIndex]="0"
+    [pageSize]="25"
+    [pageSizeOptions]="[25, 50, 100, 250]">
+  </mat-paginator>
+</div>

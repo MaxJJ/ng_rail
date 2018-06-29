@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
+import { Observable } from 'rxjs';
+
+import { Breakpoints, BreakpointState, BreakpointObserver } from '@angular/cdk/layout';
+
 
 @Component({
   selector: 'app-root',
@@ -6,5 +10,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+
+  isHandset: Observable<BreakpointState> = this.breakpointObserver.observe(Breakpoints.Handset);
+
+  constructor(private breakpointObserver: BreakpointObserver){
+ 
+  }
+
+
+ngOnInit() {
+
+}
+
+
 }

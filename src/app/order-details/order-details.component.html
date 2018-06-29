@@ -1,0 +1,21 @@
+
+    <form>
+        <div class="example-container">
+    <mat-form-field>
+      <input matInput placeholder="{{model.id}} - Orders Title" [(ngModel)]="model.short_description" name='title'>
+      
+    </mat-form-field>
+    <mat-form-field>
+        <textarea matInput placeholder="Description" [(ngModel)]="model.description" name='description'></textarea>
+      </mat-form-field>
+
+      <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="ETA" [(ngModel)]="model.will_arrive" name='eta'>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+  </div>
+    </form>
+    {{diagnostic}}
+
