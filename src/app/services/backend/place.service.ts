@@ -1,9 +1,20 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http'
+import {HttpClient, HttpHeaders} from '@angular/common/http'
 import { Observable } from 'rxjs';
 
 import {Urls} from './api_urls';
 import {Place} from '../interfaces';
+
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json',
+    
+  })
+};
+
+
+
 
 
 @Injectable({
@@ -13,10 +24,17 @@ import {Place} from '../interfaces';
 
 export class PlaceService {
   urls=new Urls();
+
   constructor(private http : HttpClient) { }
 
-getPlaces(){
+getPlaces():Observable<Place[]>{
 
   return this.http.get<Place[]>(this.urls.places);
+}
+
+postPlace(place:Place):Observable<Place>{
+
+  return this.http.post<Place>(this.urls.places,place,httpOptions);
+
 }
 }

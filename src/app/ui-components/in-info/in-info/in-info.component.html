@@ -1,0 +1,20 @@
+<mat-card class='mb-2' (click)="openInInfoDialog()">
+        <mat-card-content>
+                <div class="row">
+                        {{ model.short_description }}
+                </div>
+
+                <div class="row">
+                        ETA : {{model.will_arrive}}
+                </div>
+
+                <div class="row">
+                        from : {{model.dispatch_place.place_name}} / {{model.dispatch_place.place_code}}
+                </div>
+
+                <div class="row">
+                        consignor : {{model.dispatch_place.place_name}}
+                </div>
+
+        </mat-card-content>
+</mat-card>

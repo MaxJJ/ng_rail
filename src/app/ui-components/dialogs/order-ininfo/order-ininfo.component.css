@@ -1,0 +1,11 @@
+.dialog{
+    width: 100%;
+}
+
+.dialog > *{
+    width: 100%;
+}
+
+mat-dialog-actions > button{
+width: 100%;
+}

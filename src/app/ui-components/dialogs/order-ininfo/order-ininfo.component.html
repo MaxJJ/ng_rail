@@ -1,0 +1,33 @@
+<mat-dialog-content class="dialog">
+
+<mat-form-field>
+<input matInput placeholder="Title" [(ngModel)]="order.short_description">
+</mat-form-field>
+
+<mat-form-field >
+    
+    <input matInput [matDatepicker]="dp" placeholder="ETA" [value]='date' (dateChange)="setEta($event)" >
+    <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+    <mat-datepicker #dp
+                    startView="month"
+                    panelClass="example-month-picker">
+    </mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+<input matInput [matAutocomplete]="ac" placeholder="Station of Dispatch" [value]="stOfDispCtrl.value.place_name" [formControl]="stOfDispCtrl" >
+<mat-autocomplete #ac="matAutocomplete">
+  <mat-option *ngFor="let pl of filteredPlaces | async" [value]="pl.place_name">
+    <p>{{pl.place_name}} / {{pl.place_code}}</p>
+  </mat-option>
+</mat-autocomplete>
+
+  </mat-form-field>
+
+</mat-dialog-content>
+  <mat-dialog-actions>
+      <!-- <button mat-button mat-dialog-close>Close</button> -->
+      <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+      <button mat-button [mat-dialog-close]="order">Save</button>
+    </mat-dialog-actions>
+

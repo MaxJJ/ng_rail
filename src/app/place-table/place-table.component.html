@@ -1,6 +1,6 @@
-
+<button mat-raised-button (click)="newplace()" color="primary" >Create new Place</button>
 <div class="mat-elevation-z8">
-  {{places}}
+ 
   <mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
 
     <!-- Id Column -->
@@ -19,7 +19,23 @@
             <mat-header-cell *matHeaderCellDef >Code</mat-header-cell>
             <mat-cell *matCellDef="let row">{{row.place_code}}</mat-cell>
           </ng-container>
+        <!-- road_name_abbr Column -->
+        <ng-container matColumnDef="road_name_abbr">
+          <mat-header-cell *matHeaderCellDef >Letters</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.road_name_abbr}}</mat-cell>
+        </ng-container>
+                <!-- road_operator_name Column -->
+                <ng-container matColumnDef="road_operator_name">
+                  <mat-header-cell *matHeaderCellDef >Operator</mat-header-cell>
+                  <mat-cell *matCellDef="let row">{{row.road_operator_name}}</mat-cell>
+                </ng-container>
+        <!-- road_name_abbr Column -->
+        <ng-container matColumnDef="road_code">
+          <mat-header-cell *matHeaderCellDef >Road code</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.road_code}}</mat-cell>
+        </ng-container>
 
+        
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="rowClickHandler(row)" 
     (mouseover)= "row.is_hover=true" (mouseleave)= "row.is_hover=false"   [style.border-bottom]="row.is_hover ? 'solid 1px red' :''"></mat-row>

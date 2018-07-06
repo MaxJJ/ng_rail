@@ -3,26 +3,27 @@ import { MatPaginator, MatSort } from '@angular/material';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
 import { OrderService } from '../services/backend/order.service';
+import { Order } from '../services/interfaces';
 
 
 // TODO: Replace this with your own data model type
-export interface Shipment{
-  id:number;
-  name:string;
-}
-export interface OrdersTableItem {
-  id: number;
-  name?: string;
-  short_description:string;
-  description:string;
-  will_arrive:Date;
-  dispatch_place:string;
-  destination_place:string;
-  shipments:Shipment[];
+// export interface Shipment{
+//   id:number;
+//   name:string;
+// }
+// export interface OrdersTableItem {
+//   id: number;
+//   name?: string;
+//   short_description:string;
+//   description:string;
+//   will_arrive:Date;
+//   dispatch_place:string;
+//   destination_place:string;
+//   shipments:Shipment[];
 
  
 
-}
+// }
 
 // TODO: replace this with real data from your application
 // const EXAMPLE_DATA: OrdersTableItem[] = [
@@ -53,20 +54,26 @@ export interface OrdersTableItem {
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
-export class OrdersTableDataSource extends DataSource<OrdersTableItem> {
+export class OrdersTableDataSource extends DataSource<Order> {
   // data: OrdersTableItem[] = EXAMPLE_DATA;
-  data: OrdersTableItem[];
-  constructor(private paginator: MatPaginator, private sort: MatSort,private dataset:OrdersTableItem[]) {
+  data: Order[];
+  constructor(private paginator: MatPaginator, private sort: MatSort,private order_service:OrderService) {
     super();
-    this.data = dataset;
+    this.getOrders();
   }
+
+  getOrders(){
+  this.order_service.getOrders().subscribe(res=>this.data=res)
+
+  }
+
 
   /**
    * Connect this data source to the table. The table will only update when
    * the returned stream emits new items.
    * @returns A stream of the items to be rendered.
    */
-  connect(): Observable<OrdersTableItem[]> {
+  connect(): Observable<Order[]> {
     // Combine everything that affects the rendered data into one update
     // stream for the data-table to consume.
     const dataMutations = [
@@ -93,7 +100,7 @@ export class OrdersTableDataSource extends DataSource<OrdersTableItem> {
    * Paginate the data (client-side). If you're using server-side pagination,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getPagedData(data: OrdersTableItem[]) {
+  private getPagedData(data: Order[]) {
     const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
     return data.splice(startIndex, this.paginator.pageSize);
   }
@@ -102,7 +109,7 @@ export class OrdersTableDataSource extends DataSource<OrdersTableItem> {
    * Sort the data (client-side). If you're using server-side sorting,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getSortedData(data: OrdersTableItem[]) {
+  private getSortedData(data: Order[]) {
     if (!this.sort.active || this.sort.direction === '') {
       return data;
     }

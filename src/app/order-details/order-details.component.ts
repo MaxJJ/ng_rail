@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../services/backend/order.service';
 import { ActivatedRoute } from '@angular/router';
+import { Order } from '../services/interfaces';
 
-class MyModel{
-  constructor(private id:string,private short_description:string){}
-}
+
 
 @Component({
   selector: 'app-order-details',
@@ -25,6 +24,8 @@ export class OrderDetailsComponent implements OnInit {
 this.orders_service.getOrderById(id).subscribe(res=>this.model=res);
 
   }
+
+
 
   get diagnostic() { return JSON.stringify(this.model); };
 

@@ -1,21 +1,36 @@
+<div class="row">
+  <div class="col-6">
+<in-info [model]="model"></in-info>
+<mat-card>
+  place out!
+</mat-card>
+<mat-card>
+  place in!
+</mat-card>
+  </div>
+  <div class="col-6">
+    <mat-card>
+      comments !
+    </mat-card> 
+  </div>
+</div>
 
-    <form>
-        <div class="example-container">
+<form>
+  <div class="example-container">
     <mat-form-field>
       <input matInput placeholder="{{model.id}} - Orders Title" [(ngModel)]="model.short_description" name='title'>
-      
+
     </mat-form-field>
     <mat-form-field>
-        <textarea matInput placeholder="Description" [(ngModel)]="model.description" name='description'></textarea>
-      </mat-form-field>
+      <textarea matInput placeholder="Description" [(ngModel)]="model.description" name='description'></textarea>
+    </mat-form-field>
 
-      <mat-form-field>
-          <input matInput [matDatepicker]="picker" placeholder="ETA" [(ngModel)]="model.will_arrive" name='eta'>
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="ETA" [(ngModel)]="model.will_arrive" name='eta'>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
 
   </div>
-    </form>
-    {{diagnostic}}
-
+</form>
+{{diagnostic}}
