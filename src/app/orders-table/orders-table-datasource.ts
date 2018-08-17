@@ -57,15 +57,15 @@ import { Order } from '../services/interfaces';
 export class OrdersTableDataSource extends DataSource<Order> {
   // data: OrdersTableItem[] = EXAMPLE_DATA;
   data: Order[];
-  constructor(private paginator: MatPaginator, private sort: MatSort,private order_service:OrderService) {
+  constructor(private paginator: MatPaginator, private sort: MatSort,private orders_data) {
     super();
-    this.getOrders();
+    this.data=orders_data;
   }
 
-  getOrders(){
-  this.order_service.getOrders().subscribe(res=>this.data=res)
+  // getOrders(){
+  // this.order_service.getOrders().subscribe(res=>this.data=res)
 
-  }
+  // }
 
 
   /**

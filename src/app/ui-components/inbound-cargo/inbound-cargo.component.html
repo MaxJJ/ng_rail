@@ -1,0 +1,21 @@
+<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+  <button mat-icon-button (click)="addNewCargoItem()"  class="clickable" color="primary">
+          <mat-icon class="example-icon">add</mat-icon>
+  </button>
+  <h4>Inbound cargo</h4>
+
+</div>
+<mat-card>
+  <mat-list>
+          <mat-list-item *ngFor="let crg of in_cargo">
+                  <mat-icon matListIcon (click)="editCargoItem(crg)" class="clickable" color="primary">edit</mat-icon>
+                  <p matLine> {{crg.description|uppercase}}
+                          <span *ngIf="crg.is_container"> / tare: {{crg.container_tare}} kgs</span>
+                  </p>
+                  <p matLine>
+                          <span> {{crg.package_quantity}} pcs. / {{crg.gross_weight}} kgs</span>
+
+                  </p>
+          </mat-list-item>
+  </mat-list>
+</mat-card>

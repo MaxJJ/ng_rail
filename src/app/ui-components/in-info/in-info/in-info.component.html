@@ -1,20 +1,32 @@
-<mat-card class='mb-2' (click)="openInInfoDialog()">
-        <mat-card-content>
-                <div class="row">
-                        {{ model.short_description }}
-                </div>
+<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+        <h4>Main info </h4>
+        <button mat-icon-button (click)="openInInfoDialog()" matTooltip="Title and arrival info" class="clickable" color="primary">
+                <mat-icon>edit</mat-icon>
+        </button>
 
-                <div class="row">
-                        ETA : {{model.will_arrive}}
-                </div>
+</div>
+<mat-card>
+        <h4>{{model.short_description}}</h4>
+        <div fxLayout="row">
+                <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10px" fxFlex="30">
+                        <p color="primary">
+                                ETA : {{model.will_arrive}}
+                        </p>
 
-                <div class="row">
-                        from : {{model.dispatch_place.place_name}} / {{model.dispatch_place.place_code}}
+                        <p>Bill : {{model.inbound_bill}} / {{model.transit_or_export}}</p>
                 </div>
+                <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10px" fxFlex>
+                        <p>
+                                From : {{model.dispatch_place.place_name}} / {{model.dispatch_place.place_code}}
+                        </p>
 
-                <div class="row">
-                        consignor : {{model.dispatch_place.place_name}}
+                        <p>
+                                To : {{model.destination_place.place_name}} / {{model.destination_place.place_code}}
+                        </p>
                 </div>
+        </div>
 
-        </mat-card-content>
+
+
+
 </mat-card>

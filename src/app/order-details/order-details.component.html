@@ -1,36 +1,42 @@
-<div class="row">
-  <div class="col-6">
-<in-info [model]="model"></in-info>
-<mat-card>
-  place out!
-</mat-card>
-<mat-card>
-  place in!
-</mat-card>
-  </div>
-  <div class="col-6">
-    <mat-card>
-      comments !
-    </mat-card> 
-  </div>
+<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+    
+    <div fxLayout="column" fxLayoutAlign="start" fxFlex="50%">
+
+        <mat-card class="nopad">
+
+            <mat-toolbar>My App</mat-toolbar>
+            <mat-card-content>
+                <mat-grid-list cols="4" rowHeight="70px" [style.height]="'600px'" [gutterSize]="'1px'">
+                    <mat-grid-tile [colspan]="3" [rowspan]="1">
+                        <mat-form-field class="cont_align">
+                            <input matInput placeholder="Title" [(ngModel)]="model.short_description">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="2" [rowspan]="1">
+                        <place-autocomplete> </place-autocomplete>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="2" [rowspan]="1">
+                        <place-autocomplete> </place-autocomplete>
+                    </mat-grid-tile>
+
+
+                </mat-grid-list>
+
+            </mat-card-content>
+
+
+        </mat-card>
+
+
+
+    </div>
+
+    <div fxLayout="column" fxLayoutAlign="stretch" fxFlex class="right_pane">
+        <mat-card>
+            <in-info [model]="model"></in-info>
+            <app-inbound-cargo [in_cargo]="inbound_cargo" (cargo_items)="inboundCargoChange($event)"></app-inbound-cargo>
+        </mat-card>
+    </div>
+
+
 </div>
-
-<form>
-  <div class="example-container">
-    <mat-form-field>
-      <input matInput placeholder="{{model.id}} - Orders Title" [(ngModel)]="model.short_description" name='title'>
-
-    </mat-form-field>
-    <mat-form-field>
-      <textarea matInput placeholder="Description" [(ngModel)]="model.description" name='description'></textarea>
-    </mat-form-field>
-
-    <mat-form-field>
-      <input matInput [matDatepicker]="picker" placeholder="ETA" [(ngModel)]="model.will_arrive" name='eta'>
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-
-  </div>
-</form>
-{{diagnostic}}

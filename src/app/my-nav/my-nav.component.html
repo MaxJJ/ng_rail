@@ -8,10 +8,10 @@
     [opened]="!(isHandset | async)!.matches">
     <mat-toolbar color="primary">Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="/orders">Orders</a>
-      <a mat-list-item href="#">Shipments</a>
-      <a mat-list-item href="/places">Places</a>
+      <mat-list-item *ngFor="let item of sideMenu" (click)="item.action()"> {{item.title}}</mat-list-item>
+
     </mat-nav-list>
+    
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary" class="app_header">

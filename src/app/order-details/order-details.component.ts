@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../services/backend/order.service';
 import { ActivatedRoute } from '@angular/router';
-import { Order } from '../services/interfaces';
+import { Order, Cargo } from '../services/interfaces';
 
 
 
@@ -15,7 +15,12 @@ import { Order } from '../services/interfaces';
 export class OrderDetailsComponent implements OnInit {
 
   model:any;
- 
+  
+  
+  public get inbound_cargo() : Cargo[] {
+    return this.model.inbound_cargo;
+  }
+  
   constructor(private orders_service:OrderService,private route:ActivatedRoute) { }
 
   ngOnInit() {
@@ -25,8 +30,7 @@ this.orders_service.getOrderById(id).subscribe(res=>this.model=res);
 
   }
 
-
-
-  get diagnostic() { return JSON.stringify(this.model); };
-
+  inboundCargoChange(e) {
+    console.log(e);
+  }
 }

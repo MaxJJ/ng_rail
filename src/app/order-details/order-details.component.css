@@ -6,3 +6,25 @@
   .example-container > * {
     width: 100%;
   }
+
+  .left_pane{
+    width:320px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .right_pane{
+    /* width:520px; */
+   
+  }
+
+.nopad{
+  padding: 0;
+}
+
+.cont_align{
+
+  position: absolute;
+  left: 0;
+  width: 100%;
+}

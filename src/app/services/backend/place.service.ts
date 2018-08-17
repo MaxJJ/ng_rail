@@ -32,6 +32,12 @@ getPlaces():Observable<Place[]>{
   return this.http.get<Place[]>(this.urls.places);
 }
 
+searchPlaces(qry:string):Observable<Place[]>{
+  let url;
+  url=this.urls.places+'/search';
+  return this.http.get<Place[]>(url,{'params':{"qry":qry}});
+}
+
 postPlace(place:Place):Observable<Place>{
 
   return this.http.post<Place>(this.urls.places,place,httpOptions);

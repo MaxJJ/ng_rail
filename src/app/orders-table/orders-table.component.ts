@@ -4,6 +4,7 @@ import { OrdersTableDataSource } from './orders-table-datasource';
 import { OrderService } from '../services/backend/order.service';
 import {MatDialog} from '@angular/material';
 import { Router } from '@angular/router';
+import { Order } from '../services/interfaces';
 
 @Component({
   selector: 'orders-table',
@@ -16,6 +17,8 @@ export class OrdersTableComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   // expandedElement:OrdersTableItem;
   dataSource: OrdersTableDataSource;
+  orders_data:Order[];
+  order_item:Order;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
  
@@ -33,11 +36,19 @@ export class OrdersTableComponent implements OnInit {
     
   }
 
+addNew(){
+
+  this.orders.getNewOrder().toPromise().then((res)=>{this.order_item=res;
+                                                     this.router.navigate(['order',this.order_item.id]);});
+
+}
  
 
   ngOnInit() {
-  this.dataSource = new OrdersTableDataSource(this.paginator,this.sort,this.orders);
+  this.orders.getOrders().toPromise().then((res)=>{this.orders_data=res;
+                                                   this.dataSource=new OrdersTableDataSource(this.paginator,this.sort,this.orders_data);})
  
+  
   }
 
 

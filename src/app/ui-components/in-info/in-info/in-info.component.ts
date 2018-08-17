@@ -1,16 +1,21 @@
-import { Component, OnInit ,Input} from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import {MomentDateAdapter} from '@angular/material-moment-adapter';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
-import {MatDatepicker} from '@angular/material/datepicker';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatDatepicker } from '@angular/material/datepicker';
 import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
-import { default as _rollupMoment, Moment} from 'moment';
-import { Order } from '../../../services/interfaces';
+import { default as _rollupMoment, Moment } from 'moment';
+import { Order, Cargo, Shipment } from '../../../services/interfaces';
 import { OrderService } from '../../../services/backend/order.service';
 import { MatDialog } from '@angular/material';
 import { RtmeDatepickerComponent } from '../../date/rtme-datepicker/rtme-datepicker.component';
 import { OrderIninfoComponent } from '../../dialogs/order-ininfo/order-ininfo.component';
+import { OrderInboundCargoComponent } from '../../dialogs/order-inbound-cargo/order-inbound-cargo.component';
+import { isNullOrUndefined } from 'util';
+import { MenuService } from '../../../services/menu/menu.service';
+
+import { Router } from '../../../../../node_modules/@angular/router';
 
 const moment = _rollupMoment || _moment;
 
@@ -26,6 +31,7 @@ export const MY_FORMATS = {
   },
 };
 
+
 @Component({
   selector: 'in-info',
   templateUrl: './in-info.component.html',
@@ -33,44 +39,54 @@ export const MY_FORMATS = {
 })
 
 export class InInfoComponent implements OnInit {
-  _model:any;
-  
-  @Input() 
-  set model(model:any){
-    this._model=model;
-   
+  _model: any;
+  inbound_cargo: Cargo[];
+  new_cargo: Cargo;
+  shipments: Shipment[];
+
+
+
+  @Input()
+  set model(model: any) {
+    this._model = model;
+    this.inbound_cargo = model.inbound_cargo;
+    this.shipments = model.shipments;
   }
-  get model(){
+  get model() {
     return this._model;
   }
 
-  getDate(){
+
+
+  getDate() {
     return this._model.will_arrive;
   }
 
-  openInInfoDialog(){
+  openInInfoDialog() {
     let dialogRef = this.dialog.open(OrderIninfoComponent, {
-      height: '80vh',
+      height: '90vh',
       width: '400px',
-      data:this.model,
+      data: this.model,
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('model :',result);
-      this.order_service.postOrder(result).subscribe(res=>this._model = res);
-      
+      console.log('model :', result);
+      this.order_service.postOrder(result).subscribe(res => this.model = res);
+
     });
 
 
   }
 
-  constructor(private order_service:OrderService,private dialog:MatDialog) { }
+  
+
+  constructor(private order_service: OrderService, private dialog: MatDialog,private menu:MenuService,private router:Router) { }
 
 
 
   ngOnInit() {
   
-    
+  this.menu.setInInfoMenu();
   }
 
 

@@ -4,7 +4,7 @@ import { HttpModule} from '@angular/http';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
-import {MatButtonModule, MatCheckboxModule, MatToolbarModule, MatSidenavModule, MatPaginatorModule, MatSortModule, MatDialog, MatCardModule, MatNativeDateModule, MAT_DATE_FORMATS, DateAdapter, MAT_DATE_LOCALE} from '@angular/material';
+import {MatButtonModule, MatCheckboxModule, MatToolbarModule, MatSidenavModule, MatPaginatorModule, MatSortModule, MatDialog, MatCardModule, MatNativeDateModule, MAT_DATE_FORMATS, DateAdapter, MAT_DATE_LOCALE, MatGridListModule, MatTooltipModule} from '@angular/material';
 import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
 import {MatChipsModule} from '@angular/material/chips';
@@ -16,7 +16,7 @@ import { XzcDirective } from './xzc.directive';
 import { ContentComponent } from './content/content.component';
 import { MyNavComponent } from './my-nav/my-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
-
+import {MatSelectModule} from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
 
 import { OrdersTableComponent } from './orders-table/orders-table.component';
@@ -32,12 +32,22 @@ import { InInfoComponent } from './ui-components/in-info/in-info/in-info.compone
 import { RtmeDatepickerComponent } from './ui-components/date/rtme-datepicker/rtme-datepicker.component';
 import { OrderIninfoComponent } from './ui-components/dialogs/order-ininfo/order-ininfo.component';
 import { MY_FORMATS } from './services/adapters';
-
+import { OrderInboundCargoComponent } from './ui-components/dialogs/order-inbound-cargo/order-inbound-cargo.component';
+import {MatRadioModule} from '@angular/material/radio';
+import {CardModule} from 'primeng/card';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import { InboundCargoComponent } from './ui-components/inbound-cargo/inbound-cargo.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { PlaceAutocompleteComponent } from './ui-components/places/place-autocomplete/place-autocomplete.component';
+import { AddPlaceDialogComponent } from './ui-components/dialogs/add-place-dialog/add-place-dialog.component';
+import {MatTabsModule} from '@angular/material/tabs';
 
 const appRoutes: Routes = [
   { path: 'orders', component: OrdersTableComponent },
   { path: 'order/:id',component: OrderDetailsComponent },
   { path: 'places',component: PlaceTableComponent },
+  {path:'test',loadChildren: 'app/modules/rtme-order/rtme-order.module#RtmeOrderModule'},
+  
   { path: '',
     redirectTo: '/orders',
     pathMatch: 'full'
@@ -66,11 +76,20 @@ const appRoutes: Routes = [
     RtmeDatepickerComponent,
     
     OrderIninfoComponent,
+    
+    OrderInboundCargoComponent,
+    
+    InboundCargoComponent,
+    
+    PlaceAutocompleteComponent,
+    
+    AddPlaceDialogComponent,
+  
    
   ],
   entryComponents: [
    
-    PlaceDetailsComponent,OrderIninfoComponent
+    PlaceDetailsComponent,OrderIninfoComponent,OrderInboundCargoComponent,AddPlaceDialogComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes,{enableTracing:true,onSameUrlNavigation:'reload'}),
@@ -78,6 +97,7 @@ const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    
     MatButtonModule, 
     MatCheckboxModule,
     MatToolbarModule,
@@ -87,9 +107,11 @@ const appRoutes: Routes = [
     MatTableModule,
     MatFormFieldModule,
     MatInputModule,
+    MatTabsModule,
     HttpModule,
     HttpClientModule,
     LayoutModule,
+    FlexLayoutModule,
     MatSidenavModule,
     MatPaginatorModule,
     MatSortModule,
@@ -98,7 +120,13 @@ const appRoutes: Routes = [
     MatDatepickerModule,
     MatMomentDateModule,
     MatNativeDateModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatGridListModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatTooltipModule,
+    CardModule,
+    MatExpansionModule
 
   ],
   providers: [

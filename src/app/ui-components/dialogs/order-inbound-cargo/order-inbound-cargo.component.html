@@ -1,0 +1,54 @@
+<mat-dialog-content>
+  <mat-radio-group [style.margin-bottom]="'20px'" fxLayout="row" fxLayoutGap="10px" fxFlexAlign="start" fxFlexFill (change)="formTypeChange($event)"
+    [selected]="cargo_item.item.is_container ? c : g">
+    <mat-radio-button #c value="1">Container</mat-radio-button>
+    <mat-radio-button #g value="0">General</mat-radio-button>
+  </mat-radio-group>
+
+  <mat-divider></mat-divider>
+
+  <form [formGroup]="cargo_form">
+    <div *ngIf="cargo_item.item.is_container" [style.margin-top]="'6px'">
+      <div fxLayout="row" fxLayout.xs="column"  fxLayoutGap="10px" >
+        <mat-form-field>
+          <input matInput formControlName="description" placeholder="Container Nr.">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput formControlName="container_tare" placeholder="Tare">
+        </mat-form-field>
+      </div>
+
+      <mat-form-field>
+
+        <input matInput formControlName="package_quantity" placeholder="Packages qty">
+      </mat-form-field>
+      <mat-form-field>
+
+        <input matInput formControlName="gross_weight" placeholder="Gross Weight">
+      </mat-form-field>
+
+    </div>
+
+    <div *ngIf="!cargo_item.item.is_container">
+      <mat-form-field>
+        <input matInput placeholder="Description" formControlName='description'>
+      </mat-form-field>
+    </div>
+
+
+
+  </form>
+  
+</mat-dialog-content>
+
+
+
+
+<mat-dialog-actions>
+  <!-- <button mat-button mat-dialog-close>Close</button> -->
+  <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+  <button mat-button [mat-dialog-close]="cargo_item" color="primary">Save</button>
+  <button mat-button [mat-dialog-close]="cargo_item" (click)="deleteItem()" color="accent" >Delete</button>
+  
+</mat-dialog-actions>
