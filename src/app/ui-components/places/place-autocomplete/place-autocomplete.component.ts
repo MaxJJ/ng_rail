@@ -6,7 +6,7 @@ import { PlaceService } from '../../../services/backend/place.service';
 import { Observable } from '../../../../../node_modules/rxjs';
 import { MatAutocompleteSelectedEvent, MatDialog } from '../../../../../node_modules/@angular/material';
 import { OrderIninfoComponent } from '../../dialogs/order-ininfo/order-ininfo.component';
-import { AddPlaceDialogComponent } from '../../dialogs/add-place-dialog/add-place-dialog.component';
+
 
 
 @Component({
@@ -18,6 +18,9 @@ export class PlaceAutocompleteComponent implements OnInit {
 
   @Input()
   placeholder:string;
+
+  @Input()
+  value:Place;
 
   placeFormControl:FormControl;
   places:Observable<Place[]>;
@@ -36,7 +39,7 @@ export class PlaceAutocompleteComponent implements OnInit {
   placeChange(event:MatAutocompleteSelectedEvent){
     let selected:Place;
     selected=event.option.value;
-    let selected_str=selected.place_name+' / '+selected.place_code;
+    let selected_str=this.placeToString(selected);
     this.placeFormControl.setValue(selected_str);
     this.selected_place.emit(selected);
   }
@@ -45,24 +48,16 @@ export class PlaceAutocompleteComponent implements OnInit {
     this.placeFormControl.reset();
   }
 
-  openAddPlaceDialog(){
-    let dialogRef = this.dialog.open(AddPlaceDialogComponent, {
-      height: '90vh',
-      width: '400px',
-      data: "test",
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      
-      
-
-    });
 
 
+
+
+  placeToString(pl:Place){
+    return pl.place_name+' ('+pl.place_code+')';
   }
 
   ngOnInit() {
-    this.placeFormControl=new FormControl();
+    this.placeFormControl=new FormControl(this.placeToString(this.value));
 
     this.placeFormControl.valueChanges.subscribe(v=>this.filteredPlaces(v));
 

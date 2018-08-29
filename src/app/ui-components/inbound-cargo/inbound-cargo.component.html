@@ -2,10 +2,10 @@
   <button mat-icon-button (click)="addNewCargoItem()"  class="clickable" color="primary">
           <mat-icon class="example-icon">add</mat-icon>
   </button>
-  <h4>Inbound cargo</h4>
+  <h4>Inbound cargo </h4>
 
 </div>
-<mat-card>
+
   <mat-list>
           <mat-list-item *ngFor="let crg of in_cargo">
                   <mat-icon matListIcon (click)="editCargoItem(crg)" class="clickable" color="primary">edit</mat-icon>
@@ -18,4 +18,3 @@
                   </p>
           </mat-list-item>
   </mat-list>
-</mat-card>

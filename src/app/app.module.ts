@@ -31,7 +31,6 @@ import { PlaceDetailsComponent } from './place-table/place-details/place-details
 import { InInfoComponent } from './ui-components/in-info/in-info/in-info.component';
 import { RtmeDatepickerComponent } from './ui-components/date/rtme-datepicker/rtme-datepicker.component';
 import { OrderIninfoComponent } from './ui-components/dialogs/order-ininfo/order-ininfo.component';
-import { MY_FORMATS } from './services/adapters';
 import { OrderInboundCargoComponent } from './ui-components/dialogs/order-inbound-cargo/order-inbound-cargo.component';
 import {MatRadioModule} from '@angular/material/radio';
 import {CardModule} from 'primeng/card';
@@ -39,12 +38,18 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import { InboundCargoComponent } from './ui-components/inbound-cargo/inbound-cargo.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { PlaceAutocompleteComponent } from './ui-components/places/place-autocomplete/place-autocomplete.component';
-import { AddPlaceDialogComponent } from './ui-components/dialogs/add-place-dialog/add-place-dialog.component';
+
 import {MatTabsModule} from '@angular/material/tabs';
+import { OrderDetailsShipmentsComponent } from './ui-components/shipments/order_details_shipments/order-details-shipments/order-details-shipments.component';
+import { ShipmentComponent } from './shipment/shipment/shipment.component';
+import { CommentsComponent } from './ui-components/comments/comments/comments.component';
+import { PersonExpPanelRawComponent } from './ui-components/persons/person-exp-panel-raw/person-exp-panel-raw.component';
+
 
 const appRoutes: Routes = [
   { path: 'orders', component: OrdersTableComponent },
   { path: 'order/:id',component: OrderDetailsComponent },
+  { path: 'order/:id/shipments/:sh_id',component: ShipmentComponent },
   { path: 'places',component: PlaceTableComponent },
   {path:'test',loadChildren: 'app/modules/rtme-order/rtme-order.module#RtmeOrderModule'},
   
@@ -83,13 +88,23 @@ const appRoutes: Routes = [
     
     PlaceAutocompleteComponent,
     
-    AddPlaceDialogComponent,
+   
+    
+    OrderDetailsShipmentsComponent,
+    
+    ShipmentComponent,
+    
+    CommentsComponent,
+    
+    PersonExpPanelRawComponent,
+    
+   
   
    
   ],
   entryComponents: [
    
-    PlaceDetailsComponent,OrderIninfoComponent,OrderInboundCargoComponent,AddPlaceDialogComponent
+    PlaceDetailsComponent,OrderIninfoComponent,OrderInboundCargoComponent,
   ],
   imports: [
     RouterModule.forRoot(appRoutes,{enableTracing:true,onSameUrlNavigation:'reload'}),
@@ -131,10 +146,7 @@ const appRoutes: Routes = [
   ],
   providers: [
     MatDialog,
-    MatDatepicker,
-    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
-
-    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+   
   ],
   bootstrap: [AppComponent]
 })

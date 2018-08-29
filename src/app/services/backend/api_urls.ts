@@ -6,8 +6,9 @@ enum URL_LIST{
   ORDERS='orders',
   PLACES='places',
   NEW_CARGO='getnewcargo',
-  DELETE_CARGO='deletecargo/'
-
+  DELETE_CARGO='deletecargo/',
+  CREATE_SHIPMENT='shipments/create',
+  SHIPMENT='shipments/',
 }
 
 export class Urls{
@@ -35,6 +36,17 @@ export class Urls{
   public get deletecargo() : string {
     return this.api+URL_LIST.DELETE_CARGO;
   }
+
   
+  public get create_shipment() : string {
+    return this.api+URL_LIST.CREATE_SHIPMENT;
+  }
+  
+  
+  public get shipment() : string {
+    return this.api+URL_LIST.SHIPMENT
+  }
+  
+
   
 }

@@ -8,8 +8,12 @@
   <mat-divider></mat-divider>
 
   <form [formGroup]="cargo_form">
-    <div *ngIf="cargo_item.item.is_container" [style.margin-top]="'6px'">
-      <div fxLayout="row" fxLayout.xs="column"  fxLayoutGap="10px" >
+    <div  [style.margin-top]="'6px'" fxLayout="column">
+        <mat-form-field *ngIf="!cargo_item.item.is_container">
+            <input matInput placeholder="Description" formControlName='description'>
+          </mat-form-field>
+
+      <div *ngIf="cargo_item.item.is_container" fxLayout="row" fxLayout.xs="column"  fxLayoutGap="10px" >
         <mat-form-field>
           <input matInput formControlName="description" placeholder="Container Nr.">
         </mat-form-field>
@@ -25,16 +29,13 @@
       </mat-form-field>
       <mat-form-field>
 
-        <input matInput formControlName="gross_weight" placeholder="Gross Weight">
+        <input matInput type="number" formControlName="gross_weight" placeholder="Gross Weight">
       </mat-form-field>
 
     </div>
 
-    <div *ngIf="!cargo_item.item.is_container">
-      <mat-form-field>
-        <input matInput placeholder="Description" formControlName='description'>
-      </mat-form-field>
-    </div>
+  
+    
 
 
 

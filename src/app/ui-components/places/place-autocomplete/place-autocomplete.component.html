@@ -1,11 +1,7 @@
 
- <button mat-icon-button color="primary" (click)="openAddPlaceDialog()">
-  <mat-icon matSuffix >add</mat-icon>
-</button>
-
-  <mat-form-field>
+  <mat-form-field fxFlex>
     <input  matInput [matAutocomplete]="ac"  [placeholder]="placeholder"  [formControl]="placeFormControl" >
-    <mat-icon matSuffix (click)="clear()">close</mat-icon>
+    <mat-icon matSuffix (click)="clear()" class='pointer'>close</mat-icon>
    
     <mat-autocomplete #ac="matAutocomplete" (optionSelected)="placeChange($event)" >
       <mat-option  *ngFor="let pl of places | async" [value]="pl">

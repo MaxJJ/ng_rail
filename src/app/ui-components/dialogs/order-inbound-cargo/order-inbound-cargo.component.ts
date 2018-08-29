@@ -41,8 +41,8 @@ export class OrderInboundCargoComponent implements OnInit {
 
       });
       this.cargo_form.setValue(this.cargo_item.item);
-      this.cargo_form.valueChanges.subscribe(res=>this.cargo_item.item=res);
-
+      this.cargo_form.valueChanges.subscribe((res)=>{this.cargo_item.item=res; } );
+      
       
      }
 
@@ -57,6 +57,8 @@ export class OrderInboundCargoComponent implements OnInit {
      deleteItem(){
        
        this.order_service.deleteCargo(this.cargo_item.item.id).subscribe(res=>this.cargo_item.is_deleted=true);
+       console.log(this.cargo_item);
+       
        return this.cargo_item;
      }
 

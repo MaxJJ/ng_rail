@@ -1,3 +1,4 @@
+import { Moment } from "moment";
 
 export interface Place {
   id: number;
@@ -13,12 +14,14 @@ export interface Place {
 }
 
 export interface Shipment {
-  id: number;
-  name: string;
-  from_order: string;
-  consignor: string;
-  consignee: string;
-  facturas: any;
+  id?: number;
+  name?: string;
+  description?: string;
+  from_order?: string;
+  consignor?: string;
+  consignee?: string;
+  facturas?: any;
+  incoterms_place?:string;
 }
 
 export interface Package{
@@ -44,11 +47,11 @@ export interface Cargo {
   gng_description?: string;
   etsng_code?: string;
   package?: Package;
-  package_quantity?: number;
+  package_quantity?: any;
   unit?: Unit;
   unit_quantity?: number;
   nett_weight?: number;
-  gross_weight?: number;
+  gross_weight?: any;
 }
 
 export interface Person{
@@ -68,10 +71,7 @@ export interface Order {
   description?: string;
   dispatch_place?: Place;
   destination_place?: Place;
-
   shipments?: Shipment[];
-
-    
   consignor:Person;
   consignee:Person;
   inbound_bill:string;
@@ -79,5 +79,13 @@ export interface Order {
   inbound_cargo:Cargo[];
   total_inbound_places:number;
   total_inbound_gross:number;
+  comments:OrderComment[];
 
+}
+
+export interface OrderComment{
+  id?: number;
+  created?:string;
+  comment?:string;
+  order?:number;
 }

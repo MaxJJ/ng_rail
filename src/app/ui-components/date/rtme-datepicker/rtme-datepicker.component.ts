@@ -2,7 +2,7 @@ import { Component, OnInit ,Input, Output, EventEmitter} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
-import {MatDatepicker} from '@angular/material/datepicker';
+import {MatDatepicker, MatDatepickerInputEvent} from '@angular/material/datepicker';
 import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
 import { default as _rollupMoment, Moment} from 'moment';
@@ -12,10 +12,10 @@ const moment = _rollupMoment || _moment;
 
 export const MY_FORMATS = {
   parse: {
-    dateInput: 'DD/MM/YYYY',
+    dateInput: 'DD-MM-YYYY',
   },
   display: {
-    dateInput: 'DD/MM/YYYY',
+    dateInput: 'DD-MM-YYYY',
     monthYearLabel: 'DD MMM YYYY',
     dateA11yLabel: 'LL',
     monthYearA11yLabel: 'MMMM YYYY',
@@ -45,32 +45,30 @@ export class RtmeDatepickerComponent implements OnInit {
   @Input() 
   set date(date:any){
     this._date=date;
-    this.dateFc=new FormControl(moment(this._date));
+    this.dateFc=new FormControl(moment(this._date,"DD-MM-YYYY"));
     this.dateFc.statusChanges.subscribe(res=>this.date_val=res);
   }
   get date(){
     return this._date;
   }
 
+  @Input()
+  placeholder:string;
   
+  @Output()
+  new_date:EventEmitter<string> = new EventEmitter<string>();
   
-  
-  chosenYearHandler(normalizedYear: Moment) {
-    const ctrlValue = this.dateFc.value;
-    ctrlValue.year(normalizedYear.year());
-    this.dateFc.setValue(ctrlValue);
-  }
-
-  chosenMonthHandler(normlizedMonth: Moment, datepicker: MatDatepicker<Moment>) {
-    const ctrlValue = this.dateFc.value;
-    ctrlValue.month(normlizedMonth.month());
-    this.dateFc.setValue(ctrlValue);
-    datepicker.close();
-  }
-
   startat(){
    
     return moment(this._date);
+
+
+  }
+
+  dateChangeHandler(event: MatDatepickerInputEvent<Moment>){
+    this.new_date.emit(
+     moment(event.value).format("DD-MM-YYYY")
+    );
   }
   constructor() { }
 

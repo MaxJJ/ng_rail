@@ -33,10 +33,10 @@ export class OrderService {
     return this.http.post<Order>(this.urls.orders,order,httpOptions);
   }
 
-  getOrderById(id):Observable<Object>{
+  getOrderById(id):Observable<Order>{
     let url = this.urls.orders+'/'+id;
     
-    return this.http.get(url);
+    return this.http.get<Order>(url);
   }
 
   getNewCargo():Observable<Cargo>{

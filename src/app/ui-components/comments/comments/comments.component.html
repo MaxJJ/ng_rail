@@ -1,0 +1,18 @@
+<mat-card>
+
+  <div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="10px">
+      <button mat-button (click)="addComment()">Add Comment</button>
+      <mat-form-field fxFlex>
+          <textarea matInput placeholder="Order's comment" [formControl]="comment_fc" cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+              cdkAutosizeMinRows="2" cdkAutosizeMaxRows="5"></textarea>
+      </mat-form-field>
+      <button mat-button (click)="saveComment()">Save</button>
+  </div>
+  <mat-card *ngFor="let com of comments" class="comment">
+     <mat-card-content [innerHtml]="com.comment"> {{com.comment}}</mat-card-content>
+     <mat-card-actions>
+         <button mat-button (click)="editComment(com.id)">Edit</button>
+         <button mat-button (click)="deleteComment(com.id)">Delete</button>
+     </mat-card-actions>
+  </mat-card>
+</mat-card>

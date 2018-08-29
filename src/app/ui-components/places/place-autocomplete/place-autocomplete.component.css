@@ -1,3 +1,8 @@
 .rowgap{
     margin-right: 8px;
 }
+
+.pointer:hover{
+    color: red;
+    cursor: pointer;
+}

@@ -1,30 +1,73 @@
 <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
-    
-    <div fxLayout="column" fxLayoutAlign="start" fxFlex="50%">
 
-        <mat-card class="nopad">
+    <div fxLayout="column" fxLayoutAlign="stretch" fxFlex="50%">
 
-            <mat-toolbar>My App</mat-toolbar>
+        <mat-card>
+
+            <mat-toolbar [style.margin-bottom]="'1em'">Order {{model.id}}
+                <mat-icon class="mat-18">save</mat-icon>
+            </mat-toolbar>
+
+
             <mat-card-content>
-                <mat-grid-list cols="4" rowHeight="70px" [style.height]="'600px'" [gutterSize]="'1px'">
-                    <mat-grid-tile [colspan]="3" [rowspan]="1">
-                        <mat-form-field class="cont_align">
-                            <input matInput placeholder="Title" [(ngModel)]="model.short_description">
+                <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="1px">
+                    <mat-form-field fxFlexFill>
+                        <input matInput placeholder="Title" [formControl]="title_fc">
+                    </mat-form-field>
+
+                    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="6px" fxFlexFill>
+
+                        <rtme-datepicker fxFlex="200px" placeholder='ETA' [date]="model.will_arrive" (new_date)="etaChangeHandler($event)"></rtme-datepicker>
+
+                        <mat-form-field fxFlex>
+                            <input matInput placeholder="Bill Nr." [formControl]="inbound_bill_fc">
                         </mat-form-field>
-                    </mat-grid-tile>
-                    <mat-grid-tile [colspan]="2" [rowspan]="1">
-                        <place-autocomplete> </place-autocomplete>
-                    </mat-grid-tile>
-                    <mat-grid-tile [colspan]="2" [rowspan]="1">
-                        <place-autocomplete> </place-autocomplete>
-                    </mat-grid-tile>
+
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="6px" fxFlexFill>
+
+                        <place-autocomplete fxFlex="50%" placeholder="Place of Dispatch" [value]="model.dispatch_place" (selected_place)=placeOfDispatchHandler($event)></place-autocomplete>
+                        <place-autocomplete fxFlex="50%" placeholder="Place of Destination" [value]="model.destination_place" (selected_place)=placeOfDestinationHandler($event)></place-autocomplete>
+                    </div>
+
+                    <mat-divider [inset]="true"></mat-divider>
+
+                    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="6px" fxFlexFill [style.min-height]="'200px'">
+                        <div fxFlex="60%">
+                            <app-inbound-cargo [in_cargo]="model.inbound_cargo" (cargo_items)="inboundCargoHandler($event)"></app-inbound-cargo>
+                        </div>
 
 
-                </mat-grid-list>
+                        <div fxFlex="40%">
+                            <mat-card [style.margin-top]="'1em'">
+
+                                <mat-card-content>
+                                    <p>Total Gross : <span>{{gross_total}} kgs </span></p>
+                                    <p>Units quantity : <span>{{cargo_units_qty}} </span></p>
+                                    <p *ngIf="containers_qty > 0">Containers quantity : <span>{{containers_qty}} </span></p>
+                                </mat-card-content>
+
+                            </mat-card>
+                        </div>
+                    </div>
+
+                    <mat-divider [inset]="true"></mat-divider>
+                    <!-- <input type="file" multiple  name="" id="f" [style.display]="'none'"  (change)= "onFileChange($event)">
+
+                      <button mat-button (click)="openFileBrowser($event)">Action</button> -->
+
+                    <order-details-shipments [orders_shipments]="model.shipments" [inbound_cargo]="inbound_cargo" (updated)="shipmentsChangeHandler($event)"></order-details-shipments>
+
+                </div>
+
+
 
             </mat-card-content>
 
+            <mat-card-actions>
+                <button (click)="saveOrder()" fxFlex mat-raised-button color="primary">SAVE</button>
 
+            </mat-card-actions>
         </mat-card>
 
 
@@ -32,10 +75,7 @@
     </div>
 
     <div fxLayout="column" fxLayoutAlign="stretch" fxFlex class="right_pane">
-        <mat-card>
-            <in-info [model]="model"></in-info>
-            <app-inbound-cargo [in_cargo]="inbound_cargo" (cargo_items)="inboundCargoChange($event)"></app-inbound-cargo>
-        </mat-card>
+<app-comments [order]="model" ></app-comments>
     </div>
 
 

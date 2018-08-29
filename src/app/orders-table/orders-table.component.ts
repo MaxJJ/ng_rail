@@ -5,6 +5,7 @@ import { OrderService } from '../services/backend/order.service';
 import {MatDialog} from '@angular/material';
 import { Router } from '@angular/router';
 import { Order } from '../services/interfaces';
+import { MenuService } from '../services/menu/menu.service';
 
 @Component({
   selector: 'orders-table',
@@ -32,7 +33,7 @@ export class OrdersTableComponent implements OnInit {
 
   
 
-  constructor(private orders:OrderService,public dialog: MatDialog,private router:Router){
+  constructor(private orders:OrderService,public dialog: MatDialog,private router:Router,private menu:MenuService){
     
   }
 
@@ -45,6 +46,7 @@ addNew(){
  
 
   ngOnInit() {
+    this.menu.setInInfoMenu();
   this.orders.getOrders().toPromise().then((res)=>{this.orders_data=res;
                                                    this.dataSource=new OrdersTableDataSource(this.paginator,this.sort,this.orders_data);})
  

@@ -1,0 +1,26 @@
+<p>
+  shipment works!
+</p>
+
+{{shipment | json}}
+<mat-accordion>
+  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title [style.align-items]="'center'">
+       Title
+      </mat-panel-title>
+      <mat-panel-description>
+        <h4>{{shipment.name | uppercase}} {{shipment.description | uppercase}} </h4>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+   
+    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+    <mat-form-field fxFlex>
+      <input matInput placeholder="Description" [(ngModel)]="shipment.description">
+    </mat-form-field>
+  </div>
+  </mat-expansion-panel>
+
+ <person-exp-panel-raw [person]="order.consignor" title="Consignor"></person-exp-panel-raw>
+ <person-exp-panel-raw [person]="order.consignee" title="Consignee"></person-exp-panel-raw>
+</mat-accordion>
