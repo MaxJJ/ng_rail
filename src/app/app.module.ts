@@ -38,12 +38,16 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import { InboundCargoComponent } from './ui-components/inbound-cargo/inbound-cargo.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { PlaceAutocompleteComponent } from './ui-components/places/place-autocomplete/place-autocomplete.component';
-
+import {MatMenuModule} from '@angular/material/menu';
 import {MatTabsModule} from '@angular/material/tabs';
 import { OrderDetailsShipmentsComponent } from './ui-components/shipments/order_details_shipments/order-details-shipments/order-details-shipments.component';
 import { ShipmentComponent } from './shipment/shipment/shipment.component';
 import { CommentsComponent } from './ui-components/comments/comments/comments.component';
 import { PersonExpPanelRawComponent } from './ui-components/persons/person-exp-panel-raw/person-exp-panel-raw.component';
+import { PersonExpPanelFormComponent } from './ui-components/persons/person-exp-panel-form/person-exp-panel-form.component';
+import { CargoExPanelComponent } from './ui-components/cargo/cargo-ex-panel/cargo-ex-panel.component';
+import { CargoDialogComponent } from './ui-components/dialogs/cargo-dialog/cargo-dialog.component';
+import { RtmeDirectoriesModule } from './modules/rtme-directories/rtme-directories.module';
 
 
 const appRoutes: Routes = [
@@ -98,13 +102,19 @@ const appRoutes: Routes = [
     
     PersonExpPanelRawComponent,
     
+    PersonExpPanelFormComponent,
+    
+    CargoExPanelComponent,
+    
+    CargoDialogComponent,
+   
    
   
    
   ],
   entryComponents: [
    
-    PlaceDetailsComponent,OrderIninfoComponent,OrderInboundCargoComponent,
+    PlaceDetailsComponent,OrderIninfoComponent,OrderInboundCargoComponent,CargoDialogComponent,
   ],
   imports: [
     RouterModule.forRoot(appRoutes,{enableTracing:true,onSameUrlNavigation:'reload'}),
@@ -141,7 +151,9 @@ const appRoutes: Routes = [
     MatRadioModule,
     MatTooltipModule,
     CardModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatMenuModule,
+    RtmeDirectoriesModule,
 
   ],
   providers: [

@@ -44,4 +44,13 @@ this.order_service.getOrderById(order_id).subscribe(ord=>this.order=ord);
     this.person_service.getPerson(id).subscribe(p=>{return p});
   }
 
+  sellerHandler(val){
+
+    this.shipment.seller=val;
+  }
+
+  buyerHandler(val){
+    this.shipment.buyer = val;
+  }
+
 }

@@ -1,0 +1,121 @@
+<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+  <mat-expansion-panel-header>
+    <mat-panel-title [style.align-items]="'center'">
+      {{title}}
+    </mat-panel-title>
+    <mat-panel-description>
+      {{person.name |uppercase}}
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="6px">
+
+    <div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="6px" [style.width]="'320px'">
+      <mat-form-field>
+        <input matInput placeholder="Search " [matAutocomplete]="auto" [formControl]="persons_fc">
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="optionSelectedHandler($event)">
+          <mat-option *ngFor="let pers of filteredPersons | async" [value]="pers">
+
+            <span [style.font-size]="'12px'">{{pers.name}}</span>
+
+          </mat-option>
+        </mat-autocomplete>
+
+      </mat-form-field>
+
+      <mat-card *ngIf="selected">
+
+        <mat-card-content>
+
+          <div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="2px">
+
+            <span>{{selectedPerson.name | uppercase}}</span>
+            <span>{{selectedPerson.street_house}}</span>
+            <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="2px">
+              <span *ngIf="selectedPerson.region">{{selectedPerson.region}}, </span>
+              <span>{{selectedPerson.city}},</span>
+              <span>{{selectedPerson.postal_code}}</span>
+            </div>
+
+          </div>
+        </mat-card-content>
+
+      </mat-card>
+    </div>
+
+
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="saveHandler()">
+        <mat-icon>save</mat-icon>
+        <span>Save</span>
+      </button>
+      <button mat-menu-item (click)="editHandler()">
+        <mat-icon>edit</mat-icon>
+        <span>Edit</span>
+      </button>
+      <button mat-menu-item (click)="createHandler()">
+        <mat-icon>add</mat-icon>
+        <span>Create New</span>
+      </button>
+    </mat-menu>
+
+    <div *ngIf="show_form" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="1px" [style.width]="'320px'">
+
+      <form [formGroup]="person_fg" (ngSubmit)="onSubmit()">
+
+        <mat-form-field fxFill>
+
+          <input matInput placeholder="id" formControlName="id" >
+        </mat-form-field>
+        <mat-form-field fxFill>
+
+          <input matInput placeholder="Name" formControlName="name">
+        </mat-form-field>
+
+        <mat-form-field fxFill>
+
+          <input matInput placeholder="Sreet " formControlName="street_house">
+        </mat-form-field>
+
+        <mat-form-field fxFill>
+
+          <input matInput placeholder="Region " formControlName="region">
+        </mat-form-field>
+
+        <mat-form-field fxFill>
+
+          <input matInput placeholder="City " formControlName="city">
+        </mat-form-field>
+
+        <mat-form-field fxFill>
+
+          <input matInput placeholder="Postal Code " formControlName="postal_code">
+        </mat-form-field>
+
+        <mat-form-field fxFill>
+
+          <input matInput placeholder="INN " formControlName="inn">
+        </mat-form-field>
+
+        <mat-form-field fxFill>
+
+          <input matInput placeholder="OKPO " formControlName="okpo">
+        </mat-form-field>
+
+        <mat-form-field fxFill>
+
+          <input matInput placeholder="Phone " formControlName="phone">
+        </mat-form-field>
+
+        <button mat-button type="submit " fxFill > Submit</button>
+      
+
+
+      </form>
+    </div>
+
+
+  </div>
+</mat-expansion-panel>

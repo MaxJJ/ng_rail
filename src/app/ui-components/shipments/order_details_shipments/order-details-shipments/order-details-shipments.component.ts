@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Shipment, Cargo } from '../../../../services/interfaces';
+import { Shipment, Cargo, Order } from '../../../../services/interfaces';
 import { ShipmentsService } from '../../../../services/backend/shipments/shipments.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -14,6 +14,8 @@ export class OrderDetailsShipmentsComponent implements OnInit {
   orders_shipments:Shipment[];
   @Input()
   inbound_cargo:Cargo[];
+  
+  order:Order;
 
  
 

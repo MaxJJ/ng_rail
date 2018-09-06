@@ -1,8 +1,4 @@
-<p>
-  shipment works!
-</p>
 
-{{shipment | json}}
 <mat-accordion>
   <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
@@ -23,4 +19,9 @@
 
  <person-exp-panel-raw [person]="order.consignor" title="Consignor"></person-exp-panel-raw>
  <person-exp-panel-raw [person]="order.consignee" title="Consignee"></person-exp-panel-raw>
+ <person-exp-panel-form [person]="shipment.seller" title="Seller" (new_person)="sellerHandler($event)"></person-exp-panel-form>
+ <person-exp-panel-form [person]="shipment.buyer" title="Buyer" (new_person)="buyerHandler($event)"></person-exp-panel-form>
+
+ <cargo-ex-panel ></cargo-ex-panel>
+
 </mat-accordion>

@@ -20,6 +20,8 @@ export interface Shipment {
   from_order?: string;
   consignor?: string;
   consignee?: string;
+  seller?:any;
+  buyer?:any;
   facturas?: any;
   incoterms_place?:string;
 }
@@ -28,16 +30,22 @@ export interface Package{
   package_name_rus?:string;
   package_name_eng?:string;
   package_code?:string;
+  print_name?:string;
 }
 export interface Unit{
-  unit_name_full?:string;
-  unit_name_short?:string;
-  unit_code?:string;
+  name_full?:string;
+  name_full_eng?:string;
+  name_short?:string;
+  name_short_eng?:string;
+  code?:string;
+
+
 }
 
 
 export interface Cargo {
   id?:number;
+  shipment?:number;
   is_container?: boolean;
   container_tare?: number;
   description?: string;
@@ -55,10 +63,17 @@ export interface Cargo {
 }
 
 export interface Person{
-
-  name:string;
-  inn;string;
-  rail_code:string;
+  id?: number;
+  name?:string;
+  inn?:string;
+  okpo?:string;
+  phone?:string;
+  postal_code?:string;
+  region?:string;
+  city?:string;
+  street_house?;string;
+  rail_code?:string;
+  country?:{name:string,country_code:string};
 }
 
 export interface Order {
@@ -88,4 +103,24 @@ export interface OrderComment{
   created?:string;
   comment?:string;
   order?:number;
+}
+
+export interface Factura{
+  doc_name?:string;
+  name?:string;
+  date?:Date;
+  buyer?:Person;
+  seller?:Person;
+  consignee?:Person;
+  consignor?:Person;
+  delivery_terms?:any;
+  cargo?:Cargo[];
+  places?:number;
+  pcs?:number;
+  nett?:number;
+  gross?:number;
+
+  footer?:any;
+
+
 }

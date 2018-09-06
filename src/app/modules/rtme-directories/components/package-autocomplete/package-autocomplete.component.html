@@ -1,0 +1,8 @@
+<mat-form-field fxFlex="50%">
+    <input type="search" placeholder="Package" [matAutocomplete]="auto"  matInput  [formControl]="fc">
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectionHandler($event)">
+      <mat-option *ngFor="let p of packs | async" [value]="p">
+       {{p.package_name_rus}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field> 

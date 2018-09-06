@@ -1,0 +1,8 @@
+  <mat-form-field fxFlex="50%">
+    <input type="search" placeholder="Unit" [matAutocomplete]="auto"  matInput  [formControl]="fc">
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectionHandler($event)">
+      <mat-option *ngFor="let u of units | async" [value]="u">
+       {{u.name_short}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field> 
