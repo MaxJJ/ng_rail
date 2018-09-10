@@ -1,0 +1,23 @@
+<div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="4px">
+    <span>{{person.name}}</span>
+    <span>Rail Code : {{person.rail_code}}</span>
+   <div fxLayout="row" fxLayoutAlign="start start" >
+    <span>{{person.street_house}} </span>
+    
+   </div>
+   <div fxLayout="row" fxLayoutAlign="start start" >
+    <span *ngIf="person.region">{{person.region}}, </span>
+    <span *ngIf="person.city">{{person.city}},  </span>
+    <span *ngIf="person.postal_code">{{person.postal_code}}</span>
+    <span *ngIf="person.country">, {{person.country.name_rus}}</span>
+    
+   </div>
+   <div fxLayout="row" fxLayoutAlign="start start" >
+    <span *ngIf="person.inn">ИНН: {{person.inn}} </span>
+    <span *ngIf="person.okpo">ОКПО: {{person.inn}} </span>
+    </div>
+    <span *ngIf="person.phone">ТЕЛ: {{person.phone}} </span>
+
+   
+
+   </div>

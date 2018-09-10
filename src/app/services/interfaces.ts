@@ -1,4 +1,5 @@
 import { Moment } from "moment";
+import { Container } from "@angular/compiler/src/i18n/i18n_ast";
 
 export interface Place {
   id: number;
@@ -17,13 +18,18 @@ export interface Shipment {
   id?: number;
   name?: string;
   description?: string;
-  from_order?: string;
+  order?: number;
+  contract?:string;
+  cargo_is_general?:boolean;
+  container?:Container;
   consignor?: string;
   consignee?: string;
   seller?:any;
   buyer?:any;
   facturas?: any;
-  incoterms_place?:string;
+  cargo?:Cargo[];
+  rw_bill?:any;
+   
 }
 
 export interface Package{
@@ -113,14 +119,18 @@ export interface Factura{
   seller?:Person;
   consignee?:Person;
   consignor?:Person;
-  delivery_terms?:any;
+  delivery_terms_str_code?:any;
+  delivery_terms_place?:any;
   cargo?:Cargo[];
   places?:number;
   pcs?:number;
   nett?:number;
   gross?:number;
-
+  price?:number;
+  total_amount?:number;
+  currency?:string;
   footer?:any;
+  sign?:string;
 
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, setTestabilityGetter } from '@angular/core';
+import { Component, OnInit, Input, setTestabilityGetter, Output, EventEmitter } from '@angular/core';
 import { Cargo, Factura } from '../../../services/interfaces';
 import { CargoService } from '../../../services/backend/cargo/cargo.service';
 import { ActivatedRoute } from '@angular/router';
@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material';
 import { CargoDialogComponent } from '../../dialogs/cargo-dialog/cargo-dialog.component';
 import { isNullOrUndefined } from 'util';
 import { FillBillService } from '../../../services/output/build_xml/fill-bill.service';
+
 
 @Component({
   selector: 'cargo-ex-panel',
@@ -20,6 +21,10 @@ title = {'places':0,'nett':0,'gross':0};
 displayedColumns: string[] = ['description', 'tnved','packages'];
 choosed_cargo_item:Cargo;
 
+ @Output()
+ cargoChange:EventEmitter<Cargo[]>= new EventEmitter<Cargo[]>();
+
+
   constructor(private service:CargoService,
               private route: ActivatedRoute,
               public dialog: MatDialog,
@@ -29,7 +34,7 @@ choosed_cargo_item:Cargo;
 this.route.params.subscribe(prms=>{
   this.shipment_id=prms['sh_id'];
   this.getShipmentsCargo();
-  
+  this.cargoChange.emit(this.cargo);
 });
     
   }
@@ -63,6 +68,7 @@ this.route.params.subscribe(prms=>{
     this.service.getShipmentsCargo(this.shipment_id).subscribe(c=>{
       this.cargo=c;
       this.setTitle(); 
+      this.cargoChange.emit(this.cargo);
     })
   }
 

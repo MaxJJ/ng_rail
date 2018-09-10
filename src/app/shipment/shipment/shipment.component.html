@@ -22,6 +22,7 @@
  <person-exp-panel-form [person]="shipment.seller" title="Seller" (new_person)="sellerHandler($event)"></person-exp-panel-form>
  <person-exp-panel-form [person]="shipment.buyer" title="Buyer" (new_person)="buyerHandler($event)"></person-exp-panel-form>
 
- <cargo-ex-panel ></cargo-ex-panel>
-
+ <cargo-ex-panel (cargoChange)="cargoChangeHandler($event)"></cargo-ex-panel>
+ <shipment-facturas [shipment]='cargo'></shipment-facturas>
 </mat-accordion>
+

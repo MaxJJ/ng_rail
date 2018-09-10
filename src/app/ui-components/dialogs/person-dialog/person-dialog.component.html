@@ -1,0 +1,63 @@
+
+<form [formGroup]="person_fg" (ngSubmit)="onSubmit()">
+<mat-dialog-content>
+
+  
+      <mat-form-field fxFill>
+
+        <input matInput placeholder="id" formControlName="id">
+      </mat-form-field>
+      <mat-form-field fxFill>
+
+        <input matInput placeholder="Name" formControlName="name">
+      </mat-form-field>
+
+      <mat-form-field fxFill>
+
+        <input matInput placeholder="Sreet " formControlName="street_house">
+      </mat-form-field>
+
+      <mat-form-field fxFill>
+
+        <input matInput placeholder="Region " formControlName="region">
+      </mat-form-field>
+
+      <mat-form-field fxFill>
+
+        <input matInput placeholder="City " formControlName="city">
+      </mat-form-field>
+
+      <mat-form-field fxFill>
+
+        <input matInput placeholder="Postal Code " formControlName="postal_code">
+      </mat-form-field>
+
+      <mat-form-field fxFill>
+
+        <input matInput placeholder="INN " formControlName="inn">
+      </mat-form-field>
+
+      <mat-form-field fxFill>
+
+        <input matInput placeholder="OKPO " formControlName="okpo">
+      </mat-form-field>
+
+      <mat-form-field fxFill>
+
+        <input matInput placeholder="Phone " formControlName="phone">
+      </mat-form-field>
+
+
+    </mat-dialog-content>
+
+
+<mat-dialog-actions>
+  <button mat-button type="submit " > Submit</button>
+  <button mat-button (click)="onClose()" > Close</button>
+  <button mat-button (click)="onDelete()"> Delete</button>
+
+
+
+
+</mat-dialog-actions>
+</form>

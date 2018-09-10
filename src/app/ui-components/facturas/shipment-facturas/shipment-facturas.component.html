@@ -1,0 +1,31 @@
+<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+  <mat-expansion-panel-header>
+    <mat-panel-title [style.align-items]="'center'">
+     Facturas
+    </mat-panel-title>
+    <mat-panel-description>
+      <h4>{{shipment.name | uppercase}} {{shipment.description | uppercase}} </h4>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+ 
+  <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+ <button mat-icon-button (click)="onClick">
+     <mat-icon class="mat-18">add</mat-icon>
+ </button>
+</div>
+<mat-accordion displayMode="default" [multi]="true"
+               [hideToggle]="false">
+    <mat-expansion-panel [hideToggle]="false">
+        <mat-expansion-panel-header>Factura </mat-expansion-panel-header>
+         Panel body
+        <mat-action-row>
+            <button mat-button (click)="onAction(event)">Action1</button>
+        </mat-action-row>
+    </mat-expansion-panel>
+</mat-accordion>
+
+{{shipment | json}}
+
+
+
+{{cargo | json}}

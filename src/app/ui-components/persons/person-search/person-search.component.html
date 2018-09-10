@@ -1,0 +1,48 @@
+<div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="6px" [style.width]="'320px'">
+
+  <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="2px">
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+
+      <button mat-menu-item (click)="editHandler()">
+        <mat-icon>edit</mat-icon>
+        <span>Edit</span>
+      </button>
+      <button mat-menu-item (click)="createHandler()">
+        <mat-icon>add</mat-icon>
+        <span>Create New</span>
+      </button>
+    </mat-menu>
+
+    <mat-form-field fxFlex>
+      <input matInput type="search" placeholder="Search " [matAutocomplete]="auto" [formControl]="persons_fc">
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="optionSelectedHandler($event)">
+        <mat-option *ngFor="let pers of filteredPersons | async" [value]="pers">
+
+          <span [style.font-size]="'12px'">{{pers.name}}</span>
+
+        </mat-option>
+      </mat-autocomplete>
+
+    </mat-form-field>
+
+
+  </div>
+
+
+
+
+
+
+
+
+  <!-- <mat-card > -->
+
+    <mat-card-content>
+      <person-raw [person]="selectedPerson"></person-raw>
+    </mat-card-content>
+
+  <!-- </mat-card> -->
+</div>

@@ -48,6 +48,10 @@ import { PersonExpPanelFormComponent } from './ui-components/persons/person-exp-
 import { CargoExPanelComponent } from './ui-components/cargo/cargo-ex-panel/cargo-ex-panel.component';
 import { CargoDialogComponent } from './ui-components/dialogs/cargo-dialog/cargo-dialog.component';
 import { RtmeDirectoriesModule } from './modules/rtme-directories/rtme-directories.module';
+import { ShipmentFacturasComponent } from './ui-components/facturas/shipment-facturas/shipment-facturas.component';
+import { PersonRawComponent } from './ui-components/persons/person-raw/person-raw.component';
+import { PersonSearchComponent } from './ui-components/persons/person-search/person-search.component';
+import { PersonDialogComponent } from './ui-components/dialogs/person-dialog/person-dialog.component';
 
 
 const appRoutes: Routes = [
@@ -107,6 +111,14 @@ const appRoutes: Routes = [
     CargoExPanelComponent,
     
     CargoDialogComponent,
+    
+    ShipmentFacturasComponent,
+    
+    PersonRawComponent,
+    
+    PersonSearchComponent,
+    
+    PersonDialogComponent,
    
    
   
@@ -114,7 +126,7 @@ const appRoutes: Routes = [
   ],
   entryComponents: [
    
-    PlaceDetailsComponent,OrderIninfoComponent,OrderInboundCargoComponent,CargoDialogComponent,
+    PlaceDetailsComponent,OrderIninfoComponent,OrderInboundCargoComponent,CargoDialogComponent,PersonDialogComponent,
   ],
   imports: [
     RouterModule.forRoot(appRoutes,{enableTracing:true,onSameUrlNavigation:'reload'}),

@@ -1,11 +1,17 @@
 <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
       <mat-panel-title [style.align-items]="'center'">
-       {{title}} 
+      {{title}} 
       </mat-panel-title>
       <mat-panel-description>
-        {{person.name |uppercase}}
+      {{person.name |uppercase}}
       </mat-panel-description>
     </mat-expansion-panel-header>
-  {{person | json}}
+    <mat-card>
+        <mat-card-content>
+ <person-raw [person]="person"></person-raw>
+        </mat-card-content>
+      
+    </mat-card>
+ 
   </mat-expansion-panel>
