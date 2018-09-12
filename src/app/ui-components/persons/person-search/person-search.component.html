@@ -17,7 +17,7 @@
     </mat-menu>
 
     <mat-form-field fxFlex>
-      <input matInput type="search" placeholder="Search " [matAutocomplete]="auto" [formControl]="persons_fc">
+      <input matInput type="search" [placeholder]="title" [matAutocomplete]="auto" [formControl]="persons_fc">
       <mat-autocomplete #auto="matAutocomplete" (optionSelected)="optionSelectedHandler($event)">
         <mat-option *ngFor="let pers of filteredPersons | async" [value]="pers">
 
@@ -40,9 +40,9 @@
 
   <!-- <mat-card > -->
 
-    <mat-card-content>
-      <person-raw [person]="selectedPerson"></person-raw>
-    </mat-card-content>
+    <!-- <mat-card-content> -->
+      <!-- <person-raw [person]="selectedPerson"></person-raw> -->
+    <!-- </mat-card-content> -->
 
   <!-- </mat-card> -->
 </div>

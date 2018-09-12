@@ -22,8 +22,8 @@ export interface Shipment {
   contract?:string;
   cargo_is_general?:boolean;
   container?:Container;
-  consignor?: string;
-  consignee?: string;
+  consignor?: Person;
+  consignee?: Person;
   seller?:any;
   buyer?:any;
   facturas?: any;

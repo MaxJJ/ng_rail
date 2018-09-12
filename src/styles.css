@@ -5,3 +5,25 @@ body {
     margin: 0;
 }
 
+@media print {
+my-nav {display:none;}
+
+/* body app-root div.content{display:none !important;} */
+
+.content{
+    padding: 0 !important;
+    margin-left: 0 !important;
+}
+
+.f_container {
+    position: absolute !important;
+    margin: 0 !important;
+    background: white !important;
+    padding: 3mm !important;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+app-root *:none(#factura){display:none !important;};
+
+
+}

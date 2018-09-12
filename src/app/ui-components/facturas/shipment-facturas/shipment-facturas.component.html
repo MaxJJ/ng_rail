@@ -9,23 +9,24 @@
   </mat-expansion-panel-header>
  
   <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
- <button mat-icon-button (click)="onClick">
+ <button mat-icon-button (click)="createNewFactura()">
      <mat-icon class="mat-18">add</mat-icon>
  </button>
 </div>
+
 <mat-accordion displayMode="default" [multi]="true"
                [hideToggle]="false">
-    <mat-expansion-panel [hideToggle]="false">
+    <mat-expansion-panel *ngFor="let f of facturas" [hideToggle]="false">
         <mat-expansion-panel-header>Factura </mat-expansion-panel-header>
-         Panel body
+         <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="40px">
+             
+            <factura-form [factura]="f" [shipment]="shipment" fxFlex="320px" ></factura-form>
+            
+            <factura-show fxFlex [factura]="f"></factura-show>
+             
+         </div>
         <mat-action-row>
             <button mat-button (click)="onAction(event)">Action1</button>
         </mat-action-row>
     </mat-expansion-panel>
 </mat-accordion>
-
-{{shipment | json}}
-
-
-
-{{cargo | json}}

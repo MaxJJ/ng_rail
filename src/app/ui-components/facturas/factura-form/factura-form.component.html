@@ -1,0 +1,20 @@
+<div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="1px">
+
+<mat-form-field >
+  <input type="text" matInput placeholder="Document's type" [formControl]="doc_name_fc" >
+</mat-form-field>
+
+<mat-form-field>
+  <input type="text" matInput placeholder="Document's ID" [formControl]="name_fc">
+</mat-form-field>
+
+<rtme-datepicker placeholder="Document's date"  [date]="factura.date" (new_date)="setFacturasDate($event)"></rtme-datepicker>
+
+<person-search title="Buyer" [person]="factura.buyer" (new_person)="buyerHandler($event)"></person-search>
+<person-search title="Seller" [person]="factura.seller" (new_person)="sellerHandler($event)"></person-search>
+
+<mat-form-field>
+    <input type="text" matInput placeholder="Sign" [formControl]="sign_fc">
+  </mat-form-field>
+
+</div>

@@ -52,12 +52,17 @@ import { ShipmentFacturasComponent } from './ui-components/facturas/shipment-fac
 import { PersonRawComponent } from './ui-components/persons/person-raw/person-raw.component';
 import { PersonSearchComponent } from './ui-components/persons/person-search/person-search.component';
 import { PersonDialogComponent } from './ui-components/dialogs/person-dialog/person-dialog.component';
+import { FacturaShowComponent } from './ui-components/facturas/factura-show/factura-show.component';
+import { FacturaFormComponent } from './ui-components/facturas/factura-form/factura-form.component';
+import { FacturaPersonComponent } from './ui-components/facturas/factura-person/factura-person.component';
+import { RtmePrintComponent } from './rtme-print/rtme-print.component';
 
 
 const appRoutes: Routes = [
   { path: 'orders', component: OrdersTableComponent },
   { path: 'order/:id',component: OrderDetailsComponent },
   { path: 'order/:id/shipments/:sh_id',component: ShipmentComponent },
+  { path: 'order/:id/shipments/:sh_id/print',component: RtmePrintComponent },
   { path: 'places',component: PlaceTableComponent },
   {path:'test',loadChildren: 'app/modules/rtme-order/rtme-order.module#RtmeOrderModule'},
   
@@ -119,8 +124,14 @@ const appRoutes: Routes = [
     PersonSearchComponent,
     
     PersonDialogComponent,
+    
+    FacturaShowComponent,
+    
+    FacturaFormComponent,
+    
+    FacturaPersonComponent,
    
-   
+   RtmePrintComponent,
   
    
   ],

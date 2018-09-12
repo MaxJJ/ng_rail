@@ -1,0 +1,117 @@
+<div class="f_container mat-elevation-z2" id="factura">
+
+  <!-- header -->
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px" class="f_header">
+    <div [style.font-weight]="600" id="factura">
+        {{factura.doc_name | uppercase}}
+    </div>
+    <div [style.font-weight]="600">
+      {{factura.name}}
+    </div>
+    <div fxFlex>
+        {{factura.date}}
+    </div>
+  </div>
+
+  <!-- consignee consignor buyer seller [ placeholder person ] -->
+  <div fxLayout="row" fxLayoutAlign="start start" [style.border-bottom]="'1px solid'">
+
+    <div fxFlex="50%"  id="factura">
+      <factura-person placeholder="ПРОДАВЕЦ" [person]="factura.seller"></factura-person>
+    </div>
+    <div fxFlex="50%">
+      <factura-person placeholder="ПОКУПАТЕЛЬ" [person]="factura.buyer"></factura-person>
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="start start" [style.border-bottom]="'1px solid'">
+    <div fxFlex="50%">
+      <factura-person placeholder="ОТПРАВИТЕЛЬ" [person]="factura.consignor"></factura-person>
+    </div>
+    <div fxFlex="50%">
+      <factura-person placeholder="ПОЛУЧАТЕЛЬ" [person]="factura.consignee"></factura-person>
+    </div>
+
+  </div>
+
+  <!-- contract incoterms currency / railbill container wagon -->
+  <div fxLayout="row" fxLayoutAlign="start start" [style.border-bottom]="'1px solid'" fxLayoutGap="40px" class="f_terms_wrapper">
+    <div fxLayout="column" fxLayoutAlign="stretch" fxFlex="50%">
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <span fxFlex="200px">ДОГОВОР:</span>
+        <span>ПО ИНВОЙСУ</span>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <span fxFlex="200px">УСЛОВИЯ ПОСТАВКИ:</span>
+        <span>CIP АЛМАТЫ</span>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <span fxFlex="200px">ВАЛЮТА ПЛАТЕЖА:</span>
+        <span>USD</span>
+      </div>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="stretch" fxFlex="50%">
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <span fxFlex="200px">НАКЛАДНАЯ СМГС:</span>
+        <span>12345678</span>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <span fxFlex="200px">ВАГОН:</span>
+        <span>987654321</span>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <span fxFlex="200px">КОНТЕЙНЕР:</span>
+        <span>MSCU3213219</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- cargo  -->
+  <div [style.min-height]="'350px'">
+    <table [style.width]="'100%'">
+      <thead>
+        <th>Наименование</th>
+        <th>ТНВЭД</th>
+        <th>Единицы</th>
+        <th>Упаковка</th>
+        <th>Нетто,Кг</th>
+        <th>Брутто,Кг</th>
+        <th>Цена/ед.</th>
+        <th>Стоимость</th>
+      </thead>
+      <tr>
+        <td id="descr" [style.width]="'150px'">ТРУБЫ СТАЛЬНЫЕ БЕСШОВНЫЕ (НАРУЖНЫЙ ДИАМЕТР - 139.70мм) (72 ШТ. В 6 ОБРЕШЕТКАХ)</td>
+        <td>7304291009</td>
+        <td>1500.450<br/>Кг
+        </td>
+        <td>72<br/>ПОДДОН
+        </td>
+        <td>12456.001</td>
+        <td>12456.001</td>
+        <td>52.75</td>
+        <td>1235644.05</td>
+      </tr>
+      <tfoot>
+        <tr>
+          <td colspan="2">ВСЕГО: </td>
+          <td>2000.125</td>
+          <td>485</td>
+          <td>12558.123</td>
+          <td>55666.789</td>
+          <td></td>
+          <td>1223456.15</td>
+        </tr>
+      </tfoot>
+
+    </table>
+  </div>
+  <div [style.width]="'100%'">
+    <div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="1px">
+      <span>СЧЕТ-ФАКТУРА СОГЛАСНО ИНВОЙСУ 101 A 0039685 </span>
+      <span>СТРАНА ПРОИСХОЖДЕНИЯ - АРГЕНТИНА</span>
+      <span>НЕ ДЛЯ ВОЕННОЙ ПРОМЫШЛЕННОСТИ . ГРУЗ НЕ ИМЕЕТ ДВОЙНОГО ПРИМЕНЕНИЯ. ПРЕДНАЗНАЧЕН  ДЛЯ НЕФТЕДОБЫВАЮЩЕЙ ОТРАСЛИ.</span>
+      <br>
+      <span>{{factura.sign}}  _______________</span>   
+    </div>
+  </div>
+</div>

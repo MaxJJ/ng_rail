@@ -1,0 +1,57 @@
+.f_container{
+    width: 200mm;
+    height: 290mm;
+    padding: 8mm;
+}
+
+.f_header{
+    display: block;
+    border-top: 3px solid;
+    border-bottom: 1px solid;
+    font-size: 16px;
+    line-height: 40px;
+}
+
+.f_terms_wrapper{
+    display: block;
+    font-size: 12px;
+    line-height: 16px;
+}
+
+table{
+    
+    width: 100%;
+    font-size: 12px;
+    line-height: 14px;
+    margin-top: 8px;
+    border-spacing: 0;
+
+}
+
+tbody:before{
+ 
+    content: "-";
+    display: block;
+    line-height: 1em;
+    color: transparent;
+}
+
+
+thead > th {
+    height: 20px;
+    border-top: 1px solid;
+    border-bottom: 2px solid;
+    margin-bottom: 20px;
+}
+
+tr > #descr{
+    width:300px !important;
+    text-align: left;
+    white-space: pre-wrap;
+    font-size: 10px;
+}
+
+tr > td{
+    border-bottom: 1px solid;
+    text-align: center;
+}
