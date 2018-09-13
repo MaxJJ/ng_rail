@@ -85,8 +85,7 @@ export class InInfoComponent implements OnInit {
 
 
   ngOnInit() {
-  
-  this.menu.setInInfoMenu();
+ 
   }
 
 

@@ -1,8 +1,5 @@
-<button mat-icon-button (click)="addNew()">
-    <mat-icon class="mat-18">add</mat-icon>
-</button>
-{{order_item | json}}
-<div class="mat-elevation-z8">
+
+<div class="mat-elevation-z8" class="table_container">
   <mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
 
     <!-- Id Column -->
@@ -42,7 +39,7 @@
                 </ng-container>
 
  
-    <mat-header-row *matHeaderRowDef="displayedColumns" ></mat-header-row>
+    <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true" ></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="rowClickHandler(row)"></mat-row>
     
      
@@ -52,6 +49,6 @@
     [length]="dataSource.data.length" 
     [pageIndex]="0"
     [pageSize]="25"
-    [pageSizeOptions]="[25, 50, 100, 250]">
+    [pageSizeOptions]="[25, 50, 100, 250]" class="mat-paginator-sticky">
   </mat-paginator>
 </div>

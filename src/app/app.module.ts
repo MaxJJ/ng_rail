@@ -56,6 +56,8 @@ import { FacturaShowComponent } from './ui-components/facturas/factura-show/fact
 import { FacturaFormComponent } from './ui-components/facturas/factura-form/factura-form.component';
 import { FacturaPersonComponent } from './ui-components/facturas/factura-person/factura-person.component';
 import { RtmePrintComponent } from './rtme-print/rtme-print.component';
+import { MenuService } from './services/menu/menu.service';
+import { OrderService } from './services/backend/order.service';
 
 
 const appRoutes: Routes = [
@@ -181,6 +183,7 @@ const appRoutes: Routes = [
   ],
   providers: [
     MatDialog,
+    
    
   ],
   bootstrap: [AppComponent]

@@ -5,6 +5,7 @@ import { Order, Cargo, OrderComment } from '../services/interfaces';
 import { FormControl } from '@angular/forms';
 import { CommentsService } from '../services/backend/comments/comments.service';
 import { isNullOrUndefined } from 'util';
+import { MenuService } from '../services/menu/menu.service';
 
 
 
@@ -27,7 +28,9 @@ export class OrderDetailsComponent implements OnInit {
 
 
 
-  constructor(private orders_service: OrderService, private route: ActivatedRoute,) { }
+  constructor(private orders_service: OrderService, 
+              private route: ActivatedRoute,
+              private menu:MenuService) { }
 
   ngOnInit() {
     let id: string;
@@ -49,7 +52,13 @@ export class OrderDetailsComponent implements OnInit {
     
     this.inbound_cargo=this.model.inbound_cargo;
 
+    this.setMenu();
 
+  }
+
+
+  setMenu(){
+    this.menu.setTopTitle('Order '+this.model.id+' details')
   }
 
   etaChangeHandler(eta){
