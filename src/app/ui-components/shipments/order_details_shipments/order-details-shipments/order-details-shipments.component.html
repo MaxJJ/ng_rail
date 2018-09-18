@@ -1,23 +1,16 @@
-<button mat-button (click)="addShipmentHandler()">Add shipment</button>
-<mat-list >
-    <mat-list-item *ngFor="let item of orders_shipments" [style.margin-top]="'8px'">
-             <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="6px">
-               <mat-icon color="primary" [style.margin-right]="'4px'" class='hovpoint' (click)=editShipmentHandler(item.id)>edit</mat-icon>
-                    <mat-form-field fxFlex="60px">
-                            <input matInput type="text" placeholder="Id" [(ngModel)]="item.name">
-                        </mat-form-field>
-                        <mat-form-field >
-                                <input matInput placeholder="Cargo"  [matAutocomplete]="auto" [(ngModel)]="item.description">
-                                <mat-autocomplete #auto="matAutocomplete">
-                                  <mat-option *ngFor="let cargo of inbound_cargo" [value]="cargo.description">
-                                    {{cargo.description}}
-                                  </mat-option>
-                                </mat-autocomplete>
-                              </mat-form-field> 
-                              
-             </div>
-           
-      
+<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="6px">
+  <button mat-icon-button (click)="addShipmentHandler()">
+      <mat-icon class="mat-18">add</mat-icon>
+  </button>
+  <span rtmeH1>Order's shipments:</span>
+  </div>
 
-    </mat-list-item>
+<mat-list >
+    <mat-list-item *ngFor="let item of shipments" >
+    
+        <mat-icon matListIcon (click)="editShipmentHandler(item.id)" >link</mat-icon>
+        <h3 matLine rtmeH1> {{item.name}} </h3>
+        <p matLine>{{item.description}}</p>
+      </mat-list-item>
+
 </mat-list>

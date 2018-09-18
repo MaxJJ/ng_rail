@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http'
 import { Observable } from 'rxjs';
 import {Urls} from './api_urls';
-import { Order, Cargo } from '../interfaces';
+import { Order, Cargo, InboundDoc } from '../interfaces';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -49,5 +49,15 @@ export class OrderService {
     
     return this.http.delete(url);
 
+  }
+
+  createInboundDoc(id):Observable<InboundDoc[]>{
+    let url= 'api/orders/'+id+'/indocs/'+0;
+    return this.http.get<InboundDoc[]>(url);
+  }
+
+  deleteInboundDoc(id,doc_id):Observable<InboundDoc[]>{
+    let url= 'api/orders/'+id+'/indocs/'+doc_id;
+    return this.http.get<InboundDoc[]>(url);
   }
 }

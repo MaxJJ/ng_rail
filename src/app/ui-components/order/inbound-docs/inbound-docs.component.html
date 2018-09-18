@@ -1,0 +1,34 @@
+<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="6px">
+    <button mat-icon-button (click)="addInboundDoc()">
+        <mat-icon class="mat-18">add</mat-icon>
+    </button>
+    <span rtmeH1>Inbound Documents:</span>
+    </div>
+<div *ngFor="let d of indocs" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="6px" >
+    <div fxFlex="40px"></div>
+    <button mat-icon-button (click)="deleteInboundDoc(d)">
+            <mat-icon class="mat-18">close</mat-icon>
+        </button>
+    <mat-form-field fxFlex="150px">
+        <input type="text" placeholder="Doc" matInput [(ngModel)]="d.doc_type" [matAutocomplete]="auto" (blur)="emit()">
+        <mat-autocomplete #auto="matAutocomplete">
+            <mat-option value='BL'>
+                BL
+            </mat-option>
+            <mat-option value='CMR'>
+                CMR
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field fxFlex="150px">
+        <input matInput  placeholder="Bill Nr." [(ngModel)]="d.number" (blur)="emit()"> 
+    </mat-form-field>
+    <mat-form-field fxFlex="50px" >
+        <input matInput type="number" placeholder="Places" [(ngModel)]="d.places" (blur)="emit()">
+    </mat-form-field>
+    <mat-form-field fxFlex="100px">
+        <input matInput placeholder="Gross" [(ngModel)]="d.gross" (blur)="emit()">
+    </mat-form-field>
+</div>
+

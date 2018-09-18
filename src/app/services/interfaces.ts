@@ -1,5 +1,23 @@
 import { Moment } from "moment";
-import { Container } from "@angular/compiler/src/i18n/i18n_ast";
+
+export interface Totals{
+
+  places?:number;
+  pcs?:number;
+  nett?:number;
+  gross?:number;
+  tnved_codes_qty?:number;
+  gng_codes_qty?:number;
+
+}
+
+export interface Container{
+  name?:string;
+  containers_type?:string;
+  payload?:number;
+  tare?:number;
+}
+
 
 export interface Place {
   id: number;
@@ -29,6 +47,7 @@ export interface Shipment {
   facturas?: any;
   cargo?:Cargo[];
   rw_bill?:any;
+  invoices?:Invoice[]
    
 }
 
@@ -66,6 +85,7 @@ export interface Cargo {
   unit_quantity?: number;
   nett_weight?: number;
   gross_weight?: any;
+  invoice_number?:string;
 }
 
 export interface Person{
@@ -82,6 +102,16 @@ export interface Person{
   country?:{name:string,country_code:string};
 }
 
+export interface InboundDoc {
+  id?: number;
+  doc_type?:string;
+  number?:number;
+  places?:number;
+  gross?:number;
+}
+
+
+
 export interface Order {
   id?: number;
   customer?: string;
@@ -96,6 +126,7 @@ export interface Order {
   consignor:Person;
   consignee:Person;
   inbound_bill:string;
+  inbound_docs?:InboundDoc[];
   transit_or_export:string;
   inbound_cargo:Cargo[];
   total_inbound_places:number;
@@ -133,4 +164,20 @@ export interface Factura{
   sign?:string;
 
 
+}
+
+export interface Invoice{
+  number?:string;
+  date?:any;
+  incoterms_place?:string;
+  incoterms_code?:string;
+  buyer?:Person;
+  seller?:Person;
+  consignee?:Person;
+  unit?:Unit;
+  units_qty?:number;
+  package?:Package;
+  packages_qty?:number;
+  nett_kgs?:number;
+  gross_kgs?:number;
 }

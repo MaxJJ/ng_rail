@@ -24,7 +24,7 @@ export class PlaceAutocompleteComponent implements OnInit {
 
   placeFormControl:FormControl;
   places:Observable<Place[]>;
-
+  v:string;
   @Output()
   selected_place = new EventEmitter<Place>();
 
@@ -48,10 +48,6 @@ export class PlaceAutocompleteComponent implements OnInit {
     this.placeFormControl.reset();
   }
 
-
-
-
-
   placeToString(pl:Place){
     return pl.place_name+' ('+pl.place_code+')';
   }
@@ -59,7 +55,10 @@ export class PlaceAutocompleteComponent implements OnInit {
   ngOnInit() {
     this.placeFormControl=new FormControl(this.placeToString(this.value));
 
-    this.placeFormControl.valueChanges.subscribe(v=>this.filteredPlaces(v));
+    this.placeFormControl.valueChanges.subscribe(v=>{
+      this.filteredPlaces(v);
+      this.v=v;
+    });
 
 
   

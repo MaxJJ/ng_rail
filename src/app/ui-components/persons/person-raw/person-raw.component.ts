@@ -9,6 +9,8 @@ import { Person } from '../../../services/interfaces';
 export class PersonRawComponent implements OnInit {
 @Input()
   person:Person;
+@Input()
+title:string;  
   constructor() { }
 
   ngOnInit() {

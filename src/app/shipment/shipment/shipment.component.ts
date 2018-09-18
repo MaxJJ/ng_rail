@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Shipment, Person, Order, Factura, Cargo } from '../../services/interfaces';
+import { Shipment, Person, Order, Factura, Cargo, Place } from '../../services/interfaces';
 import { ShipmentsService } from '../../services/backend/shipments/shipments.service';
 import { PersonsService } from '../../services/backend/persons/persons.service';
 import { OrderService } from '../../services/backend/order.service';
@@ -29,6 +29,9 @@ export class ShipmentComponent implements OnInit {
 
   shipment:Shipment;
   cargo:Cargo[];
+  isContainer:boolean = false;
+  dispatch:Place;
+  destination:Place;
 
   constructor(private route: ActivatedRoute,
               private service:ShipmentsService,
@@ -39,7 +42,11 @@ export class ShipmentComponent implements OnInit {
 
     let id: string;
     this.route.params.subscribe(param => id = param.sh_id);
-    this.service.getShipmentById(id).subscribe(res => this.shipment = res);
+    this.service.getShipmentById(id).subscribe(res =>{
+      this.shipment = res;
+      this.isContainer=!this.shipment.cargo_is_general;
+    
+    });
     this.setOrder();
 
     
@@ -48,7 +55,11 @@ export class ShipmentComponent implements OnInit {
   private setOrder(){
 let order_id;
 this.route.params.subscribe(prms=>order_id=prms['id']);
-this.order_service.getOrderById(order_id).subscribe(ord=>this.order=ord);
+this.order_service.getOrderById(order_id).subscribe(ord=>{
+  this.order=ord;
+  this.dispatch=this.order.dispatch_place;
+  this.destination=this.order.destination_place;
+});
     
   }
 
@@ -57,17 +68,21 @@ this.order_service.getOrderById(order_id).subscribe(ord=>this.order=ord);
     this.person_service.getPerson(id).subscribe(p=>{return p});
   }
 
-  sellerHandler(val){
-
-    this.shipment.seller=val;
-  }
-
-  buyerHandler(val){
-    this.shipment.buyer = val;
-  }
 
   cargoChangeHandler(val){
     this.cargo=val;
+  }
+
+  isContainerChange(val){
+    if (val.checked){
+      this.service.createDeleteContainer(this.shipment.id,0).subscribe(sh=>this.shipment=sh);
+      this.isContainer=val.checked;
+    }else{
+      this.service.createDeleteContainer(this.shipment.id,100).subscribe(sh=>this.shipment=sh);
+      this.isContainer=val.checked;
+    }
+    
+  
   }
 
 }

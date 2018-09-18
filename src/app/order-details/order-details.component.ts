@@ -25,6 +25,7 @@ export class OrderDetailsComponent implements OnInit {
   containers_qty: number;
   cargo_units_qty: number;
   gross_total: number;
+  
 
 
 
@@ -39,6 +40,11 @@ export class OrderDetailsComponent implements OnInit {
     this.orders_service.getOrderById(id).subscribe(res => this.model = res);
     setTimeout(()=>{this.setFields()},300) ;
 
+  }
+
+  ngOnDestroy(){
+
+    this.saveOrder();
   }
 
   setFields(){
@@ -61,6 +67,13 @@ export class OrderDetailsComponent implements OnInit {
     this.menu.setTopTitle('Order '+this.model.id+' details')
   }
 
+  consignorHandler(val){
+    this.model.consignor = val;
+  }
+  consigneeHandler(val){
+    this.model.consignee = val;
+  }
+
   etaChangeHandler(eta){
     this.model.will_arrive=eta;
     console.log(eta);
@@ -78,11 +91,6 @@ this.model.destination_place=val;
     this.model.inbound_cargo=val;
     this.calculateTotals(this.model.inbound_cargo);
     this.inbound_cargo=this.model.inbound_cargo;
-  }
-
-  shipmentsChangeHandler(val){
-    console.log(val);
-    this.model.shipments=val;
   }
 
   calculateTotals(arr: Cargo[]) {
@@ -122,10 +130,16 @@ this.model.destination_place=val;
   }
 
   saveOrder(){
-    console.log(this.model.shipments)
+    console.log(this.model.inbound_docs);
     this.orders_service.postOrder(this.model).subscribe(m=>this.model=m);
   }
 
+  indocsHandler(val){
+
+    this.model.inbound_docs=val;
+
+    console.log(this.model.inbound_docs);
+  }
 
 
  

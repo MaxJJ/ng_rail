@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Shipment, Cargo, Order } from '../../../../services/interfaces';
+import { Shipment, Cargo, Order, Totals } from '../../../../services/interfaces';
 import { ShipmentsService } from '../../../../services/backend/shipments/shipments.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -10,33 +10,54 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./order-details-shipments.component.css']
 })
 export class OrderDetailsShipmentsComponent implements OnInit {
-  @Input()
-  orders_shipments:Shipment[];
-  @Input()
-  inbound_cargo:Cargo[];
-  
-  order:Order;
+  order_id:number;
+  shipments:Shipment[];
 
+  @Output()
+  totals:Totals;
  
 
   @Output()
   updated:EventEmitter<Shipment[]> = new EventEmitter<Shipment[]>();
 
-  constructor(private serv:ShipmentsService,private nav:Router) { }
+  constructor(private serv:ShipmentsService,private nav:Router,private route:ActivatedRoute) { }
 
   ngOnInit() {
-
+this.route.params.subscribe(p=>this.order_id=p.id);
+this.serv.getOrdersShipments(this.order_id).subscribe(shs=>{
+  this.shipments=shs;
+  this._calcTotals(this.shipments);
+});
   }
 
   addShipmentHandler(){
   
-  this.serv.createNewShipment().subscribe(sh=>this.orders_shipments.push(sh));
- this.updated.emit(this.orders_shipments);
+  this.serv.createNewShipment(this.order_id).subscribe(sh=>{
+      this.nav.navigate([this.nav.url,'shipments',sh.id]);
+    
+  });
+ 
   }
 
   editShipmentHandler(id){
      
 this.nav.navigate([this.nav.url,'shipments',id]);
     
+  }
+
+  private _calcTotals(items:Shipment[]){
+    let ttls:Totals = {places:0,pcs:0,nett:0,gross:0,tnved_codes_qty:0,gng_codes_qty:0};
+    let cargo:Cargo[]=[];
+    items.forEach((v,i,a)=>{
+      cargo.concat(v.cargo);
+    });
+    cargo.forEach((v,i,a)=>{
+      ttls.places+=v.package_quantity;
+      ttls.pcs+=v.unit_quantity;
+      ttls.nett+=v.nett_weight;
+      ttls.gross+=v.gross_weight;
+    });
+
+    console.log(ttls);
   }
 }

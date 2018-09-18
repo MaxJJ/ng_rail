@@ -1,8 +1,9 @@
 
   <mat-form-field fxFlex>
-    <input  matInput [matAutocomplete]="ac"  [placeholder]="placeholder"  [formControl]="placeFormControl" >
-    <mat-icon matSuffix (click)="clear()" class='pointer'>close</mat-icon>
-   
+    <input  matInput type="search" [matAutocomplete]="ac"  [placeholder]="placeholder"  [formControl]="placeFormControl" >
+    <button mat-button *ngIf="v" matSuffix mat-icon-button aria-label="Clear" (click)="clear()">
+    <mat-icon>close</mat-icon>
+  </button>
     <mat-autocomplete #ac="matAutocomplete" (optionSelected)="placeChange($event)" >
       <mat-option  *ngFor="let pl of places | async" [value]="pl">
         <p>{{pl.place_name}} / {{pl.place_code}}</p>

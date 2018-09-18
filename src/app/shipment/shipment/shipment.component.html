@@ -1,26 +1,56 @@
-
 <mat-accordion>
   <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
       <mat-panel-title [style.align-items]="'center'">
-       Title
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="6px">
+          <span>{{shipment.name | uppercase}} </span>
+          <span *ngIf="isContainer">{{shipment.container.name}}</span>
+          <span>{{shipment.description | uppercase}} </span>
+        </div>
+          
       </mat-panel-title>
-      <mat-panel-description>
+      <!-- <mat-panel-description>
         <h4>{{shipment.name | uppercase}} {{shipment.description | uppercase}} </h4>
-      </mat-panel-description>
+      </mat-panel-description> -->
     </mat-expansion-panel-header>
    
     <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+    <mat-form-field fxFlex="80px">
+      <input matInput placeholder="ID" [(ngModel)]="shipment.name">
+    </mat-form-field>
     <mat-form-field fxFlex>
       <input matInput placeholder="Description" [(ngModel)]="shipment.description">
     </mat-form-field>
   </div>
+
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="40px">
+   <place-raw fxFlex="250px" title="Dispatch" [place]="dispatch"></place-raw>
+   <place-raw fxFlex="250px" title="Destination" [place]="destination"></place-raw>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="40px">
+  <person-raw fxFlex="250px" [person]="order.consignee" title="Consignee" ></person-raw>
+  <person-raw fxFlex="250px" [person]="order.consignor" title="Consignor" ></person-raw>
+</div>
+<mat-divider [style.margin-top]="'10px'"></mat-divider>
+
+<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="40px" [style.margin-top]="'10px'">
+<mat-checkbox (change)= "isContainerChange($event)" [checked]="!shipment.cargo_is_general">is container?</mat-checkbox>
+<mat-form-field *ngIf="isContainer">
+  <input matInput placeholder="Container" [(ngModel)]="shipment.container.name">
+</mat-form-field>
+<mat-form-field *ngIf="isContainer">
+  <input matInput placeholder="Type" [(ngModel)]="shipment.container.containers_type">
+</mat-form-field>
+<mat-form-field *ngIf="isContainer">
+  <input matInput placeholder="Payload" [(ngModel)]="shipment.container.payload">
+</mat-form-field>
+<mat-form-field *ngIf="isContainer">
+  <input matInput placeholder="Tare" [(ngModel)]="shipment.container.tare">
+</mat-form-field>
+</div>
   </mat-expansion-panel>
 
- <person-exp-panel-raw [person]="order.consignor" title="Consignor"></person-exp-panel-raw>
- <person-exp-panel-raw [person]="order.consignee" title="Consignee"></person-exp-panel-raw>
- <person-exp-panel-form [person]="shipment.seller" title="Seller" (new_person)="sellerHandler($event)"></person-exp-panel-form>
- <person-exp-panel-form [person]="shipment.buyer" title="Buyer" (new_person)="buyerHandler($event)"></person-exp-panel-form>
 
  <cargo-ex-panel (cargoChange)="cargoChangeHandler($event)"></cargo-ex-panel>
  <shipment-facturas [shipment]="shipment"></shipment-facturas>

@@ -3,36 +3,33 @@
     <div fxLayout="column" fxLayoutAlign="stretch" fxFlex="50%">
 
         <mat-card>
-
-            <mat-toolbar [style.margin-bottom]="'1em'">Order {{model.id}}
-                <mat-icon class="mat-18">save</mat-icon>
-            </mat-toolbar>
-
-
             <mat-card-content>
-                <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="1px">
-                    <mat-form-field fxFlexFill>
+                <div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="1px">
+                    <mat-form-field>
                         <input matInput placeholder="Title" [formControl]="title_fc">
                     </mat-form-field>
 
-                    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="6px" fxFlexFill>
+                    <rtme-datepicker placeholder='ETA' [date]="model.will_arrive" (new_date)="etaChangeHandler($event)"></rtme-datepicker>
 
-                        <rtme-datepicker fxFlex="200px" placeholder='ETA' [date]="model.will_arrive" (new_date)="etaChangeHandler($event)"></rtme-datepicker>
+                    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="6px">
 
-                        <mat-form-field fxFlex>
-                            <input matInput placeholder="Bill Nr." [formControl]="inbound_bill_fc">
-                        </mat-form-field>
+                        <person-search fxFlex="50%" title="Consignor" [person]="model.consignor" (new_person)=consignorHandler($event)></person-search>
+
+                        <place-autocomplete fxFlex="50%" placeholder="Place of Dispatch" [value]="model.dispatch_place"
+                            (selected_place)=placeOfDispatchHandler($event)></place-autocomplete>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="6px">
+                        <person-search fxFlex="50%" title="Consignee" [person]="model.consignee" (new_person)=consigneeHandler($event)></person-search>
+
+                        <place-autocomplete fxFlex="50%" placeholder="Place of Destination" [value]="model.destination_place"
+                            (selected_place)=placeOfDestinationHandler($event)></place-autocomplete>
 
                     </div>
-                    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="6px" fxFlexFill>
-
-                        <place-autocomplete fxFlex="50%" placeholder="Place of Dispatch" [value]="model.dispatch_place" (selected_place)=placeOfDispatchHandler($event)></place-autocomplete>
-                        <place-autocomplete fxFlex="50%" placeholder="Place of Destination" [value]="model.destination_place" (selected_place)=placeOfDestinationHandler($event)></place-autocomplete>
-                    </div>
+                    <inbound-docs [indocs]="model.inbound_docs" (new_indocs)=indocsHandler($event)></inbound-docs>
 
                     <mat-divider [inset]="true"></mat-divider>
 
-                    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="6px" fxFlexFill [style.min-height]="'200px'">
+                    <!-- <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="6px" fxFlexFill [style.min-height]="'200px'">
                         <div fxFlex="60%">
                             <app-inbound-cargo [in_cargo]="model.inbound_cargo" (cargo_items)="inboundCargoHandler($event)"></app-inbound-cargo>
                         </div>
@@ -49,14 +46,14 @@
 
                             </mat-card>
                         </div>
-                    </div>
+                    </div> -->
 
-                    <mat-divider [inset]="true"></mat-divider>
+                    <!-- <mat-divider [inset]="true"></mat-divider> -->
                     <!-- <input type="file" multiple  name="" id="f" [style.display]="'none'"  (change)= "onFileChange($event)">
 
                       <button mat-button (click)="openFileBrowser($event)">Action</button> -->
 
-                    <order-details-shipments [orders_shipments]="model.shipments" [inbound_cargo]="inbound_cargo" (updated)="shipmentsChangeHandler($event)"></order-details-shipments>
+                    <order-details-shipments></order-details-shipments>
 
                 </div>
 
@@ -75,7 +72,7 @@
     </div>
 
     <div fxLayout="column" fxLayoutAlign="stretch" fxFlex class="right_pane">
-<app-comments [order]="model" ></app-comments>
+        <app-comments [order]="model"></app-comments>
     </div>
 
 

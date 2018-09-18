@@ -58,6 +58,9 @@ import { FacturaPersonComponent } from './ui-components/facturas/factura-person/
 import { RtmePrintComponent } from './rtme-print/rtme-print.component';
 import { MenuService } from './services/menu/menu.service';
 import { OrderService } from './services/backend/order.service';
+import { RtmeH1Directive } from './directives/rtme-h1.directive';
+import { InboundDocsComponent } from './ui-components/order/inbound-docs/inbound-docs.component';
+import { PlaceRawComponent } from './ui-components/places/place-raw/place-raw.component';
 
 
 const appRoutes: Routes = [
@@ -134,6 +137,12 @@ const appRoutes: Routes = [
     FacturaPersonComponent,
    
    RtmePrintComponent,
+   
+   RtmeH1Directive,
+   
+   InboundDocsComponent,
+   
+   PlaceRawComponent,
   
    
   ],
