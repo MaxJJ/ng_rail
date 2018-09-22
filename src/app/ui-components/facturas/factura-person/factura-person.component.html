@@ -1,15 +1,15 @@
 <div fxLayout="column" fxLayoutAlign="stretch" class="p_wrapper">
     <div class="p_placeholder">{{placeholder | uppercase}}</div>
-    <div class="p_name">{{person.name}}</div>
+    <div class="p_name">{{person?.name}}</div>
     <div fxLayout="row" fxLayoutAlign="start start">
-        <span>{{person.street_house}}, </span>
-        <span *ngIf="person.region">{{person.region}}, </span>
-        <span>{{person.city}}, </span>
-        <span *ngIf="person.postal_code">{{person.postal_code}}, </span>
-        <span>{{person.country.name_rus}}, </span>
-        <span *ngIf="person.phone">ТЕЛ: {{person.phone}}, </span>
-        <span *ngIf="person.okpo">{{person.okpo}},</span>
-        <span *ngIf="person.inn"> {{person.inn}}</span>      
+        <span>{{person?.street_house}}, </span>
+        <span *ngIf="person.region">{{person?.region}}, </span>
+        <span>{{person?.city}}, </span>
+        <span *ngIf="person.postal_code">{{person?.postal_code}}, </span>
+        <span>{{person?.country.name_rus}}, </span>
+        <span *ngIf="person.phone">ТЕЛ: {{person?.phone}}, </span>
+        <span *ngIf="person.okpo">{{person?.okpo}},</span>
+        <span *ngIf="person.inn"> {{person?.inn}}</span>      
     </div>
 
   </div>

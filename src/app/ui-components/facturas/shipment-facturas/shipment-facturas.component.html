@@ -4,7 +4,7 @@
      Facturas
     </mat-panel-title>
     <mat-panel-description>
-      <h4>{{shipment.name | uppercase}} {{shipment.description | uppercase}} </h4>
+     
     </mat-panel-description>
   </mat-expansion-panel-header>
  
@@ -12,17 +12,16 @@
  <button mat-icon-button (click)="createNewFactura()">
      <mat-icon class="mat-18">add</mat-icon>
  </button>
+ <span rtmeH1>Shipment's facturas:</span>
 </div>
 
-<mat-accordion displayMode="default" [multi]="true"
+<mat-accordion *ngIf="facturas" displayMode="default" [multi]="true"
                [hideToggle]="false">
     <mat-expansion-panel *ngFor="let f of facturas" [hideToggle]="false">
         <mat-expansion-panel-header>Factura </mat-expansion-panel-header>
          <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="40px">
              
-            <factura-form [factura]="f" [shipment]="shipment" fxFlex="320px" ></factura-form>
-            
-            <factura-show fxFlex [factura]="f"></factura-show>
+            <factura-form [factura]="f" [shipment]="shipment" [order]="order" fxFlex></factura-form>
              
          </div>
         <mat-action-row>

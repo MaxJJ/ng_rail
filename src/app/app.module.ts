@@ -1,45 +1,45 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpModule} from '@angular/http';
+import { HttpModule } from '@angular/http';
 
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
-import {MatButtonModule, MatCheckboxModule, MatToolbarModule, MatSidenavModule, MatPaginatorModule, MatSortModule, MatDialog, MatCardModule, MatNativeDateModule, MAT_DATE_FORMATS, DateAdapter, MAT_DATE_LOCALE, MatGridListModule, MatTooltipModule} from '@angular/material';
-import {MatListModule} from '@angular/material/list';
-import {MatIconModule} from '@angular/material/icon';
-import {MatChipsModule} from '@angular/material/chips';
-import {MatTableModule} from '@angular/material/table';
-import {MatFormFieldModule, MatFormFieldControl} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatButtonModule, MatCheckboxModule, MatToolbarModule, MatSidenavModule, MatPaginatorModule, MatSortModule, MatDialog, MatCardModule, MatNativeDateModule, MAT_DATE_FORMATS, DateAdapter, MAT_DATE_LOCALE, MatGridListModule, MatTooltipModule } from '@angular/material';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatTableModule } from '@angular/material/table';
+import { MatFormFieldModule, MatFormFieldControl } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
 import { XzcDirective } from './xzc.directive';
 import { ContentComponent } from './content/content.component';
 import { MyNavComponent } from './my-nav/my-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
 
 import { OrdersTableComponent } from './orders-table/orders-table.component';
 import { RouterModule, Routes } from '@angular/router';
 import { OrderDetailsComponent } from './order-details/order-details.component';
 import { FormsModule, FormControl, ReactiveFormsModule } from '@angular/forms';
-import {MatDatepickerModule,MatDatepicker} from '@angular/material/datepicker';
-import {MatMomentDateModule, MomentDateAdapter} from '@angular/material-moment-adapter';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatDatepickerModule, MatDatepicker } from '@angular/material/datepicker';
+import { MatMomentDateModule, MomentDateAdapter } from '@angular/material-moment-adapter';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { PlaceTableComponent } from './place-table/place-table.component';
 import { PlaceDetailsComponent } from './place-table/place-details/place-details.component';
 import { InInfoComponent } from './ui-components/in-info/in-info/in-info.component';
 import { RtmeDatepickerComponent } from './ui-components/date/rtme-datepicker/rtme-datepicker.component';
 import { OrderIninfoComponent } from './ui-components/dialogs/order-ininfo/order-ininfo.component';
 import { OrderInboundCargoComponent } from './ui-components/dialogs/order-inbound-cargo/order-inbound-cargo.component';
-import {MatRadioModule} from '@angular/material/radio';
-import {CardModule} from 'primeng/card';
-import {FlexLayoutModule} from '@angular/flex-layout';
+import { MatRadioModule } from '@angular/material/radio';
+import { CardModule } from 'primeng/card';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { InboundCargoComponent } from './ui-components/inbound-cargo/inbound-cargo.component';
-import {MatExpansionModule} from '@angular/material/expansion';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { PlaceAutocompleteComponent } from './ui-components/places/place-autocomplete/place-autocomplete.component';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatTabsModule } from '@angular/material/tabs';
 import { OrderDetailsShipmentsComponent } from './ui-components/shipments/order_details_shipments/order-details-shipments/order-details-shipments.component';
 import { ShipmentComponent } from './shipment/shipment/shipment.component';
 import { CommentsComponent } from './ui-components/comments/comments/comments.component';
@@ -61,103 +61,121 @@ import { OrderService } from './services/backend/order.service';
 import { RtmeH1Directive } from './directives/rtme-h1.directive';
 import { InboundDocsComponent } from './ui-components/order/inbound-docs/inbound-docs.component';
 import { PlaceRawComponent } from './ui-components/places/place-raw/place-raw.component';
+import { ShipmentInvoicesComponent } from './ui-components/shipments/shipment-invoices/shipment-invoices.component';
+import { UnitsAutocompleteComponent } from './ui-components/units/units-autocomplete/units-autocomplete.component';
+import { ShipmentViewResolver } from './resolvers/shipment-view.service';
+import { PersonComboComponent } from './ui-components/persons/person-combo/person-combo.component';
+import { CargoComboComponent } from './ui-components/facturas/cargo-combo/cargo-combo.component';
 
 
 const appRoutes: Routes = [
   { path: 'orders', component: OrdersTableComponent },
-  { path: 'order/:id',component: OrderDetailsComponent },
-  { path: 'order/:id/shipments/:sh_id',component: ShipmentComponent },
-  { path: 'order/:id/shipments/:sh_id/print',component: RtmePrintComponent },
-  { path: 'places',component: PlaceTableComponent },
-  {path:'test',loadChildren: 'app/modules/rtme-order/rtme-order.module#RtmeOrderModule'},
-  
-  { path: '',
+  { path: 'order/:id', component: OrderDetailsComponent },
+  {
+    path: 'order/:id/shipments/:sh_id',
+    component: ShipmentComponent,
+    resolve: { shipment: ShipmentViewResolver }
+  },
+  { path: 'order/:id/shipments/:sh_id/print', component: RtmePrintComponent },
+  { path: 'places', component: PlaceTableComponent },
+  { path: 'test', loadChildren: 'app/modules/rtme-order/rtme-order.module#RtmeOrderModule' },
+
+  {
+    path: '',
     redirectTo: '/orders',
     pathMatch: 'full'
   },
-  { path: '**', redirectTo:'/orders'}
+  { path: '**', redirectTo: '/orders' }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    
+
     XzcDirective,
-    
+
     ContentComponent,
     MyNavComponent,
     OrdersTableComponent,
-    
+
     OrderDetailsComponent,
-    
+
     PlaceTableComponent,
-    
+
     PlaceDetailsComponent,
-    
+
     InInfoComponent,
-    
+
     RtmeDatepickerComponent,
-    
+
     OrderIninfoComponent,
-    
+
     OrderInboundCargoComponent,
-    
+
     InboundCargoComponent,
-    
+
     PlaceAutocompleteComponent,
-    
-   
-    
+
+
+
     OrderDetailsShipmentsComponent,
-    
+
     ShipmentComponent,
-    
+
     CommentsComponent,
-    
+
     PersonExpPanelRawComponent,
-    
+
     PersonExpPanelFormComponent,
-    
+
     CargoExPanelComponent,
-    
+
     CargoDialogComponent,
-    
+
     ShipmentFacturasComponent,
-    
+
     PersonRawComponent,
-    
+
     PersonSearchComponent,
-    
+
     PersonDialogComponent,
-    
+
     FacturaShowComponent,
-    
+
     FacturaFormComponent,
-    
+
     FacturaPersonComponent,
-   
-   RtmePrintComponent,
-   
-   RtmeH1Directive,
-   
-   InboundDocsComponent,
-   
-   PlaceRawComponent,
-  
-   
+
+    RtmePrintComponent,
+
+    RtmeH1Directive,
+
+    InboundDocsComponent,
+
+    PlaceRawComponent,
+
+    ShipmentInvoicesComponent,
+
+    UnitsAutocompleteComponent,
+
+    PersonComboComponent,
+
+    CargoComboComponent,
+
+
   ],
   entryComponents: [
-   
-    PlaceDetailsComponent,OrderIninfoComponent,OrderInboundCargoComponent,CargoDialogComponent,PersonDialogComponent,
+
+    PlaceDetailsComponent, OrderIninfoComponent, OrderInboundCargoComponent, CargoDialogComponent, PersonDialogComponent,
   ],
   imports: [
-    RouterModule.forRoot(appRoutes,{enableTracing:true,onSameUrlNavigation:'reload'}),
+    RouterModule.forRoot(appRoutes, { enableTracing: true, onSameUrlNavigation: 'reload' }),
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    
-    MatButtonModule, 
+
+    MatButtonModule,
     MatCheckboxModule,
     MatToolbarModule,
     MatListModule,
@@ -174,7 +192,7 @@ const appRoutes: Routes = [
     MatSidenavModule,
     MatPaginatorModule,
     MatSortModule,
-    MatDialogModule, 
+    MatDialogModule,
     MatCardModule,
     MatDatepickerModule,
     MatMomentDateModule,
@@ -192,8 +210,8 @@ const appRoutes: Routes = [
   ],
   providers: [
     MatDialog,
-    
-   
+
+
   ],
   bootstrap: [AppComponent]
 })

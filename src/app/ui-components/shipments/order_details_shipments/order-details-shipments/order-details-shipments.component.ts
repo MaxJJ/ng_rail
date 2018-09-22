@@ -33,7 +33,8 @@ this.serv.getOrdersShipments(this.order_id).subscribe(shs=>{
   addShipmentHandler(){
   
   this.serv.createNewShipment(this.order_id).subscribe(sh=>{
-      this.nav.navigate([this.nav.url,'shipments',sh.id]);
+    this.shipments.push(sh);
+      // this.nav.navigate([this.nav.url,'shipments',sh.id]);
     
   });
  

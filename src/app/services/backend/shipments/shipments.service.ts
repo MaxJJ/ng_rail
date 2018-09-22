@@ -1,10 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Shipment } from '../../interfaces';
+import { Shipment, Invoice } from '../../interfaces';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Urls } from '../api_urls';
 
 const API = "api/orders/"
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json',
+    
+  })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +30,11 @@ export class ShipmentsService {
 
     return this.http.get<Shipment>(this.urls.shipment+id);
   }
+
+  saveShipment(order_id,s:Shipment):Observable<Shipment>{
+    let url = API+order_id+'/shipments/'+s.id;
+    return this.http.post(url,s,httpOptions);
+  }
   
   getOrdersShipments(order_id):Observable<Shipment[]>{
     let url = API+order_id+'/shipments';
@@ -35,6 +47,11 @@ export class ShipmentsService {
 
     let url = 'api/shipments/'+shipment_id+'/container/'+qry;
     return this.http.get(url);
+  }
+
+  createInvoice(shipment_id):Observable<Invoice>{
+    let url = 'api/shipments/'+shipment_id+'/invoices/create';
+    return this.http.get<Invoice>(url);
   }
 
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Factura } from '../../../services/interfaces';
+import { Factura, Person } from '../../../services/interfaces';
 
 @Component({
   selector: 'factura-show',
@@ -10,11 +10,15 @@ export class FacturaShowComponent implements OnInit {
 
   @Input()
   factura:Factura;
-
+  @Input()
+  shipment:Factura;
+ 
   constructor() { }
 
   ngOnInit() {
     this.factura.name="TST-256";
+    this.factura.consignee=this.shipment.consignee;
+    this.factura.consignor=this.shipment.consignor;
   }
 
 }

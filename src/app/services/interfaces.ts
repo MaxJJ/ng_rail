@@ -86,6 +86,8 @@ export interface Cargo {
   nett_weight?: number;
   gross_weight?: any;
   invoice_number?:string;
+  unit_price?:number;
+  total?:number;
 }
 
 export interface Person{
@@ -169,6 +171,7 @@ export interface Factura{
 export interface Invoice{
   number?:string;
   date?:any;
+  currency?:string;
   incoterms_place?:string;
   incoterms_code?:string;
   buyer?:Person;

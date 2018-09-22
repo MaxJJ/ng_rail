@@ -1,17 +1,35 @@
 <div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="1px">
+<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
+  <mat-form-field >
+    <input type="text" matInput placeholder="Document's type" [formControl]="doc_name_fc" >
+  </mat-form-field>
+  
+  <mat-form-field>
+    <input type="text" matInput placeholder="Document's ID" [formControl]="name_fc">
+  </mat-form-field>
+  
+  <rtme-datepicker placeholder="Document's date"  [date]="factura.date" (new_date)="setFacturasDate($event)"></rtme-datepicker> 
+</div>
 
-<mat-form-field >
-  <input type="text" matInput placeholder="Document's type" [formControl]="doc_name_fc" >
-</mat-form-field>
+<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="30px">
+  <person-combo title="Seller" [person]="factura.seller" (change)="sellerHandler($event)" fxFlex="50%"></person-combo> 
+  <person-combo title="Buyer" [person]="factura.buyer" (change)="sellerBuyer($event)" fxFlex="50%"></person-combo> 
+</div>
 
-<mat-form-field>
-  <input type="text" matInput placeholder="Document's ID" [formControl]="name_fc">
-</mat-form-field>
+<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="30px">
+  <person-raw title="Consignee" [person]="factura.consignee"  fxFlex="50%"></person-raw> 
+  <person-raw title="Cosignor" [person]="factura.consignor"  fxFlex="50%"></person-raw> 
+</div>
 
-<rtme-datepicker placeholder="Document's date"  [date]="factura.date" (new_date)="setFacturasDate($event)"></rtme-datepicker>
+<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="6px">
+  <mat-form-field>
+    <input type="text" matInput placeholder="Incoterms" [formControl]="name_fc">
+  </mat-form-field>
+</div>
 
-<person-search title="Buyer" [person]="factura.buyer" (new_person)="buyerHandler($event)"></person-search>
-<person-search title="Seller" [person]="factura.seller" (new_person)="sellerHandler($event)"></person-search>
+<cargo-combo></cargo-combo>
+
+
 
 <mat-form-field>
     <input type="text" matInput placeholder="Sign" [formControl]="sign_fc">

@@ -29,30 +29,6 @@
 
                     <mat-divider [inset]="true"></mat-divider>
 
-                    <!-- <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="6px" fxFlexFill [style.min-height]="'200px'">
-                        <div fxFlex="60%">
-                            <app-inbound-cargo [in_cargo]="model.inbound_cargo" (cargo_items)="inboundCargoHandler($event)"></app-inbound-cargo>
-                        </div>
-
-
-                        <div fxFlex="40%">
-                            <mat-card [style.margin-top]="'1em'">
-
-                                <mat-card-content>
-                                    <p>Total Gross : <span>{{gross_total}} kgs </span></p>
-                                    <p>Units quantity : <span>{{cargo_units_qty}} </span></p>
-                                    <p *ngIf="containers_qty > 0">Containers quantity : <span>{{containers_qty}} </span></p>
-                                </mat-card-content>
-
-                            </mat-card>
-                        </div>
-                    </div> -->
-
-                    <!-- <mat-divider [inset]="true"></mat-divider> -->
-                    <!-- <input type="file" multiple  name="" id="f" [style.display]="'none'"  (change)= "onFileChange($event)">
-
-                      <button mat-button (click)="openFileBrowser($event)">Action</button> -->
-
                     <order-details-shipments></order-details-shipments>
 
                 </div>

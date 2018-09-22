@@ -1,0 +1,91 @@
+<div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="2px">
+  <span rtmeH1>Cargo</span>
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <button mat-icon-button (click)="createItem()" [disabled]="addDisabled" color="primary">
+      <mat-icon>add</mat-icon>
+    </button>
+    <button mat-icon-button (click)="onClick" color="primary">
+      <mat-icon>search</mat-icon>
+    </button>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="20px">
+    <div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="1px" fxFlex="280px">
+      <mat-form-field>
+        <input matInput [(ngModel)]="item.tnved_code" placeholder="ТНВЭД">
+      </mat-form-field>
+      <mat-form-field>
+        <textarea matInput [(ngModel)]="item.description" placeholder="Description" mat-autosize='true' [matAutosizeMinRows]="3"
+          [matAutosizeMaxRows]="5"></textarea>
+      </mat-form-field>
+
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
+        <mat-form-field fxFlex="80px">
+          <input matInput [(ngModel)]="item.unit_quantity" placeholder="qty">
+        </mat-form-field>
+        <units-autocomplete fxFlex [value]="item.unit"  (valueChange)="unitHandler($event)" ></units-autocomplete>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
+        <mat-form-field fxFlex="80px">
+          <input matInput [(ngModel)]="item.package_quantity" placeholder="qty">
+        </mat-form-field>
+        
+            <package-autocomplete fxFlex [value]="item.package" (valueChange)="packageHandler($event)" ></package-autocomplete>
+        
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
+        <mat-form-field fxFlex="50%">
+          <input matInput [(ngModel)]="item.nett_weight" placeholder="Nett, kgs">
+        </mat-form-field>
+        <mat-form-field fxFlex="50%">
+          <input matInput [(ngModel)]="item.gross_weight" placeholder="Gross, kgs">
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
+        <mat-form-field fxFlex="50%">
+          <input matInput [(ngModel)]="item.unit_price" placeholder="Price per unit">
+        </mat-form-field>
+        <mat-form-field fxFlex="50%">
+          <input matInput [(ngModel)]="item.total" placeholder="Total amount">
+        </mat-form-field>
+      </div>
+<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+    <button mat-stroked-button color="primary" (click)="submit()" fxFlex="70%">Submit</button>
+    <button mat-stroked-button color="warn" fxFlex="30%">Delete</button> 
+</div>
+
+
+
+    </div>
+    <div fxFlex >
+     <!-- {{item|json}} <br>
+     ------------------------ <br>
+   {{cargoes | json}} -->
+      <div *ngFor="let c of cargoes" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="2px" class="cargo_item">
+        <div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="1px" fxFlex="200px">
+          <span>{{c.tnved_code}}</span>
+          <div>{{c.description}} </div>
+        </div>
+
+        <div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="4px" fxFlex="100px">
+         <div><span>{{c.unit_quantity}}</span> <span>{{c.unit?.name_short}}</span></div> 
+         <div><span>{{c.package_quantity}} </span> <span>{{c.package?.print_name}}</span></div> 
+        </div>
+
+        <div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="4px" fxFlex="100px">
+         <div><span>nett: </span> <span>{{c.nett_weight}}</span></div> 
+         <div><span>gross: </span> <span>{{c.gross_weight}}</span></div> 
+        </div>
+
+        <div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="4px" fxFlex="100px">
+         <div><span>price: </span> <span>{{c.unit_price}}</span></div> 
+         <div><span>total: </span> <span>{{c.total}}</span></div> 
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+
+</div>

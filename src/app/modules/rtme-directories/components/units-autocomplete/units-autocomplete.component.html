@@ -1,4 +1,5 @@
-  <mat-form-field fxFlex="50%">
+  <div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="1px">
+  <mat-form-field >
     <input type="search" placeholder="Unit" [matAutocomplete]="auto"  matInput  [formControl]="fc">
     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectionHandler($event)">
       <mat-option *ngFor="let u of units | async" [value]="u">
@@ -6,3 +7,4 @@
       </mat-option>
     </mat-autocomplete>
   </mat-form-field> 
+  </div>

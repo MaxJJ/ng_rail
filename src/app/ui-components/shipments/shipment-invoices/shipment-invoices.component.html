@@ -1,0 +1,62 @@
+<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+  <button mat-icon-button (click)="addInvoice()">
+    <mat-icon class="mat-18">add</mat-icon>
+  </button>
+  <span rtmeH1>Shipment's Invoices:</span>
+  <button matSuffics mat-icon-button (click)="emit()">
+      <mat-icon class="mat-18">save</mat-icon>
+  </button>
+ 
+</div>
+
+<div fxLayout="row" fxLayoutAlign="start start">
+  <div fxFlex="50px">
+
+  </div>
+  <mat-accordion *ngIf="invoices" displayMode="default"  [hideToggle]="false" fxFlex>
+
+    <mat-expansion-panel *ngFor="let i of invoices" [hideToggle]="false" (opened)="close = true" (closed)="close = false">
+
+      <mat-expansion-panel-header>Invoice {{i.number}}</mat-expansion-panel-header>
+     
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="6px">
+        <mat-form-field fxFlex="200px">
+          <input matInput placeholder="Number" [(ngModel)]="i.number">
+        </mat-form-field>
+        <mat-form-field fxFlex="60px">
+          <input matInput placeholder="Currency" [(ngModel)]="i.currency">
+        </mat-form-field>
+        <mat-form-field fxFlex="60px">
+          <input matInput placeholder="Units" [(ngModel)]="i.units_qty">
+        </mat-form-field>
+        <mat-form-field fxFlex="80px">
+          <input matInput placeholder="Packages" [(ngModel)]="i.packages_qty">
+        </mat-form-field>
+        <mat-form-field fxFlex="80px">
+          <input matInput placeholder="Nett, Kgs" [(ngModel)]="i.nett_kgs">
+        </mat-form-field>
+        <mat-form-field fxFlex="80px">
+          <input matInput placeholder="Gross, Kgs" [(ngModel)]="i.gross_kgs">
+        </mat-form-field>
+
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+        <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10px">
+          <person-search title="Buyer" [person]="i.buyer" (new_person)="iBuyerHandler($event,i)"></person-search>
+          <person-search title="Seller" [person]="i.seller" (new_person)="iSellerHandler($event,i)"></person-search>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+          <person-raw *ngIf="i.buyer" title="Buyer" [person]="i.buyer"></person-raw>
+          <person-raw *ngIf="i.seller" title="Seller" [person]="i.seller"></person-raw>
+        </div>
+
+      </div>
+      <mat-action-row>
+        <mat-checkbox>delete?</mat-checkbox>
+        <button mat-button (click)="deleteInvoice($event,i)">Delete</button>
+      </mat-action-row>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

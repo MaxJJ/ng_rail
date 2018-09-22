@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Shipment, Cargo, Factura } from '../../../services/interfaces';
+import { Shipment, Cargo, Factura, Order } from '../../../services/interfaces';
 import { CargoService } from '../../../services/backend/cargo/cargo.service';
 import { FacturaService } from '../../../services/backend/factura/factura.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'shipment-facturas',
@@ -11,33 +12,36 @@ import { FacturaService } from '../../../services/backend/factura/factura.servic
 export class ShipmentFacturasComponent implements OnInit {
 
   @Input()
-  shipment: Shipment;
-
-  cargo: Cargo[];
   facturas: Factura[];
+  @Input()
+  order: Order;
+  
+  shipment_id:number;
+  cargo: Cargo[];
+  
 
 
-  constructor(private cargo_service: CargoService, private factura_service: FacturaService) { }
+  constructor(
+    private cargo_service: CargoService, 
+    private factura_service: FacturaService,
+    private route:ActivatedRoute,
+    ) { }
 
-  ngOnInit() {
+  ngOnChanges(){
 
-    this.cargo = this.shipment.cargo;
-    this.getShipmentsFacturas();
     
   }
 
+  ngOnInit() {
+ this.route.params.subscribe(p=>this.shipment_id=p.sh_id);
+  }
+
   createNewFactura() {
-    this.factura_service.createNewFactura(this.shipment.id).subscribe(v=>{
+    this.factura_service.createNewFactura(this.shipment_id).subscribe(v=>{
       this.facturas.push(v);
     });
   }
 
-  getShipmentsFacturas(){
 
-    this.factura_service.getShipmentsFacturas(this.shipment.id).subscribe(fctrs=>{
-      this.facturas=fctrs;
-      console.log(this.facturas);
-    });
-    }
   
 }

@@ -16,7 +16,7 @@ export class FacturaService {
 
     let id = 0;
     let url = API+shipment_id+'/facturas/'+id;
-    console.log(url);
+    
     return this.http.get(url);
 
   }

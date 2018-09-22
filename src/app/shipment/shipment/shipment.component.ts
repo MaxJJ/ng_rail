@@ -6,14 +6,14 @@ import { PersonsService } from '../../services/backend/persons/persons.service';
 import { OrderService } from '../../services/backend/order.service';
 
 class FacturasExPanelData {
-  shipment_id:number;
-  facturas:Factura[];
-  cargo:Cargo[];
+  shipment_id: number;
+  facturas: Factura[];
+  cargo: Cargo[];
 
-  constructor(id:number,f:Factura[],c:Cargo[]) {
-    this.shipment_id=id;
-    this.facturas=f;
-    this.cargo=c;
+  constructor(id: number, f: Factura[], c: Cargo[]) {
+    this.shipment_id = id;
+    this.facturas = f;
+    this.cargo = c;
   }
 }
 
@@ -24,65 +24,70 @@ class FacturasExPanelData {
 })
 export class ShipmentComponent implements OnInit {
 
-  
-  order:Order;
 
-  shipment:Shipment;
-  cargo:Cargo[];
-  isContainer:boolean = false;
-  dispatch:Place;
-  destination:Place;
+  order: Order;
+
+  shipment: Shipment;
+  cargo: Cargo[];
+  isContainer: boolean = false;
+  dispatch: Place;
+  destination: Place;
 
   constructor(private route: ActivatedRoute,
-              private service:ShipmentsService,
-              private person_service:PersonsService,
-              private order_service:OrderService) { }
+    private service: ShipmentsService,
+    private person_service: PersonsService,
+    private order_service: OrderService) { 
+
+
+    }
+
+    ngOnChanges(){
+ 
+    
+    }
 
   ngOnInit() {
-
-    let id: string;
-    this.route.params.subscribe(param => id = param.sh_id);
-    this.service.getShipmentById(id).subscribe(res =>{
-      this.shipment = res;
-      this.isContainer=!this.shipment.cargo_is_general;
+ 
+this.route.data.subscribe((data) => {
+  console.log("data is --------",data);
+    this.shipment = data.shipment.shipment;
+    this.order = data.shipment.order;
     
-    });
-    this.setOrder();
-
-    
-  }
-
-  private setOrder(){
-let order_id;
-this.route.params.subscribe(prms=>order_id=prms['id']);
-this.order_service.getOrderById(order_id).subscribe(ord=>{
-  this.order=ord;
-  this.dispatch=this.order.dispatch_place;
-  this.destination=this.order.destination_place;
+    this.isContainer = !this.shipment.cargo_is_general;
+    this.dispatch = this.order.dispatch_place;
+    this.destination = this.order.destination_place;
+    this.shipment.consignee=this.order.consignee;
+    this.shipment.consignor=this.order.consignor;
 });
-    
-  }
-
-  personById(id){
-
-    this.person_service.getPerson(id).subscribe(p=>{return p});
   }
 
 
-  cargoChangeHandler(val){
-    this.cargo=val;
+  personById(id) {
+
+    this.person_service.getPerson(id).subscribe(p => { return p });
   }
 
-  isContainerChange(val){
-    if (val.checked){
-      this.service.createDeleteContainer(this.shipment.id,0).subscribe(sh=>this.shipment=sh);
-      this.isContainer=val.checked;
-    }else{
-      this.service.createDeleteContainer(this.shipment.id,100).subscribe(sh=>this.shipment=sh);
-      this.isContainer=val.checked;
+
+  cargoChangeHandler(val) {
+    this.cargo = val;
+  }
+
+  isContainerChange(val) {
+    if (val.checked) {
+      this.service.createDeleteContainer(this.shipment.id, 0).subscribe(sh => this.shipment = sh);
+      this.isContainer = val.checked;
+    } else {
+      this.service.createDeleteContainer(this.shipment.id, 100).subscribe(sh => this.shipment = sh);
+      this.isContainer = val.checked;
     }
-    
-  
+
+
+  }
+
+
+
+  saveShipment(){
+    this.service.saveShipment(this.order.id,this.shipment).subscribe(sh=>this.shipment=sh);
   }
 
 }

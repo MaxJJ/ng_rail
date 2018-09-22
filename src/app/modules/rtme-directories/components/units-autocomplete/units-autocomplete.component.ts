@@ -14,6 +14,9 @@ import { isNullOrUndefined } from 'util';
 export class UnitsAutocompleteComponent implements OnInit {
 @Input()
 value:Unit;
+@Input()
+title:string;
+
 units:Observable<Unit[]>;
 fc:FormControl=new FormControl('');
 
