@@ -62,10 +62,11 @@ import { RtmeH1Directive } from './directives/rtme-h1.directive';
 import { InboundDocsComponent } from './ui-components/order/inbound-docs/inbound-docs.component';
 import { PlaceRawComponent } from './ui-components/places/place-raw/place-raw.component';
 import { ShipmentInvoicesComponent } from './ui-components/shipments/shipment-invoices/shipment-invoices.component';
-import { UnitsAutocompleteComponent } from './ui-components/units/units-autocomplete/units-autocomplete.component';
+
 import { ShipmentViewResolver } from './resolvers/shipment-view.service';
 import { PersonComboComponent } from './ui-components/persons/person-combo/person-combo.component';
 import { CargoComboComponent } from './ui-components/facturas/cargo-combo/cargo-combo.component';
+import { CargoModalComponent } from './ui-components/dialogs/cargo/cargo-modal/cargo-modal.component';
 
 
 const appRoutes: Routes = [
@@ -156,17 +157,25 @@ const appRoutes: Routes = [
 
     ShipmentInvoicesComponent,
 
-    UnitsAutocompleteComponent,
+   
 
     PersonComboComponent,
 
     CargoComboComponent,
 
+    CargoModalComponent,
+
 
   ],
   entryComponents: [
 
-    PlaceDetailsComponent, OrderIninfoComponent, OrderInboundCargoComponent, CargoDialogComponent, PersonDialogComponent,
+    PlaceDetailsComponent, 
+    OrderIninfoComponent, 
+    OrderInboundCargoComponent, 
+    CargoDialogComponent, 
+    PersonDialogComponent,
+    CargoModalComponent,
+
   ],
   imports: [
     RouterModule.forRoot(appRoutes, { enableTracing: true, onSameUrlNavigation: 'reload' }),

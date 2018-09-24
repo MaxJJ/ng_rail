@@ -1,0 +1,54 @@
+<h2 mat-dialog-title>Edit cargo {{text}}</h2>
+
+<mat-dialog-content>
+  <div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="1px">
+    <mat-form-field>
+      <input matInput [(ngModel)]="d.item.tnved_code" placeholder="ТНВЭД">
+    </mat-form-field>
+    <mat-form-field>
+      <textarea matInput [(ngModel)]="d.item.description" placeholder="Description" mat-autosize='true'
+        [matAutosizeMinRows]="3" [matAutosizeMaxRows]="5"></textarea>
+    </mat-form-field>
+
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
+      <mat-form-field fxFlex="80px">
+        <input matInput [(ngModel)]="d.item.unit_quantity" placeholder="qty">
+      </mat-form-field>
+      <units-autocomplete fxFlex [value]="d.item.unit" (valueChange)="unitHandler($event)"></units-autocomplete>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
+      <mat-form-field fxFlex="80px">
+        <input matInput [(ngModel)]="d.item.package_quantity" placeholder="qty">
+      </mat-form-field>
+
+      <package-autocomplete fxFlex [value]="d.item.package" (valueChange)="packageHandler($event)"></package-autocomplete>
+
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
+      <mat-form-field fxFlex="50%">
+        <input matInput [(ngModel)]="d.item.nett_weight" placeholder="Nett, kgs">
+      </mat-form-field>
+      <mat-form-field fxFlex="50%">
+        <input matInput [(ngModel)]="d.item.gross_weight" placeholder="Gross, kgs">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
+      <mat-form-field fxFlex="50%">
+        <input matInput [(ngModel)]="d.item.unit_price" placeholder="Price per unit">
+      </mat-form-field>
+      <mat-form-field fxFlex="50%">
+        <input matInput [(ngModel)]="d.item.total" placeholder="Total amount">
+      </mat-form-field>
+    </div>
+
+
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+
+  
+    <button mat-stroked-button color="primary" (click)="close()" fxFlex="33%" [style.margin-right]="'4px'">Submit</button>
+    <button mat-stroked-button color="accent" (click)="copyItem()" fxFlex="33%"[style.margin-right]="'4px'">Make copy</button>
+    <button mat-stroked-button color="warn" (click)="deleteItem()" fxFlex="30%">Delete</button>
+
+</mat-dialog-actions>

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UnitsAutocompleteComponent } from './units-autocomplete.component';
+import { CargoModalComponent } from './cargo-modal.component';
 
-describe('UnitsAutocompleteComponent', () => {
-  let component: UnitsAutocompleteComponent;
-  let fixture: ComponentFixture<UnitsAutocompleteComponent>;
+describe('CargoModalComponent', () => {
+  let component: CargoModalComponent;
+  let fixture: ComponentFixture<CargoModalComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UnitsAutocompleteComponent ]
+      declarations: [ CargoModalComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UnitsAutocompleteComponent);
+    fixture = TestBed.createComponent(CargoModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

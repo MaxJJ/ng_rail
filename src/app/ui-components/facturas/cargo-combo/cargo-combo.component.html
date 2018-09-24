@@ -8,84 +8,80 @@
       <mat-icon>search</mat-icon>
     </button>
   </div>
-  <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="20px">
-    <div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="1px" fxFlex="280px">
-      <mat-form-field>
-        <input matInput [(ngModel)]="item.tnved_code" placeholder="ТНВЭД">
-      </mat-form-field>
-      <mat-form-field>
-        <textarea matInput [(ngModel)]="item.description" placeholder="Description" mat-autosize='true' [matAutosizeMinRows]="3"
-          [matAutosizeMaxRows]="5"></textarea>
-      </mat-form-field>
-
-      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
-        <mat-form-field fxFlex="80px">
-          <input matInput [(ngModel)]="item.unit_quantity" placeholder="qty">
-        </mat-form-field>
-        <units-autocomplete fxFlex [value]="item.unit"  (valueChange)="unitHandler($event)" ></units-autocomplete>
-      </div>
-      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
-        <mat-form-field fxFlex="80px">
-          <input matInput [(ngModel)]="item.package_quantity" placeholder="qty">
-        </mat-form-field>
-        
-            <package-autocomplete fxFlex [value]="item.package" (valueChange)="packageHandler($event)" ></package-autocomplete>
-        
-      </div>
-      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
-        <mat-form-field fxFlex="50%">
-          <input matInput [(ngModel)]="item.nett_weight" placeholder="Nett, kgs">
-        </mat-form-field>
-        <mat-form-field fxFlex="50%">
-          <input matInput [(ngModel)]="item.gross_weight" placeholder="Gross, kgs">
-        </mat-form-field>
-      </div>
-      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
-        <mat-form-field fxFlex="50%">
-          <input matInput [(ngModel)]="item.unit_price" placeholder="Price per unit">
-        </mat-form-field>
-        <mat-form-field fxFlex="50%">
-          <input matInput [(ngModel)]="item.total" placeholder="Total amount">
-        </mat-form-field>
-      </div>
-<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-    <button mat-stroked-button color="primary" (click)="submit()" fxFlex="70%">Submit</button>
-    <button mat-stroked-button color="warn" fxFlex="30%">Delete</button> 
-</div>
 
 
-
-    </div>
-    <div fxFlex >
-     <!-- {{item|json}} <br>
-     ------------------------ <br>
-   {{cargoes | json}} -->
-      <div *ngFor="let c of cargoes" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="2px" class="cargo_item">
-        <div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="1px" fxFlex="200px">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z2">
+    <ng-container matColumnDef="num">
+      <th mat-header-cell *matHeaderCellDef>No.</th>
+      <td mat-cell *matCellDef="let c" class="number"> {{cargo.indexOf(c)+1}} </td>
+      <td mat-footer-cell *matFooterCellDef> </td>
+    </ng-container>
+    <ng-container matColumnDef="tnved" >
+      <th mat-header-cell *matHeaderCellDef [style.width]="'350px'">ТНВЭД</th>
+      <td mat-cell *matCellDef="let c" class="description" >
+        <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="1px" >
           <span>{{c.tnved_code}}</span>
-          <div>{{c.description}} </div>
+          <span>{{c.description}}</span>
         </div>
-
-        <div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="4px" fxFlex="100px">
-         <div><span>{{c.unit_quantity}}</span> <span>{{c.unit?.name_short}}</span></div> 
-         <div><span>{{c.package_quantity}} </span> <span>{{c.package?.print_name}}</span></div> 
+      </td>
+      <td mat-footer-cell *matFooterCellDef> TOTAL:</td>
+    </ng-container>
+    <ng-container matColumnDef="units">
+      <th mat-header-cell *matHeaderCellDef>Units</th>
+      <td mat-cell *matCellDef="let c">
+        <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="1px">
+          <span>{{c.unit_quantity}}</span>
+          <span>{{c.unit.name_short}}</span>
         </div>
-
-        <div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="4px" fxFlex="100px">
-         <div><span>nett: </span> <span>{{c.nett_weight}}</span></div> 
-         <div><span>gross: </span> <span>{{c.gross_weight}}</span></div> 
+      </td>
+      <td mat-footer-cell *matFooterCellDef> </td>
+    </ng-container>
+    <ng-container matColumnDef="packages">
+      <th mat-header-cell *matHeaderCellDef>Pack</th>
+      <td mat-cell *matCellDef="let c">
+        <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="1px">
+          <span>{{c.package_quantity}}</span>
+          <span>{{c.package.print_name}}</span>
         </div>
+      </td>
+      <td mat-footer-cell *matFooterCellDef> {{getTotalPackages()}} </td>
+    </ng-container>
+    <ng-container matColumnDef="nett">
+      <th mat-header-cell *matHeaderCellDef>Nett, kgs</th>
+      <td mat-cell *matCellDef="let c">
+        {{c.nett_weight}}
+      </td>
+      
+      <td mat-footer-cell *matFooterCellDef> {{getTotalNett()}} </td>
+    </ng-container>
+    <ng-container matColumnDef="gross">
+      <th mat-header-cell *matHeaderCellDef>Gross, kgs</th>
+      <td mat-cell *matCellDef="let c">
+        {{c.gross_weight}}
+      </td>
+      <td mat-footer-cell *matFooterCellDef> {{getTotalGross()}} </td>
+    </ng-container>
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef>Price</th>
+      <td mat-cell *matCellDef="let c">
+        {{c.unit_price}}
+      </td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+    <ng-container matColumnDef="total">
+      <th mat-header-cell *matHeaderCellDef>Amount</th>
+      <td mat-cell *matCellDef="let c">
+        {{c.total }}
+      </td>
+      <td mat-footer-cell *matFooterCellDef> {{getTotalCost() | number : '1.1-3'}} </td>
+    </ng-container>
 
-        <div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="4px" fxFlex="100px">
-         <div><span>price: </span> <span>{{c.unit_price}}</span></div> 
-         <div><span>total: </span> <span>{{c.total}}</span></div> 
-        </div>
 
-      </div>
-
-    </div>
-  </div>
-
+    
+    <tr mat-header-row *matHeaderRowDef="columns" class="t_header"></tr>
+    <tr mat-row *matRowDef="let row; columns: columns" (click)=editItem(row) class="t_row"></tr>
+    <tr mat-footer-row *matFooterRowDef="columns" class="footer"></tr>
+  </table>
 
 
 </div>
