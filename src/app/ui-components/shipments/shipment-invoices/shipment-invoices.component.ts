@@ -16,13 +16,20 @@ export class ShipmentInvoicesComponent implements OnInit {
   invoices: Invoice[];
   shipment_id: number;
 
+  closed:boolean=true;
+
   @Output()
   change: EventEmitter<Invoice[]> = new EventEmitter<Invoice[]>()
 
   constructor(private service: ShipmentsService, private invoice_serv: InvoiceService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.params.subscribe(p => this.shipment_id = p.sh_id);
+    // this.route.params.subscribe(p => this.shipment_id = p.sh_id);
+    this.route.data.subscribe(data=>{
+      this.invoices=data.shipment.shipment.invoices;
+      this.shipment_id=data.shipment.shipment.id;
+      
+    })
   }
 
   addInvoice() {
@@ -47,5 +54,9 @@ export class ShipmentInvoicesComponent implements OnInit {
     });
   }
 
+  saveInvoice(i:Invoice){
+    console.log(i+' closed = '+this.closed);
+    this.closed= !this.closed;
+  }
 
 }

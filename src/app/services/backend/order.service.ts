@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http'
 import { Observable } from 'rxjs';
 import {Urls} from './api_urls';
 import { Order, Cargo, InboundDoc } from '../interfaces';
+import { map, mergeMap } from 'rxjs/operators';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -31,6 +32,17 @@ export class OrderService {
   postOrder(order):Observable<Order>{
     
     return this.http.post<Order>(this.urls.orders,order,httpOptions);
+  }
+
+  deleteOrder(order_id):Observable<Order>{
+    const url = 'api/orders/'+order_id+'/delete';
+  //  let result:Observable<Order>; 
+  //  return this.getOrderById(order_id).pipe(mergeMap(order=>
+  //    <Observable<Order>>this.http.post<Order>(url,order,httpOptions)
+  //   ));
+
+    return this.http.delete<Order>(url);
+   
   }
 
   getOrderById(id):Observable<Order>{

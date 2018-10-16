@@ -6,6 +6,8 @@ import { FormControl } from '@angular/forms';
 import { CommentsService } from '../services/backend/comments/comments.service';
 import { isNullOrUndefined } from 'util';
 import { MenuService } from '../services/menu/menu.service';
+import { ShipmentsService } from '../services/backend/shipments/shipments.service';
+import { MatSnackBar } from '@angular/material';
 
 
 
@@ -18,7 +20,7 @@ import { MenuService } from '../services/menu/menu.service';
 
 export class OrderDetailsComponent implements OnInit {
 
-  model: Order;
+  order: Order;
   title_fc: FormControl=new FormControl();
   inbound_bill_fc: FormControl=new FormControl();
   inbound_cargo: Cargo[];
@@ -29,116 +31,95 @@ export class OrderDetailsComponent implements OnInit {
 
 
 
-  constructor(private orders_service: OrderService, 
+  constructor(private orders_service: OrderService,
+              private shipment_service:ShipmentsService, 
               private route: ActivatedRoute,
-              private menu:MenuService) { }
+              private menu:MenuService,
+              public snackBar: MatSnackBar,
+              ) { }
 
   ngOnInit() {
-    let id: string;
-    
-    this.route.params.subscribe(param => id = param.id);
-    this.orders_service.getOrderById(id).subscribe(res => this.model = res);
-    setTimeout(()=>{this.setFields()},300) ;
 
+    
+
+    this.route.data.subscribe((data)=>{
+      this.order=data.order;
+      this.setFields();
+      this.setMenu();
+
+    })
+   
   }
 
   ngOnDestroy(){
 
-    this.saveOrder();
+    // this.saveOrder();
   }
 
   setFields(){
-    this.calculateTotals(this.model.inbound_cargo);
+   
     // Title field settings
-    this.title_fc.setValue(this.model.short_description);
-    this.title_fc.valueChanges.subscribe(title=>this.model.short_description=title)
+    this.title_fc.setValue(this.order.short_description);
+    this.title_fc.valueChanges.subscribe(title=>this.order.short_description=title)
     //  bill nr  field settings
-    this.inbound_bill_fc.setValue(this.model.inbound_bill);
-    this.inbound_bill_fc.valueChanges.subscribe(valx=>this.model.inbound_bill=valx);
+    this.inbound_bill_fc.setValue(this.order.inbound_bill);
+    this.inbound_bill_fc.valueChanges.subscribe(valx=>this.order.inbound_bill=valx);
     
-    this.inbound_cargo=this.model.inbound_cargo;
+    this.inbound_cargo=this.order.inbound_cargo;
+    
 
-    this.setMenu();
 
   }
 
-
   setMenu(){
-    this.menu.setTopTitle('Order '+this.model.id+' details')
+ 
+this.shipment_service.getOrdersShipments(this.order.id).subscribe(shipments=>{
+  this.menu.setOrderDetailsSideMenu();
+  
+  this.menu.pushData({shipments:shipments,order_id:this.order.id});
+});
+   
   }
 
   consignorHandler(val){
-    this.model.consignor = val;
+    this.order.consignor = val;
   }
   consigneeHandler(val){
-    this.model.consignee = val;
+    this.order.consignee = val;
   }
 
   etaChangeHandler(eta){
-    this.model.will_arrive=eta;
-    console.log(eta);
+    this.order.will_arrive=eta;
+    
   }
 
   placeOfDispatchHandler(val) {
-this.model.dispatch_place=val;
+this.order.dispatch_place=val;
+
   }
 
   placeOfDestinationHandler(val){
-this.model.destination_place=val;
+this.order.destination_place=val;
+
   }
 
-  inboundCargoHandler(val){
-    this.model.inbound_cargo=val;
-    this.calculateTotals(this.model.inbound_cargo);
-    this.inbound_cargo=this.model.inbound_cargo;
-  }
-
-  calculateTotals(arr: Cargo[]) {
-    function isContainer(element: Cargo, index, array) {
-      return (element.is_container == true);
-    };
-
-    this.containers_qty = arr.filter(isContainer).length;
-    this.gross_total=0;
-    this.cargo_units_qty=0;
-     arr.forEach(element => {
-      
-      let b= parseFloat(element.gross_weight);
-      let c = parseInt(element.package_quantity)
-     this.gross_total += b;
-     this.cargo_units_qty += c ;
-
-
-     
-     
-   });
-  }
-
- 
-
-  openFileBrowser(event){
-
-    event.preventDefault();
-    let element:HTMLElement = document.getElementById('f') as HTMLElement;
-
-    element.click();
-    
-  }
-  onFileChange(event){
-    
-    console.log(event.target.files);
-  }
 
   saveOrder(){
-    console.log(this.model.inbound_docs);
-    this.orders_service.postOrder(this.model).subscribe(m=>this.model=m);
+  
+    this.orders_service.postOrder(this.order).subscribe(m=>{
+      this.order=m;
+      this.snackBar.open('Order Saved','Undo',{
+        duration: 500
+      });
+    
+    });
   }
 
   indocsHandler(val){
 
-    this.model.inbound_docs=val;
+    this.order.inbound_docs=val;
 
-    console.log(this.model.inbound_docs);
+
   }
 
 

@@ -3,6 +3,7 @@ import { Shipment, Invoice } from '../../interfaces';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Urls } from '../api_urls';
+import { ShipmentInfo } from '../../../ui-components/shipments/shipment-info/shipment-info.component';
 
 const API = "api/orders/"
 
@@ -52,6 +53,11 @@ export class ShipmentsService {
   createInvoice(shipment_id):Observable<Invoice>{
     let url = 'api/shipments/'+shipment_id+'/invoices/create';
     return this.http.get<Invoice>(url);
+  }
+
+  saveInfo(shipment_id:number,i:ShipmentInfo):Observable<Shipment>{
+    let url='api/shipments/'+shipment_id+'/info';
+    return this.http.post(url,i,httpOptions);
   }
 
 }

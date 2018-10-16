@@ -1,82 +1,34 @@
-
 <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px">
-  
 
-<div fxFlex="920px">
-  
 
-<mat-accordion>
-  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-    <mat-expansion-panel-header>
-      <mat-panel-title [style.align-items]="'center'">
-        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="6px">
-          <span>{{shipment.name | uppercase}} </span>
-          <span *ngIf="isContainer">{{shipment.container.name}}</span>
-          <span>{{shipment.description | uppercase}} </span>
-        </div>
-          
-      </mat-panel-title>
-      <!-- <mat-panel-description>
-        <h4>{{shipment.name | uppercase}} {{shipment.description | uppercase}} </h4>
-      </mat-panel-description> -->
-    </mat-expansion-panel-header>
-   
-    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
-    <mat-form-field fxFlex="80px">
-      <input matInput placeholder="ID" [(ngModel)]="shipment.name">
-    </mat-form-field>
-    <mat-form-field fxFlex>
-      <input matInput placeholder="Description" [(ngModel)]="shipment.description">
-    </mat-form-field>
+  <div fxFlex="920px">
+
+
+    
+      <shipment-info></shipment-info>
+      <mat-accordion>
+      <!-- extension panel for invoices -->
+      <shipment-invoices></shipment-invoices>
+
+
+      <!-- <cargo-ex-panel (cargoChange)="cargoChangeHandler($event)"></cargo-ex-panel> -->
+      <shipment-facturas [facturas]="shipment.facturas" [order]="order"></shipment-facturas>
+
+      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title> Railbill </mat-panel-title>
+          <mat-panel-description></mat-panel-description>
+        </mat-expansion-panel-header>
+        <railbill [shipment]="shipment" [dispatch]="order.dispatch_place" [destination]="order.destination_place"></railbill>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <button mat-button (click)="saveShipment()">Save</button>
+
   </div>
 
-  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="40px">
-   <place-raw *ngIf="dispatch" fxFlex="250px" title="Dispatch" [place]="dispatch"></place-raw>
-   <place-raw *ngIf="destination" fxFlex="250px" title="Destination" [place]="destination"></place-raw>
-  </div>
-
-  <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="40px">
-  <person-raw  *ngIf="order" fxFlex="250px" [person]="order.consignee" title="Consignee" ></person-raw>
-  <person-raw *ngIf="order" fxFlex="250px" [person]="order.consignor" title="Consignor" ></person-raw>
-</div>
-<mat-divider [style.margin-top]="'10px'"></mat-divider>
-
-<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="40px" [style.margin-top]="'10px'">
-<mat-checkbox (change)= "isContainerChange($event)" [checked]="!shipment.cargo_is_general">is container?</mat-checkbox>
-<mat-form-field *ngIf="isContainer" fxFlex="150px">
-  <input matInput placeholder="Container" [(ngModel)]="shipment.container.name">
-</mat-form-field>
-<mat-form-field *ngIf="isContainer" fxFlex="80px">
-  <input matInput placeholder="Type" [(ngModel)]="shipment.container.containers_type">
-</mat-form-field>
-<mat-form-field *ngIf="isContainer" fxFlex="80px">
-  <input matInput placeholder="Payload" [(ngModel)]="shipment.container.payload">
-</mat-form-field>
-<mat-form-field *ngIf="isContainer" fxFlex="100px">
-  <input matInput placeholder="Tare" [(ngModel)]="shipment.container.tare">
-</mat-form-field>
-</div>
-  </mat-expansion-panel>
-
-  <!-- extension panel for invoices -->
-<mat-expansion-panel [hideToggle]="false" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-    <mat-expansion-panel-header>
-        <mat-panel-title> Invoices</mat-panel-title>
-        <mat-panel-description></mat-panel-description>
-    </mat-expansion-panel-header>
-   <shipment-invoices *ngIf="shipment" [invoices]="shipment.invoices"></shipment-invoices>
-</mat-expansion-panel>
-
- <cargo-ex-panel (cargoChange)="cargoChangeHandler($event)"></cargo-ex-panel>
- <shipment-facturas  [facturas]="shipment.facturas" [order]="order"></shipment-facturas>
-</mat-accordion>
-
-<button mat-button (click)="saveShipment()">Save</button>
-
-</div>
-
-<div fxFlex>
+  <div fxFlex>
     <app-comments [order]="order"></app-comments>
-</div>
+  </div>
 
 </div>

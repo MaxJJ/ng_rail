@@ -4,7 +4,7 @@ import { HttpModule } from '@angular/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
-import { MatButtonModule, MatCheckboxModule, MatToolbarModule, MatSidenavModule, MatPaginatorModule, MatSortModule, MatDialog, MatCardModule, MatNativeDateModule, MAT_DATE_FORMATS, DateAdapter, MAT_DATE_LOCALE, MatGridListModule, MatTooltipModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatToolbarModule, MatSidenavModule, MatPaginatorModule, MatSortModule, MatDialog, MatCardModule, MatNativeDateModule, MAT_DATE_FORMATS, DateAdapter, MAT_DATE_LOCALE, MatGridListModule, MatTooltipModule, MatSnackBar, MatSnackBarModule } from '@angular/material';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
@@ -56,8 +56,7 @@ import { FacturaShowComponent } from './ui-components/facturas/factura-show/fact
 import { FacturaFormComponent } from './ui-components/facturas/factura-form/factura-form.component';
 import { FacturaPersonComponent } from './ui-components/facturas/factura-person/factura-person.component';
 import { RtmePrintComponent } from './rtme-print/rtme-print.component';
-import { MenuService } from './services/menu/menu.service';
-import { OrderService } from './services/backend/order.service';
+
 import { RtmeH1Directive } from './directives/rtme-h1.directive';
 import { InboundDocsComponent } from './ui-components/order/inbound-docs/inbound-docs.component';
 import { PlaceRawComponent } from './ui-components/places/place-raw/place-raw.component';
@@ -67,11 +66,26 @@ import { ShipmentViewResolver } from './resolvers/shipment-view.service';
 import { PersonComboComponent } from './ui-components/persons/person-combo/person-combo.component';
 import { CargoComboComponent } from './ui-components/facturas/cargo-combo/cargo-combo.component';
 import { CargoModalComponent } from './ui-components/dialogs/cargo/cargo-modal/cargo-modal.component';
+import { RailbillComponent } from './ui-components/railbill/railbill/railbill.component';
+import { ShipmentInfoComponent } from './ui-components/shipments/shipment-info/shipment-info.component';
+import { SideMenuDirective } from './directives/menu/side-menu/side-menu.directive';
+import { OrdersSideMenuComponent } from './orders-table/side-menu/orders-side-menu/orders-side-menu.component';
+import { OrderDetailsSideMenuComponent } from './order-details/side-menu/order-details-side-menu/order-details-side-menu.component';
+import { OrdersTableViewResolver } from './resolvers/orders-table-view-resolver.service';
+import { OrderDetailsResolver } from './resolvers/order-details-resolver.service';
+import { ShipmentViewSideMenuComponent } from './shipment/shipment/side-menu/shipment-view-side-menu/shipment-view-side-menu.component';
 
 
 const appRoutes: Routes = [
-  { path: 'orders', component: OrdersTableComponent },
-  { path: 'order/:id', component: OrderDetailsComponent },
+  { path: 'orders', 
+    component: OrdersTableComponent,
+    resolve: {orders:OrdersTableViewResolver }
+},
+  { path: 'order/:id', 
+    component: OrderDetailsComponent,
+    resolve: {order:OrderDetailsResolver}
+   },
+
   {
     path: 'order/:id/shipments/:sh_id',
     component: ShipmentComponent,
@@ -165,6 +179,18 @@ const appRoutes: Routes = [
 
     CargoModalComponent,
 
+    RailbillComponent,
+
+    ShipmentInfoComponent,
+
+    SideMenuDirective,
+
+    OrdersSideMenuComponent,
+
+    OrderDetailsSideMenuComponent,
+
+    ShipmentViewSideMenuComponent,
+
 
   ],
   entryComponents: [
@@ -175,6 +201,9 @@ const appRoutes: Routes = [
     CargoDialogComponent, 
     PersonDialogComponent,
     CargoModalComponent,
+    OrdersSideMenuComponent,
+    OrderDetailsSideMenuComponent,
+    ShipmentViewSideMenuComponent,
 
   ],
   imports: [
@@ -214,6 +243,7 @@ const appRoutes: Routes = [
     CardModule,
     MatExpansionModule,
     MatMenuModule,
+    MatSnackBarModule,
     RtmeDirectoriesModule,
 
   ],

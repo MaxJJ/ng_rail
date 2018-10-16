@@ -4,6 +4,7 @@ import { Shipment, Person, Order, Factura, Cargo, Place } from '../../services/i
 import { ShipmentsService } from '../../services/backend/shipments/shipments.service';
 import { PersonsService } from '../../services/backend/persons/persons.service';
 import { OrderService } from '../../services/backend/order.service';
+import { MenuService } from '../../services/menu/menu.service';
 
 class FacturasExPanelData {
   shipment_id: number;
@@ -36,7 +37,9 @@ export class ShipmentComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private service: ShipmentsService,
     private person_service: PersonsService,
-    private order_service: OrderService) { 
+    private order_service: OrderService,
+    private menu: MenuService,
+    ) { 
 
 
     }
@@ -49,8 +52,7 @@ export class ShipmentComponent implements OnInit {
   ngOnInit() {
  
 this.route.data.subscribe((data) => {
-  console.log("data is --------",data);
-    this.shipment = data.shipment.shipment;
+     this.shipment = data.shipment.shipment;
     this.order = data.shipment.order;
     
     this.isContainer = !this.shipment.cargo_is_general;
@@ -58,6 +60,8 @@ this.route.data.subscribe((data) => {
     this.destination = this.order.destination_place;
     this.shipment.consignee=this.order.consignee;
     this.shipment.consignor=this.order.consignor;
+    this.menu.setShipmentViewSideMenu();
+    this.menu.pushData({shipment:this.shipment});
 });
   }
 
@@ -72,22 +76,13 @@ this.route.data.subscribe((data) => {
     this.cargo = val;
   }
 
-  isContainerChange(val) {
-    if (val.checked) {
-      this.service.createDeleteContainer(this.shipment.id, 0).subscribe(sh => this.shipment = sh);
-      this.isContainer = val.checked;
-    } else {
-      this.service.createDeleteContainer(this.shipment.id, 100).subscribe(sh => this.shipment = sh);
-      this.isContainer = val.checked;
-    }
 
-
-  }
 
 
 
   saveShipment(){
     this.service.saveShipment(this.order.id,this.shipment).subscribe(sh=>this.shipment=sh);
   }
+
 
 }

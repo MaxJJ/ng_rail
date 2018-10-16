@@ -1,0 +1,13 @@
+<div fxLayout="column" fxLayoutAlign="stretch"  [style.padding]="'0 6px'" >
+<a routerLink="/orders" mat-button>To orders</a>
+<a routerLink="/orders" mat-button>Create copy</a>
+<span rtmeH1  [style.text-align]="'center'">  {{data.shipments.length}} Shipments of order {{data.order_id}}:</span>
+<button mat-button (click)="createShipment()" color="accent">Create shipment</button>
+<button *ngFor="let sh of data.shipments" mat-button (click)="navigateToShipment(sh.id)">{{sh.name}}</button>
+  </div>
+
+
+  <div class="bottom_buttons">
+    <button mat-button (click)="onClick">Save</button>
+    <button mat-button (click)="delete()">Delete</button>
+  </div>

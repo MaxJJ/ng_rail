@@ -1,0 +1,6 @@
+<div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="4px" [style.padding]="'0 6px'">
+  <span rtmeH1 [style.text-align]="'center'">Facturas</span>
+  <button mat-button (click)="onClick" color="accent">New Factura</button>
+  <button *ngFor="let fct of data.shipment.facturas" mat-button (click)="onClick">{{fct.name}}</button>
+</div>
+

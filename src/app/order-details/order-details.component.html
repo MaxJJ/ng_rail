@@ -5,31 +5,36 @@
         <mat-card>
             <mat-card-content>
                 <div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="1px">
-                    <mat-form-field>
-                        <input matInput placeholder="Title" [formControl]="title_fc">
-                    </mat-form-field>
-
-                    <rtme-datepicker placeholder='ETA' [date]="model.will_arrive" (new_date)="etaChangeHandler($event)"></rtme-datepicker>
-
                     <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="6px">
-
-                        <person-search fxFlex="50%" title="Consignor" [person]="model.consignor" (new_person)=consignorHandler($event)></person-search>
-
-                        <place-autocomplete fxFlex="50%" placeholder="Place of Dispatch" [value]="model.dispatch_place"
-                            (selected_place)=placeOfDispatchHandler($event)></place-autocomplete>
+                            <mat-form-field fxFlex="80%">
+                                    <input matInput placeholder="Title" [formControl]="title_fc">
+                                </mat-form-field>
+            
+                                <rtme-datepicker fxFlex placeholder='ETA' [date]="order.will_arrive" (new_date)="etaChangeHandler($event)"></rtme-datepicker>   
                     </div>
-                    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="6px">
-                        <person-search fxFlex="50%" title="Consignee" [person]="model.consignee" (new_person)=consigneeHandler($event)></person-search>
 
-                        <place-autocomplete fxFlex="50%" placeholder="Place of Destination" [value]="model.destination_place"
+
+                    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+
+                        <person-combo fxFlex="50%" title="Consignor" [person]="order.consignor" (change)=consignorHandler($event)></person-combo>
+                        <person-combo fxFlex title="Consignee" [person]="order.consignee" (change)=consigneeHandler($event)></person-combo>
+                       
+                    </div>
+
+                    <span rtmeH1 [style.margin]="'15px 0 5px 0'">Stations</span>
+                    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="6px">
+                        
+                        <place-autocomplete fxFlex="50%" placeholder="Place of Dispatch" [value]="order.dispatch_place"
+                        (selected_place)=placeOfDispatchHandler($event)></place-autocomplete>
+                        <place-autocomplete fxFlex="50%" placeholder="Place of Destination" [value]="order.destination_place"
                             (selected_place)=placeOfDestinationHandler($event)></place-autocomplete>
 
                     </div>
-                    <inbound-docs [indocs]="model.inbound_docs" (new_indocs)=indocsHandler($event)></inbound-docs>
+                    <inbound-docs [indocs]="order.inbound_docs" (new_indocs)=indocsHandler($event)></inbound-docs>
 
                     <mat-divider [inset]="true"></mat-divider>
 
-                    <order-details-shipments></order-details-shipments>
+                    <!-- <order-details-shipments></order-details-shipments> -->
 
                 </div>
 
@@ -48,7 +53,7 @@
     </div>
 
     <div fxLayout="column" fxLayoutAlign="stretch" fxFlex class="right_pane">
-        <app-comments [order]="model"></app-comments>
+        <app-comments [order]="order"></app-comments>
     </div>
 
 

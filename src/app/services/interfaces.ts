@@ -12,6 +12,7 @@ export interface Totals{
 }
 
 export interface Container{
+  id?:number;
   name?:string;
   containers_type?:string;
   payload?:number;
@@ -44,7 +45,7 @@ export interface Shipment {
   consignee?: Person;
   seller?:any;
   buyer?:any;
-  facturas?: any;
+  facturas?: Factura[];
   cargo?:Cargo[];
   rw_bill?:any;
   invoices?:Invoice[]

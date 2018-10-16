@@ -1,11 +1,14 @@
+<mat-expansion-panel [hideToggle]="false" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+  <mat-expansion-panel-header>
+    <mat-panel-title> Invoices</mat-panel-title>
+    <mat-panel-description></mat-panel-description>
+  </mat-expansion-panel-header>
+
 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
   <button mat-icon-button (click)="addInvoice()">
     <mat-icon class="mat-18">add</mat-icon>
   </button>
   <span rtmeH1>Shipment's Invoices:</span>
-  <button matSuffics mat-icon-button (click)="emit()">
-      <mat-icon class="mat-18">save</mat-icon>
-  </button>
  
 </div>
 
@@ -15,9 +18,9 @@
   </div>
   <mat-accordion *ngIf="invoices" displayMode="default"  [hideToggle]="false" fxFlex>
 
-    <mat-expansion-panel *ngFor="let i of invoices" [hideToggle]="false" (opened)="close = true" (closed)="close = false">
+    <mat-expansion-panel *ngFor="let i of invoices" [hideToggle]="false"  [expanded] ="closed===false"  (opened)="close = true" (closed)="close = false">
 
-      <mat-expansion-panel-header>Invoice {{i.number}}</mat-expansion-panel-header>
+      <mat-expansion-panel-header>Invoice {{i.number}} {{closed}}</mat-expansion-panel-header>
      
       <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="6px">
         <mat-form-field fxFlex="200px">
@@ -40,19 +43,20 @@
         </mat-form-field>
 
       </div>
-      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-        <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10px">
-          <person-search title="Buyer" [person]="i.buyer" (new_person)="iBuyerHandler($event,i)"></person-search>
-          <person-search title="Seller" [person]="i.seller" (new_person)="iSellerHandler($event,i)"></person-search>
+
+
+        <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+          <person-raw *ngIf="i.buyer" title="Buyer" [person]="i.buyer"  fxFlex="50%"></person-raw>
+          <person-raw *ngIf="i.seller" title="Seller" [person]="i.seller"  fxFlex="50%"></person-raw>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+       
+          <person-combo title="Buyer" [person]="i.buyer" (new_person)="iBuyerHandler($event,i)" fxFlex="50%"></person-combo>
+          <person-search title="Seller" [person]="i.seller" (new_person)="iSellerHandler($event,i)" fxFlex="50%"></person-search>
         </div>
 
-        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-          <person-raw *ngIf="i.buyer" title="Buyer" [person]="i.buyer"></person-raw>
-          <person-raw *ngIf="i.seller" title="Seller" [person]="i.seller"></person-raw>
-        </div>
-
-      </div>
       <mat-action-row>
+          <button mat-button (click)="saveInvoice(i)">Save</button>
         <mat-checkbox>delete?</mat-checkbox>
         <button mat-button (click)="deleteInvoice($event,i)">Delete</button>
       </mat-action-row>
@@ -60,3 +64,5 @@
     </mat-expansion-panel>
   </mat-accordion>
 </div>
+
+</mat-expansion-panel>

@@ -15,17 +15,14 @@
  <span rtmeH1>Shipment's facturas:</span>
 </div>
 
-<mat-accordion *ngIf="facturas" displayMode="default" [multi]="true"
-               [hideToggle]="false">
-    <mat-expansion-panel *ngFor="let f of facturas" [hideToggle]="false">
+<mat-accordion *ngIf="facturas" displayMode="default" >
+    <mat-expansion-panel *ngFor="let f of facturas" [hideToggle]="false" (opened)="isop = true" (closed)="isop = false">
         <mat-expansion-panel-header>Factura </mat-expansion-panel-header>
          <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="40px">
              
             <factura-form [factura]="f" [shipment]="shipment" [order]="order" fxFlex></factura-form>
              
          </div>
-        <mat-action-row>
-            <button mat-button (click)="onAction(event)">Action1</button>
-        </mat-action-row>
+
     </mat-expansion-panel>
 </mat-accordion>

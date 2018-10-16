@@ -1,87 +1,59 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Type } from '@angular/core';
 import { Observable, Subject, Subscriber } from '../../../../node_modules/rxjs';
 import { Router } from '../../../../node_modules/@angular/router';
 import { OrderService } from '../backend/order.service';
 import { Order } from '../interfaces';
+import { OrdersSideMenuComponent } from '../../orders-table/side-menu/orders-side-menu/orders-side-menu.component';
+import { OrderDetailsSideMenuComponent } from '../../order-details/side-menu/order-details-side-menu/order-details-side-menu.component';
+import { ShipmentViewSideMenuComponent } from '../../shipment/shipment/side-menu/shipment-view-side-menu/shipment-view-side-menu.component';
 
-class SideMenuItem{
-  title:string;
-  action:A;
-  constructor(title:string,action:any){
-    this.title=title;
-    this.action=action;
-  }
-
-}
-
-export enum A{
-  NEW_ORDER,
-}
-
-interface MenuReturnData{
-  orders?:Order[];
-}
 
 @Injectable({
   providedIn: 'root'
 })
 export class MenuService {
 
-  side_menu: Observable<any[]>;
-  next_menu: Subscriber<any[]>;
+  side_menu: Observable<Type<any>>;
+  next_menu: Subscriber<Type<any>>;
   top_title: Observable<string>;
   next_top_title: Subscriber<string>;
   menu_items: any;
-  side_menu_items:SideMenuItem[] = [];
-  data:Observable<MenuReturnData>;
-  next_data:Subscriber<MenuReturnData>;
+  
+  data:Observable<any>;
+  next_data:Subscriber<any>;
 
 
 
   constructor(private router: Router,
-              public order_service:OrderService,
+             
               ) {
     this.side_menu = new Observable(s => this.next_menu = s);
     this.data = new Observable(d => this.next_data= d);
     this.top_title = new Observable(tt => this.next_top_title= tt);
   }
 
-  setSideMenu(next_val: any[]) {
-    this.next_menu.next(next_val);
-  }
+pushData(d:any){
+this.next_data.next(d);
+}  
+setOrderTableSideMenu(){
+  this.next_menu.next(OrdersSideMenuComponent);
+}
+
+setOrderDetailsSideMenu(){
+  this.next_menu.next(OrderDetailsSideMenuComponent);
+}
+
+setShipmentViewSideMenu(){
+  this.next_menu.next(ShipmentViewSideMenuComponent);
+}
+
 
   setTopTitle(val:string){
     this.next_top_title.next(val);
   }
 
-  createAddMenuItemAndPush(title:string,action:A){
-
-    let item = new SideMenuItem(title,action);
-    this.side_menu_items.push(item);
-    this.setSideMenu(this.side_menu_items);
-
-  }
-
-  cleanSideMenuItems(){
-
-    this.side_menu_items = [];
-  }
-
-  createOrder(){
-    this.order_service.getNewOrder().toPromise().then((res)=>{
-      let order_item=res;
-      this.router.navigate(['order',order_item.id]);});
-  }
 
 
 
-  printXZ(){
-
-    console.log("HZ");
-  }
-
-  returnOrdersInWork(){
-  
-  }
 }
 

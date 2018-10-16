@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ComponentFactoryResolver, ViewChild } from '@angular/core';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
-import { MenuService, A } from '../services/menu/menu.service';
-import { OrderService } from '../services/backend/order.service';
-import { OrderComment } from '../services/interfaces';
+
+
+import { SideMenuDirective } from '../directives/menu/side-menu/side-menu.directive';
+import { OrdersSideMenuComponent } from '../orders-table/side-menu/orders-side-menu/orders-side-menu.component';
+import { MenuService } from '../services/menu/menu.service';
 
 @Component({
   selector: 'my-nav',
@@ -15,22 +17,29 @@ export class MyNavComponent {
   isHandset: Observable<BreakpointState> = this.breakpointObserver.observe(Breakpoints.Tablet);
   sideMenu:any[];
   top:string;
+data:any;
+  @ViewChild(SideMenuDirective) side_menu_host:SideMenuDirective;
 
-  constructor(private breakpointObserver: BreakpointObserver, private menu:MenuService, private order_service:OrderService) {}
+  constructor(private breakpointObserver: BreakpointObserver, 
+              private menu:MenuService, 
+             
+              private resolver:ComponentFactoryResolver) {}
  
   ngOnInit() {
+   
   this.menu.top_title.subscribe(t=>this.top=t);
-
-   this.menu.side_menu.subscribe(n=>{
-     this.sideMenu=n;
-     console.log(n);});
-  }
-
-  dosom(a:A){
     
-    switch(a){
-      case(A.NEW_ORDER):{this.menu.createOrder()}
-
-    }
+   this.menu.side_menu.subscribe(n=>{
+ 
+  this.side_menu_host.sideMenuContainerRef.clear();
+   let cmp:any = this.side_menu_host.sideMenuContainerRef.createComponent(this.resolver.resolveComponentFactory(n));
+   this.menu.data.subscribe(d=>{
+     this.data=d;
+     cmp.instance.data=this.data;
+    });  
+   
+  }); 
   }
+
+
 }

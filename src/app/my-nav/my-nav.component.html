@@ -7,10 +7,8 @@
     [mode]="(isHandset | async)!.matches ? 'over' : 'side'"
     [opened]="!(isHandset | async)!.matches">
     <mat-toolbar color="primary">Menu</mat-toolbar>
-    <mat-nav-list>
-      <mat-list-item *ngFor="let item of sideMenu" (click)="dosom(item.action)"> {{item.title}}</mat-list-item>
 
-    </mat-nav-list>
+    <ng-template sideMenu></ng-template>
     
   </mat-sidenav>
   <mat-sidenav-content>
@@ -25,7 +23,7 @@
       </button>
       <mat-toolbar-row> 
         <span [style.width]="'250px'" >Railtrans.me</span>
-        <span>{{top}}</span>
+        
       </mat-toolbar-row>
      
       
