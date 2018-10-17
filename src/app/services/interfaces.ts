@@ -43,12 +43,12 @@ export interface Shipment {
   container?:Container;
   consignor?: Person;
   consignee?: Person;
-  seller?:any;
-  buyer?:any;
-  facturas?: Factura[];
-  cargo?:Cargo[];
-  rw_bill?:any;
-  invoices?:Invoice[]
+  // seller?:any;
+  // buyer?:any;
+  // facturas?: Factura[];
+  // cargo?:Cargo[];
+  // rw_bill?:any;
+  // invoices?:Invoice[]
    
 }
 
@@ -146,6 +146,7 @@ export interface OrderComment{
 }
 
 export interface Factura{
+  shipment?:any;
   doc_name?:string;
   name?:string;
   date?:Date;

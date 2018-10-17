@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Invoice } from '../../interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -14,4 +15,6 @@ export class InvoiceService {
     return this.http.delete(url);
 
   }
+
+
 }

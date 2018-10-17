@@ -26,7 +26,7 @@ export class OrderDetailsShipmentsComponent implements OnInit {
 this.route.params.subscribe(p=>this.order_id=p.id);
 this.serv.getOrdersShipments(this.order_id).subscribe(shs=>{
   this.shipments=shs;
-  this._calcTotals(this.shipments);
+  // this._calcTotals(this.shipments);
 });
   }
 
@@ -50,7 +50,7 @@ this.nav.navigate([this.nav.url,'shipments',id]);
     let ttls:Totals = {places:0,pcs:0,nett:0,gross:0,tnved_codes_qty:0,gng_codes_qty:0};
     let cargo:Cargo[]=[];
     items.forEach((v,i,a)=>{
-      cargo.concat(v.cargo);
+      // cargo.concat(v.cargo);
     });
     cargo.forEach((v,i,a)=>{
       ttls.places+=v.package_quantity;

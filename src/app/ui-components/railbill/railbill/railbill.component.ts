@@ -23,10 +23,10 @@ export class RailbillComponent implements OnInit {
 
   ngOnInit() {
   let c:Cargo[] = [];
-   let f= this.shipment.facturas;
-   f.forEach(factura => {
-      c=c.concat(factura.cargo);
-   });
+  //  let f= this.shipment.facturas;
+  //  f.forEach(factura => {
+  //     c=c.concat(factura.cargo);
+  //  });
   
   this.cargo = c;
 

@@ -50,6 +50,11 @@ export class ShipmentsService {
     return this.http.get(url);
   }
 
+
+  getShipmentInvoices(shipment_id):Observable<Invoice[]>{
+    let url = 'api/shipments/'+shipment_id+'/invoices';
+    return this.http.get<Invoice[]>(url);
+  }
   createInvoice(shipment_id):Observable<Invoice>{
     let url = 'api/shipments/'+shipment_id+'/invoices/create';
     return this.http.get<Invoice>(url);

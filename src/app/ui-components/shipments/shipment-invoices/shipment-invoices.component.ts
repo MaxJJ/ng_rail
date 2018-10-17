@@ -26,7 +26,7 @@ export class ShipmentInvoicesComponent implements OnInit {
   ngOnInit() {
     // this.route.params.subscribe(p => this.shipment_id = p.sh_id);
     this.route.data.subscribe(data=>{
-      this.invoices=data.shipment.shipment.invoices;
+      this.invoices=data.shipment.invoices;
       this.shipment_id=data.shipment.shipment.id;
       
     })

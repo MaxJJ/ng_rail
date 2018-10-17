@@ -3,7 +3,7 @@
 <a routerLink="/orders" mat-button>Create copy</a>
 <span rtmeH1  [style.text-align]="'center'">  {{data.shipments.length}} Shipments of order {{data.order_id}}:</span>
 <button mat-button (click)="createShipment()" color="accent">Create shipment</button>
-<button *ngFor="let sh of data.shipments" mat-button (click)="navigateToShipment(sh.id)">{{sh.name}}</button>
+<button *ngFor="let sh of data.shipments" mat-button (click)="navigateToShipment(sh.id)">отправка - {{sh.name}}</button>
   </div>
 
 

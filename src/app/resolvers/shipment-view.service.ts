@@ -25,9 +25,10 @@ export class ShipmentViewResolver implements Resolve<any> {
     
     return forkJoin([
       this.shipment_service.getShipmentById(id),
-      this.order_service.getOrderById(ord_id)
+      this.order_service.getOrderById(ord_id),
+      this.shipment_service.getShipmentInvoices(id),
     ]).pipe(map((res)=>{
-      return {shipment:res[0],order:res[1]};
+      return {shipment:res[0],order:res[1],invoices:res[2]};
        }));
     
   }
