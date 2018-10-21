@@ -32,7 +32,7 @@ export class FacturaFormComponent implements OnInit {
   ngOnInit() {
        this.factura.consignee=this.order.consignee;
       this.factura.consignor=this.order.consignor;
- 
+ this.name_fc.setValue(this.factura.name);
 
 
     this.name_fc.valueChanges.subscribe(val=>this.factura.name=val);

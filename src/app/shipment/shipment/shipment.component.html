@@ -2,28 +2,61 @@
 
 
   <div fxFlex="920px">
+    <mat-card>
+
+      <mat-card-content>
 
 
-    
-      <shipment-info></shipment-info>
-      <mat-accordion>
-      <!-- extension panel for invoices -->
-      <shipment-invoices></shipment-invoices>
+        <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+          <mat-form-field fxFlex="80px">
+            <input matInput placeholder="ID" [(ngModel)]="shipment.name">
+          </mat-form-field>
+          <mat-form-field fxFlex>
+            <input matInput placeholder="Description" [(ngModel)]="shipment.description">
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="40px">
+          <place-raw *ngIf="dispatch" fxFlex="50%" title="Dispatch" [place]="dispatch"></place-raw>
+          <place-raw *ngIf="destination" fxFlex="50%" title="Destination" [place]="destination"></place-raw>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="40px">
+      
+          <person-raw *ngIf="order" fxFlex="50%" [person]="order.consignor" title="Consignor" class="raw"></person-raw>
+          <person-raw *ngIf="order" fxFlex="50%" [person]="order.consignee" title="Consignee" class="raw"></person-raw>
+        </div>
+        
+
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="40px" [style.margin-top]="'10px'">
+          <mat-checkbox (change)="isContainerChange($event)" [checked]="isContainer">is container?</mat-checkbox>
+          <mat-form-field *ngIf="isContainer" fxFlex="150px">
+            <input matInput placeholder="Container" [(ngModel)]="container.name">
+          </mat-form-field>
+          <mat-form-field *ngIf="isContainer" fxFlex="80px">
+            <input matInput placeholder="Type" [(ngModel)]="container.containers_type">
+          </mat-form-field>
+          <mat-form-field *ngIf="isContainer" fxFlex="80px">
+            <input matInput placeholder="Payload" [(ngModel)]="container.payload">
+          </mat-form-field>
+          <mat-form-field *ngIf="isContainer" fxFlex="100px">
+            <input matInput placeholder="Tare" [(ngModel)]="container.tare">
+          </mat-form-field>
+          <h4>{{container.id}}</h4>
+        </div>
 
 
-      <!-- <cargo-ex-panel (cargoChange)="cargoChangeHandler($event)"></cargo-ex-panel> -->
-      <shipment-facturas [facturas]="shipment.facturas" [order]="order"></shipment-facturas>
+        <!-- extension panel for invoices -->
+        <shipment-invoices ></shipment-invoices>
+      </mat-card-content>
+      <mat-card-actions align="start">
+        <button mat-button (click)="saveShipment()">Save</button>
 
-      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-        <mat-expansion-panel-header>
-          <mat-panel-title> Railbill </mat-panel-title>
-          <mat-panel-description></mat-panel-description>
-        </mat-expansion-panel-header>
-        <!-- <railbill [shipment]="shipment" [dispatch]="order.dispatch_place" [destination]="order.destination_place"></railbill> -->
-      </mat-expansion-panel>
-    </mat-accordion>
+      </mat-card-actions>
 
-    <button mat-button (click)="saveShipment()">Save</button>
+    </mat-card>
+
+
 
   </div>
 

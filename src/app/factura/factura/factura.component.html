@@ -1,0 +1,23 @@
+<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px">
+
+
+  <div fxFlex="920px">
+    <mat-card>
+
+      <mat-card-content>
+
+        <factura-form [factura]="factura" [shipment]="shipment" [order]="order"></factura-form>
+
+
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button (click)="saveFactura()">Save</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div fxFlex>
+    <app-comments [order]="order"></app-comments>
+  </div>
+
+</div>

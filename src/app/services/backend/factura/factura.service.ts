@@ -1,7 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Factura } from '../../interfaces';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json',
+    
+  })
+};
 
 const API:string = 'api/shipments/'
 
@@ -14,8 +21,8 @@ export class FacturaService {
 
   createNewFactura(shipment_id:number):Observable<Factura>{
 
-    let id = 0;
-    let url = API+shipment_id+'/facturas/'+id;
+   
+    let url = 'api/shipments/'+shipment_id+'/facturas/create';
     
     return this.http.get(url);
 
@@ -26,6 +33,15 @@ export class FacturaService {
     let url = API+shipment_id+'/facturas/all';
     
     return this.http.get<Factura[]>(url);
+  }
+
+  getFacturaById(id:number):Observable<Factura>{
+    let url = 'api/factura/'+id;
+    return this.http.get<Factura>(url);
+  }
+  saveFactura(factura:Factura):Observable<Factura>{
+    let url = 'api/factura/'+factura.id;
+    return this.http.post<Factura>(url,factura,httpOptions);
   }
 
 

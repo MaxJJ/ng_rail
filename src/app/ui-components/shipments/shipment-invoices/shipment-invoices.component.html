@@ -1,23 +1,22 @@
-
-
 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
   <button mat-icon-button (click)="addInvoice()">
     <mat-icon class="mat-18">add</mat-icon>
   </button>
   <span rtmeH1>Shipment's Invoices:</span>
- 
+
 </div>
 
 <div fxLayout="row" fxLayoutAlign="start start">
   <div fxFlex="50px">
 
   </div>
-  <mat-accordion *ngIf="invoices" displayMode="default"  [hideToggle]="false" fxFlex>
+  <mat-accordion *ngIf="invoices" displayMode="default" [hideToggle]="false" fxFlex>
 
-    <mat-expansion-panel *ngFor="let i of invoices" [hideToggle]="false"  [expanded] ="closed===false"  (opened)="close = true" (closed)="close = false">
+    <mat-expansion-panel *ngFor="let i of invoices" [hideToggle]="false" [expanded]="closed===false" (opened)="saveInvoices()"
+      (closed)="saveInvoices()">
 
-      <mat-expansion-panel-header>Invoice {{i.number}} {{closed}}</mat-expansion-panel-header>
-     
+      <mat-expansion-panel-header>Invoice {{i.number}} </mat-expansion-panel-header>
+
       <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="6px">
         <mat-form-field fxFlex="200px">
           <input matInput placeholder="Number" [(ngModel)]="i.number">
@@ -41,14 +40,17 @@
       </div>
 
 
-        <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
-          <person-raw *ngIf="i.buyer" title="Buyer" [person]="i.buyer"  fxFlex="50%"></person-raw>
-          <person-raw *ngIf="i.seller" title="Seller" [person]="i.seller"  fxFlex="50%"></person-raw>
-        </div>
-        <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
-       
-          <person-combo title="Buyer" [person]="i.buyer" (new_person)="iBuyerHandler($event,i)" fxFlex="50%"></person-combo>
-          <person-search title="Seller" [person]="i.seller" (new_person)="iSellerHandler($event,i)" fxFlex="50%"></person-search>
-        </div>
+      <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+        <person-combo title="Seller" [person]="i.seller" (change)="iSellerHandler($event,i)" fxFlex="50%"></person-combo>
+        <person-combo title="Buyer" [person]="i.buyer" (change)="iBuyerHandler($event,i)" fxFlex="50%"></person-combo>
 
-  
+      </div>
+      <mat-action-row>
+        <button mat-button (click)="saveInvoices($event)">Save</button>
+        <button mat-button (click)="deleteInvoice($event, i)">Delete</button>
+        
+      </mat-action-row>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

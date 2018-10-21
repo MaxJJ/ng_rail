@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Shipment, Invoice } from '../../interfaces';
+import { Shipment, Invoice, Factura } from '../../interfaces';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Urls } from '../api_urls';
-import { ShipmentInfo } from '../../../ui-components/shipments/shipment-info/shipment-info.component';
 
 const API = "api/orders/"
 
@@ -32,8 +31,8 @@ export class ShipmentsService {
     return this.http.get<Shipment>(this.urls.shipment+id);
   }
 
-  saveShipment(order_id,s:Shipment):Observable<Shipment>{
-    let url = API+order_id+'/shipments/'+s.id;
+  saveShipment(s:Shipment):Observable<Shipment>{
+    let url = 'api/shipments/'+s.id;
     return this.http.post(url,s,httpOptions);
   }
   
@@ -55,14 +54,19 @@ export class ShipmentsService {
     let url = 'api/shipments/'+shipment_id+'/invoices';
     return this.http.get<Invoice[]>(url);
   }
+  saveShipmentInvoices(shipment_id,invoices:Invoice[]):Observable<Invoice[]>{
+    let url = 'api/shipments/'+shipment_id+'/invoices';
+    return this.http.post<Invoice[]>(url,invoices,httpOptions);
+  }
   createInvoice(shipment_id):Observable<Invoice>{
     let url = 'api/shipments/'+shipment_id+'/invoices/create';
     return this.http.get<Invoice>(url);
   }
 
-  saveInfo(shipment_id:number,i:ShipmentInfo):Observable<Shipment>{
-    let url='api/shipments/'+shipment_id+'/info';
-    return this.http.post(url,i,httpOptions);
+  getShipmentsFacturas(shipment_id):Observable<Factura[]>{
+    let url = 'api/shipments/'+shipment_id+'/facturas';
+
+    return this.http.get<Factura[]>(url);
   }
 
 }

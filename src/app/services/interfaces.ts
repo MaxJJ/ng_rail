@@ -146,6 +146,7 @@ export interface OrderComment{
 }
 
 export interface Factura{
+  id?:number;
   shipment?:any;
   doc_name?:string;
   name?:string;
@@ -171,6 +172,8 @@ export interface Factura{
 }
 
 export interface Invoice{
+  id?:number;
+  shipment:any;
   number?:string;
   date?:any;
   currency?:string;

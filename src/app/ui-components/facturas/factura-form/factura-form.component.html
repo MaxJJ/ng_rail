@@ -13,7 +13,7 @@
 
 <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="30px">
   <person-combo title="Seller" [person]="factura.seller" (change)="sellerHandler($event)" fxFlex="50%"></person-combo> 
-  <person-combo title="Buyer" [person]="factura.buyer" (change)="sellerBuyer($event)" fxFlex="50%"></person-combo> 
+  <person-combo title="Buyer" [person]="factura.buyer" (change)="buyerHandler($event)" fxFlex="50%"></person-combo> 
 </div>
 
 <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="30px">

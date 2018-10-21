@@ -12,19 +12,16 @@ import { InvoiceService } from '../../../services/backend/shipments/invoice.serv
 })
 export class ShipmentInvoicesComponent implements OnInit {
 
-  @Input()
+
   invoices: Invoice[];
   shipment_id: number;
 
   closed:boolean=true;
 
-  @Output()
-  change: EventEmitter<Invoice[]> = new EventEmitter<Invoice[]>()
 
   constructor(private service: ShipmentsService, private invoice_serv: InvoiceService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    // this.route.params.subscribe(p => this.shipment_id = p.sh_id);
     this.route.data.subscribe(data=>{
       this.invoices=data.shipment.invoices;
       this.shipment_id=data.shipment.shipment.id;
@@ -38,11 +35,18 @@ export class ShipmentInvoicesComponent implements OnInit {
     });
   }
 
+  saveInvoices(ev:MouseEvent){
+ this.closed=false;
+      this.service.saveShipmentInvoices(this.shipment_id,this.invoices).subscribe(inv=>console.log(inv));
+  
+  }
+
   iBuyerHandler(val, i) {
     let ix = this.invoices.indexOf(i);
     this.invoices[ix].buyer = val;
   }
   iSellerHandler(val, i) {
+    console.log(val);
     let ix = this.invoices.indexOf(i);
     this.invoices[ix].seller = val;
   }
@@ -54,9 +58,6 @@ export class ShipmentInvoicesComponent implements OnInit {
     });
   }
 
-  saveInvoice(i:Invoice){
-    console.log(i+' closed = '+this.closed);
-    this.closed= !this.closed;
-  }
+
 
 }

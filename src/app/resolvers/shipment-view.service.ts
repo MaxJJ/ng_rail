@@ -27,8 +27,9 @@ export class ShipmentViewResolver implements Resolve<any> {
       this.shipment_service.getShipmentById(id),
       this.order_service.getOrderById(ord_id),
       this.shipment_service.getShipmentInvoices(id),
+      this.shipment_service.getShipmentsFacturas(id),
     ]).pipe(map((res)=>{
-      return {shipment:res[0],order:res[1],invoices:res[2]};
+      return {shipment:res[0],order:res[1],invoices:res[2],facturas:res[3]};
        }));
     
   }

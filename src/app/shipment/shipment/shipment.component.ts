@@ -1,10 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Shipment, Person, Order, Factura, Cargo, Place } from '../../services/interfaces';
+import { Shipment, Person, Order, Factura, Cargo, Place, Container, Invoice } from '../../services/interfaces';
 import { ShipmentsService } from '../../services/backend/shipments/shipments.service';
 import { PersonsService } from '../../services/backend/persons/persons.service';
 import { OrderService } from '../../services/backend/order.service';
 import { MenuService } from '../../services/menu/menu.service';
+import { isNullOrUndefined } from 'util';
 
 class FacturasExPanelData {
   shipment_id: number;
@@ -31,8 +32,10 @@ export class ShipmentComponent implements OnInit {
   shipment: Shipment;
   cargo: Cargo[];
   isContainer: boolean = false;
+  container:Container={id:0,};
   dispatch: Place;
   destination: Place;
+  facturas:Factura[];
 
   constructor(private route: ActivatedRoute,
     private service: ShipmentsService,
@@ -54,14 +57,18 @@ export class ShipmentComponent implements OnInit {
 this.route.data.subscribe((data) => {
      this.shipment = data.shipment.shipment;
     this.order = data.shipment.order;
+    this.facturas=data.shipment.facturas;
     
     this.isContainer = !this.shipment.cargo_is_general;
+    if(!isNullOrUndefined(this.shipment.container)){
+      this.container = this.shipment.container;
+    }
     this.dispatch = this.order.dispatch_place;
     this.destination = this.order.destination_place;
     this.shipment.consignee=this.order.consignee;
     this.shipment.consignor=this.order.consignor;
     this.menu.setShipmentViewSideMenu();
-    this.menu.pushData({shipment:this.shipment});
+    this.menu.pushData({shipment:this.shipment,order:this.order,facturas:this.facturas});
 });
   }
 
@@ -74,15 +81,22 @@ this.route.data.subscribe((data) => {
 
   cargoChangeHandler(val) {
     this.cargo = val;
+    
   }
 
-
+  isContainerChange(change){
+    this.isContainer = change.checked;
+  }
 
 
 
   saveShipment(){
-    this.service.saveShipment(this.order.id,this.shipment).subscribe(sh=>this.shipment=sh);
+    this.shipment.cargo_is_general=!this.isContainer;
+    this.shipment.container=this.container
+  
+    this.service.saveShipment(this.shipment).subscribe(sh=>this.shipment=sh);
   }
+
 
 
 }

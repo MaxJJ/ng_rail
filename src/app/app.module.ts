@@ -67,30 +67,41 @@ import { PersonComboComponent } from './ui-components/persons/person-combo/perso
 import { CargoComboComponent } from './ui-components/facturas/cargo-combo/cargo-combo.component';
 import { CargoModalComponent } from './ui-components/dialogs/cargo/cargo-modal/cargo-modal.component';
 import { RailbillComponent } from './ui-components/railbill/railbill/railbill.component';
-import { ShipmentInfoComponent } from './ui-components/shipments/shipment-info/shipment-info.component';
 import { SideMenuDirective } from './directives/menu/side-menu/side-menu.directive';
 import { OrdersSideMenuComponent } from './orders-table/side-menu/orders-side-menu/orders-side-menu.component';
 import { OrderDetailsSideMenuComponent } from './order-details/side-menu/order-details-side-menu/order-details-side-menu.component';
 import { OrdersTableViewResolver } from './resolvers/orders-table-view-resolver.service';
 import { OrderDetailsResolver } from './resolvers/order-details-resolver.service';
 import { ShipmentViewSideMenuComponent } from './shipment/shipment/side-menu/shipment-view-side-menu/shipment-view-side-menu.component';
+import { FacturaComponent } from './factura/factura/factura.component';
+import { FacturaViewResolver } from './resolvers/factura-view-resolver.service';
+import { FacturaViewSideMenuComponent } from './factura/factura-side-menu/factura-view-side-menu/factura-view-side-menu.component';
 
 
 const appRoutes: Routes = [
-  { path: 'orders', 
+  {
+    path: 'orders',
     component: OrdersTableComponent,
-    resolve: {orders:OrdersTableViewResolver }
-},
-  { path: 'order/:id', 
+    resolve: { orders: OrdersTableViewResolver }
+  },
+  {
+    path: 'order/:id',
     component: OrderDetailsComponent,
-    resolve: {order:OrderDetailsResolver}
-   },
+    resolve: { order: OrderDetailsResolver }
+  },
 
   {
     path: 'order/:id/shipments/:sh_id',
     component: ShipmentComponent,
     resolve: { shipment: ShipmentViewResolver }
   },
+
+  {
+    path: 'order/:id/shipments/:sh_id/facturas/:factura_id',
+    component: FacturaComponent,
+    resolve: { data: FacturaViewResolver }
+  },
+
   { path: 'order/:id/shipments/:sh_id/print', component: RtmePrintComponent },
   { path: 'places', component: PlaceTableComponent },
   { path: 'test', loadChildren: 'app/modules/rtme-order/rtme-order.module#RtmeOrderModule' },
@@ -171,7 +182,7 @@ const appRoutes: Routes = [
 
     ShipmentInvoicesComponent,
 
-   
+
 
     PersonComboComponent,
 
@@ -180,9 +191,6 @@ const appRoutes: Routes = [
     CargoModalComponent,
 
     RailbillComponent,
-
-    ShipmentInfoComponent,
-
     SideMenuDirective,
 
     OrdersSideMenuComponent,
@@ -191,19 +199,24 @@ const appRoutes: Routes = [
 
     ShipmentViewSideMenuComponent,
 
+    FacturaComponent,
+
+    FacturaViewSideMenuComponent,
+
 
   ],
   entryComponents: [
 
-    PlaceDetailsComponent, 
-    OrderIninfoComponent, 
-    OrderInboundCargoComponent, 
-    CargoDialogComponent, 
+    PlaceDetailsComponent,
+    OrderIninfoComponent,
+    OrderInboundCargoComponent,
+    CargoDialogComponent,
     PersonDialogComponent,
     CargoModalComponent,
     OrdersSideMenuComponent,
     OrderDetailsSideMenuComponent,
     ShipmentViewSideMenuComponent,
+    FacturaViewSideMenuComponent,
 
   ],
   imports: [
