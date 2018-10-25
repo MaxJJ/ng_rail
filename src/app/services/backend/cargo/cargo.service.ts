@@ -26,10 +26,12 @@ export class CargoService {
     return this.http.get<Cargo[]>(url);
   }
 
-  getCargoById(id):Observable<Cargo>{
-    let url = API+id;
+  getCargoById(cargo_id,factura_id):Observable<Cargo>{
+    let url = 'api/factura/'+factura_id+'/cargo/'+cargo_id;
     return this.http.get(url);
   }
+
+
 
   saveCargo(c:Cargo):Observable<Cargo>{
     let id=c.id;
@@ -46,5 +48,15 @@ export class CargoService {
   searchCargoByDescription(qry:string):Observable<Cargo[]>{
     let url=API+'search';
     return this.http.get<Cargo[]>(url,{'params':{"qry":qry}});
+  }
+
+  saveFacturasCargo(factura_id,cargo:Cargo[]):Observable<Cargo[]>{
+    let url = 'api/factura/'+factura_id+'/cargo';
+    return this.http.post<Cargo[]>(url,cargo,httpOptions);
+  }
+
+  getIndexedCargo():Observable<Cargo[]>{
+    let url = 'api/cargo/indexed';
+    return this.http.get<Cargo[]>(url);
   }
 }

@@ -1,37 +1,56 @@
 <div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="1px">
-<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
-  <mat-form-field >
-    <input type="text" matInput placeholder="Document's type" [formControl]="doc_name_fc" >
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
+    <mat-form-field fxFlex="20%">
+      <input type="text" matInput placeholder="Document's type" [formControl]="doc_name_fc">
+    </mat-form-field>
+
+    <mat-form-field fxFlex="50%">
+      <input type="text" matInput placeholder="Document's ID" [formControl]="name_fc">
+    </mat-form-field>
+
+    <rtme-datepicker placeholder="Document's date" [date]="factura.date" (new_date)="setFacturasDate($event)" fxFlex></rtme-datepicker>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="30px" [style.margin-top]="'-10px'">
+    <person-raw title="Cosignor" [person]="factura.consignor" fxFlex="50%"></person-raw>
+    <person-raw title="Consignee" [person]="factura.consignee" fxFlex="50%"></person-raw>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="30px" [style.margin-top]="'10px'">
+    <person-combo title="Seller" [person]="factura.seller" (change)="sellerHandler($event)" fxFlex="50%"></person-combo>
+    <person-combo title="Buyer" [person]="factura.buyer" (change)="buyerHandler($event)" fxFlex="50%"></person-combo>
+  </div>
+
+
+
+  <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="6px" [style.margin-top]="'20px'">
+    <mat-form-field fxFlex="100px">
+      <input type="text" matInput placeholder="Incoterms code" [formControl]="delivery_terms_str_code_fc" >
+    </mat-form-field>
+    <mat-form-field fxFlex="200px">
+      <input type="text" matInput placeholder="Incoterms place" [formControl]="delivery_terms_place_fc">
+    </mat-form-field>
+    <mat-form-field fxFlex="60px">
+      <input type="text" matInput placeholder="Currency" [formControl]="currency_fc">
+    </mat-form-field>
+    <mat-form-field fxFlex>
+      <input type="text" matInput placeholder="Contract" [formControl]="contract_name_fc">
+    </mat-form-field>
+  </div>
+
+  <cargo-combo></cargo-combo>
+
+
+
+  <mat-form-field [style.margin-top]="'20px'">
+    <textarea  matInput
+               cdkTextareaAutosize
+               cdkAutosizeMinRows="3"
+               cdkAutosizeMaxRows="10" 
+               placeholder="Info" [formControl]="footer_fc"></textarea>
   </mat-form-field>
-  
+
   <mat-form-field>
-    <input type="text" matInput placeholder="Document's ID" [formControl]="name_fc">
-  </mat-form-field>
-  
-  <rtme-datepicker placeholder="Document's date"  [date]="factura.date" (new_date)="setFacturasDate($event)"></rtme-datepicker> 
-</div>
-
-<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="30px">
-  <person-combo title="Seller" [person]="factura.seller" (change)="sellerHandler($event)" fxFlex="50%"></person-combo> 
-  <person-combo title="Buyer" [person]="factura.buyer" (change)="buyerHandler($event)" fxFlex="50%"></person-combo> 
-</div>
-
-<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="30px">
-  <person-raw title="Consignee" [person]="factura.consignee"  fxFlex="50%"></person-raw> 
-  <person-raw title="Cosignor" [person]="factura.consignor"  fxFlex="50%"></person-raw> 
-</div>
-
-<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="6px">
-  <mat-form-field>
-    <input type="text" matInput placeholder="Incoterms" [formControl]="name_fc">
-  </mat-form-field>
-</div>
-
-<cargo-combo [cargo]="factura.cargo"></cargo-combo>
-
-
-
-<mat-form-field>
     <input type="text" matInput placeholder="Sign" [formControl]="sign_fc">
   </mat-form-field>
 

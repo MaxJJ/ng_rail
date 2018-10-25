@@ -35,7 +35,7 @@ import { OrderInboundCargoComponent } from './ui-components/dialogs/order-inboun
 import { MatRadioModule } from '@angular/material/radio';
 import { CardModule } from 'primeng/card';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { InboundCargoComponent } from './ui-components/inbound-cargo/inbound-cargo.component';
+
 import { MatExpansionModule } from '@angular/material/expansion';
 import { PlaceAutocompleteComponent } from './ui-components/places/place-autocomplete/place-autocomplete.component';
 import { MatMenuModule } from '@angular/material/menu';
@@ -45,8 +45,7 @@ import { ShipmentComponent } from './shipment/shipment/shipment.component';
 import { CommentsComponent } from './ui-components/comments/comments/comments.component';
 import { PersonExpPanelRawComponent } from './ui-components/persons/person-exp-panel-raw/person-exp-panel-raw.component';
 import { PersonExpPanelFormComponent } from './ui-components/persons/person-exp-panel-form/person-exp-panel-form.component';
-import { CargoExPanelComponent } from './ui-components/cargo/cargo-ex-panel/cargo-ex-panel.component';
-import { CargoDialogComponent } from './ui-components/dialogs/cargo-dialog/cargo-dialog.component';
+
 import { RtmeDirectoriesModule } from './modules/rtme-directories/rtme-directories.module';
 import { ShipmentFacturasComponent } from './ui-components/facturas/shipment-facturas/shipment-facturas.component';
 import { PersonRawComponent } from './ui-components/persons/person-raw/person-raw.component';
@@ -76,6 +75,7 @@ import { ShipmentViewSideMenuComponent } from './shipment/shipment/side-menu/shi
 import { FacturaComponent } from './factura/factura/factura.component';
 import { FacturaViewResolver } from './resolvers/factura-view-resolver.service';
 import { FacturaViewSideMenuComponent } from './factura/factura-side-menu/factura-view-side-menu/factura-view-side-menu.component';
+import { CargoSearchComponent } from './ui-components/cargo/cargo-search/cargo-search.component';
 
 
 const appRoutes: Routes = [
@@ -138,8 +138,6 @@ const appRoutes: Routes = [
 
     OrderInboundCargoComponent,
 
-    InboundCargoComponent,
-
     PlaceAutocompleteComponent,
 
 
@@ -153,10 +151,6 @@ const appRoutes: Routes = [
     PersonExpPanelRawComponent,
 
     PersonExpPanelFormComponent,
-
-    CargoExPanelComponent,
-
-    CargoDialogComponent,
 
     ShipmentFacturasComponent,
 
@@ -203,6 +197,8 @@ const appRoutes: Routes = [
 
     FacturaViewSideMenuComponent,
 
+    CargoSearchComponent,
+
 
   ],
   entryComponents: [
@@ -210,7 +206,6 @@ const appRoutes: Routes = [
     PlaceDetailsComponent,
     OrderIninfoComponent,
     OrderInboundCargoComponent,
-    CargoDialogComponent,
     PersonDialogComponent,
     CargoModalComponent,
     OrdersSideMenuComponent,

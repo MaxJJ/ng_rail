@@ -1,20 +1,24 @@
 <div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="2px">
   <span rtmeH1>Cargo</span>
-  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+  <!-- <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
     <button mat-icon-button (click)="createItem()" [disabled]="addDisabled" color="primary">
       <mat-icon>add</mat-icon>
     </button>
     <button mat-icon-button (click)="onClick" color="primary">
       <mat-icon>search</mat-icon>
     </button>
-  </div>
+  </div> -->
 
 
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z2">
     <ng-container matColumnDef="num">
       <th mat-header-cell *matHeaderCellDef>No.</th>
       <td mat-cell *matCellDef="let c" class="number"> {{cargo.indexOf(c)+1}} </td>
-      <td mat-footer-cell *matFooterCellDef> </td>
+      <td mat-footer-cell *matFooterCellDef> 
+          <button mat-icon-button (click)="createItem()" [disabled]="addDisabled" color="primary">
+              <mat-icon>add</mat-icon>
+            </button>
+      </td>
     </ng-container>
     <ng-container matColumnDef="tnved" >
       <th mat-header-cell *matHeaderCellDef [style.width]="'350px'">ТНВЭД</th>
@@ -24,7 +28,12 @@
           <span>{{c.description}}</span>
         </div>
       </td>
-      <td mat-footer-cell *matFooterCellDef> TOTAL:</td>
+      <td mat-footer-cell *matFooterCellDef [style.vertical-align]="'middle'"> 
+ <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="50px">
+    <button mat-raised-button (click)="saveCargo()" [style.float]="'left'">Save</button>
+    <span>TOTAL:</span>
+ </div>
+        </td>
     </ng-container>
     <ng-container matColumnDef="units">
       <th mat-header-cell *matHeaderCellDef>Units</th>

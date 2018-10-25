@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { OrderInboundCargoComponent } from '../../order-inbound-cargo/order-inbound-cargo.component';
 import { CargoService } from '../../../../services/backend/cargo/cargo.service';
 import { Cargo } from '../../../../services/interfaces';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-cargo-modal',
@@ -12,12 +13,17 @@ import { Cargo } from '../../../../services/interfaces';
 export class CargoModalComponent implements OnInit {
 text:string = '';
 copy:Cargo;
+
+is_indexed_fc:FormControl=new FormControl();
+
   constructor(public dialogRef: MatDialogRef<OrderInboundCargoComponent>,
     @Inject(MAT_DIALOG_DATA) public d: any,
     private cargo_s:CargoService,
     ) { }
 
   ngOnInit() {
+    this.is_indexed_fc.setValue(this.d.item.is_indexed);
+   this.is_indexed_fc.valueChanges.subscribe(v=>this.d.item.is_indexed=v);
   }
 
   unitHandler(val){
@@ -38,7 +44,7 @@ copy:Cargo;
     this.dialogRef.close(this.d);
   }
   copyItem(){
-this.cargo_s.getCargoById(0).subscribe(c=>{
+this.cargo_s.getCargoById(0,this.d.factura_id).subscribe(c=>{
   this.copy=c;
   this.copy.description=this.d.item.description;
   this.copy.tnved_code=this.d.item.tnved_code;
@@ -57,6 +63,20 @@ this.cargo_s.getCargoById(0).subscribe(c=>{
 
       this.dialogRef.close(this.d);
     });
+
+  }
+
+  searchHandler(val:Cargo){
+    let m:Cargo = this.d.item;
+    m.is_indexed=false;
+    m.tnved_code=val.tnved_code;
+    m.description=val.description;
+    m.gng_code=val.gng_code;
+    m.etsng_code=val.etsng_code;
+    m.gng_description=val.gng_description;
+    m.tved_description=val.tved_description;
+    m.package=val.package;
+    m.unit=val.unit;
 
   }
 

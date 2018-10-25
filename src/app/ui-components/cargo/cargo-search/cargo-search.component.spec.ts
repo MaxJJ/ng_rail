@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CargoDialogComponent } from './cargo-dialog.component';
+import { CargoSearchComponent } from './cargo-search.component';
 
-describe('CargoDialogComponent', () => {
-  let component: CargoDialogComponent;
-  let fixture: ComponentFixture<CargoDialogComponent>;
+describe('CargoSearchComponent', () => {
+  let component: CargoSearchComponent;
+  let fixture: ComponentFixture<CargoSearchComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CargoDialogComponent ]
+      declarations: [ CargoSearchComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CargoDialogComponent);
+    fixture = TestBed.createComponent(CargoSearchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

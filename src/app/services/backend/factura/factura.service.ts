@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Factura } from '../../interfaces';
+import { Factura, Cargo } from '../../interfaces';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -42,6 +42,11 @@ export class FacturaService {
   saveFactura(factura:Factura):Observable<Factura>{
     let url = 'api/factura/'+factura.id;
     return this.http.post<Factura>(url,factura,httpOptions);
+  }
+
+  getFacturasCargo(factura_id):Observable<Cargo[]>{
+    let url = 'api/factura/'+factura_id+'/cargo';
+    return this.http.get<Cargo[]>(url);
   }
 
 

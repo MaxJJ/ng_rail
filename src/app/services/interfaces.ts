@@ -89,6 +89,7 @@ export interface Cargo {
   invoice_number?:string;
   unit_price?:number;
   total?:number;
+  is_indexed?:boolean;
 }
 
 export interface Person{
@@ -165,6 +166,7 @@ export interface Factura{
   price?:number;
   total_amount?:number;
   currency?:string;
+  contract_name?:string;
   footer?:any;
   sign?:string;
 

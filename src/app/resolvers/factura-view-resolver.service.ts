@@ -24,7 +24,8 @@ export class FacturaViewResolver {
   constructor(private http:HttpClient, 
               private shipment_service:ShipmentsService,
               private order_service:OrderService,
-              private factura_service:FacturaService
+              private factura_service:FacturaService,
+              
               ) { }
 
   resolve(route:ActivatedRouteSnapshot,state:RouterStateSnapshot):Observable<FacturaViewData>{
@@ -38,8 +39,9 @@ export class FacturaViewResolver {
       this.shipment_service.getShipmentsFacturas(sh_id),
       this.factura_service.getFacturaById(parseInt(id)),
       this.order_service.getOrderById(ord_id),
+      this.factura_service.getFacturasCargo(id)
     ]).pipe(map((res)=>{
-      return {shipment:res[0],facturas:res[1],thisFactura:res[2],order:res[3]};
+      return {shipment:res[0],facturas:res[1],thisFactura:res[2],order:res[3],cargo:res[4]};
        }));
     
   }

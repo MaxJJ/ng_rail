@@ -1,0 +1,6 @@
+.mat-option {
+    white-space: pre-wrap !important;
+    height: inherit !important;
+    line-height: inherit !important;
+    padding: 4px 8px;
+}

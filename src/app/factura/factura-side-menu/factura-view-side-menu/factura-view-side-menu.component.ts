@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Factura, Cargo } from '../../../services/interfaces';
+import { FillBillService } from '../../../services/output/build_xml/fill-bill.service';
 
 @Component({
   selector: 'app-factura-view-side-menu',
@@ -9,15 +11,24 @@ import { Router } from '@angular/router';
 export class FacturaViewSideMenuComponent implements OnInit {
 
   data:any;
-
-  constructor(private router:Router,) { }
+factura:Factura;
+cargo:Cargo[];
+  constructor(private router:Router,
+              private fb:FillBillService,
+    ) { }
 
   ngOnInit() {
+    this.factura=this.data.factura;
+    this.cargo=this.data.cargo;
   }
 
   goToShipment(){
     console.log(this.data);
     this.router.navigate(['order',this.data.order.id,'shipments',this.data.shipment.id]);
+    
+  }
 
+  createFacturaXML(){
+this.fb.createFactura(this.factura,this.cargo);
   }
 }

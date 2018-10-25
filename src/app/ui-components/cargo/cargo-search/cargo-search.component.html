@@ -1,0 +1,20 @@
+
+<div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="1px">
+<mat-checkbox [formControl]='is_search_enabled_fc'>Search?</mat-checkbox>
+<mat-form-field fxFlex >
+  <input matInput type="search" placeholder="Search Cargo" [matAutocomplete]="auto" [formControl]="cargo_fc" >
+  <button mat-button *ngIf="cargo_fc.value" matSuffix mat-icon-button aria-label="Clear" (click)="cargo_fc.setValue('')">
+    <mat-icon>close</mat-icon>
+  </button>
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="optionSelectedHandler($event)">
+    <mat-option *ngFor="let c of filteredCargo" [value]="c">
+
+      <div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="2px">
+      <span [style.font-size]="'12px'">{{c.tnved_code}}</span>
+      <span [style.font-size]="'12px'">{{c.description}}</span>
+        </div>
+    </mat-option>
+  </mat-autocomplete>
+
+</mat-form-field>
+</div>
