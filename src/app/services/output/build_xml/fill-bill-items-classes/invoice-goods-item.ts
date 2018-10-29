@@ -7,7 +7,7 @@ export class InvoiceGoodsItem {
     GoodsQuantity=0;
     MeasureUnitQualifierName='';
     MeasureUnitQualifierCode='';
-    PlacesQuantity='';
+    PlacesQuantity=0;
     PlacesDescription='';
     PlacesCode='';
     GrossWeightQuantity=0;

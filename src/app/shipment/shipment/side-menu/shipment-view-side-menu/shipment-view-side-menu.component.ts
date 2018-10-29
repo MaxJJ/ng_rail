@@ -32,6 +32,10 @@ this.factura_service.createNewFactura(this.shipment_id).subscribe(f=>{
   toFactura(f:Factura){
     this.router.navigate(['order',this.order_id,'shipments',this.shipment_id,'facturas',f.id])
   }
+
+  toShipment(){
+    this.router.navigate(['order',this.order_id]);
+  }
 }
 
 // 'order/:id/shipments/:sh_id/facturas/:factura_id'

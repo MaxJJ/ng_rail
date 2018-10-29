@@ -40,7 +40,7 @@
       <td mat-cell *matCellDef="let c">
         <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="1px">
           <span>{{c.unit_quantity}}</span>
-          <span>{{c.unit.name_short}}</span>
+          <span>{{c.unit?.name_short}}</span>
         </div>
       </td>
       <td mat-footer-cell *matFooterCellDef> </td>
@@ -50,7 +50,7 @@
       <td mat-cell *matCellDef="let c">
         <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="1px">
           <span>{{c.package_quantity}}</span>
-          <span>{{c.package.print_name}}</span>
+          <span>{{c.package?.print_name}}</span>
         </div>
       </td>
       <td mat-footer-cell *matFooterCellDef> {{getTotalPackages()}} </td>

@@ -1,0 +1,21 @@
+
+.footer{
+    padding: 6px;
+    border-top: 2px solid;
+}
+
+.footer .f{
+
+    font-size: 14px;
+    font-weight:600;
+}
+.footer .i{
+
+    font-size: 9px;
+    
+}
+.footer .h{
+
+    font-size: 9px;
+    
+}

@@ -1,4 +1,5 @@
 <div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="4px" [style.padding]="'0 6px'">
+  <button (click)="toShipment()"  mat-button>Order {{order_id}}</button>
   <span rtmeH1 [style.text-align]="'center'">Facturas</span>
   <button mat-button (click)="createFactura()" color="accent">New Factura</button>
   <button *ngFor="let fct of data.facturas" mat-button (click)="toFactura(fct)">f - {{fct.name}}</button>

@@ -39,9 +39,19 @@ export class FacturaViewResolver {
       this.shipment_service.getShipmentsFacturas(sh_id),
       this.factura_service.getFacturaById(parseInt(id)),
       this.order_service.getOrderById(ord_id),
-      this.factura_service.getFacturasCargo(id)
+      this.factura_service.getFacturasCargo(id),
+      this.shipment_service.getShipmentInvoices(sh_id),
+    
+      
     ]).pipe(map((res)=>{
-      return {shipment:res[0],facturas:res[1],thisFactura:res[2],order:res[3],cargo:res[4]};
+      return {shipment:res[0],
+              facturas:res[1],
+              thisFactura:res[2],
+              order:res[3],
+              cargo:res[4],
+              invoices:res[5],
+            
+            };
        }));
     
   }

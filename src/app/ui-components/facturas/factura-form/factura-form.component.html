@@ -38,9 +38,30 @@
     </mat-form-field>
   </div>
 
+
+
   <cargo-combo></cargo-combo>
 
 
+  <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="2px">
+      <mat-form-field fxFlex="80%">
+          <input type="text" matInput placeholder="Extra" [formControl]="extra_total_description_fc">
+        </mat-form-field>
+      <mat-form-field fxFlex>
+          <input type="text" matInput placeholder="Extra amount" [formControl]="extra_total_fc">
+        </mat-form-field>
+  </div>
+
+  <mat-chip-list #chipList>
+      <mat-chip *ngFor="let inv of invoices" (click)="addInvNum(inv)">
+        {{inv.number}}
+      </mat-chip>
+    </mat-chip-list>
+
+  <mat-form-field fxFlex>
+
+      <input type="text" matInput [formControl]="footer_first_str_fc">
+    </mat-form-field>
 
   <mat-form-field [style.margin-top]="'20px'">
     <textarea  matInput

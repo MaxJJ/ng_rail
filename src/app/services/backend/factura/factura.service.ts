@@ -43,6 +43,10 @@ export class FacturaService {
     let url = 'api/factura/'+factura.id;
     return this.http.post<Factura>(url,factura,httpOptions);
   }
+  deleteFactura(id){
+    let url = 'api/factura/'+id;
+    return this.http.delete<Factura>(url,httpOptions);
+  }
 
   getFacturasCargo(factura_id):Observable<Cargo[]>{
     let url = 'api/factura/'+factura_id+'/cargo';

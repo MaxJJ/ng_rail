@@ -81,11 +81,11 @@ export interface Cargo {
   gng_description?: string;
   etsng_code?: string;
   package?: Package;
-  package_quantity?: any;
+  package_quantity?: number;
   unit?: Unit;
   unit_quantity?: number;
   nett_weight?: number;
-  gross_weight?: any;
+  gross_weight?: number;
   invoice_number?:string;
   unit_price?:number;
   total?:number;
@@ -168,6 +168,11 @@ export interface Factura{
   currency?:string;
   contract_name?:string;
   footer?:any;
+  footer_first_str?:string;
+
+  extra_total_description?:string;
+  extra_total?:number;
+  grand_total?:number;
   sign?:string;
 
 
@@ -190,4 +195,7 @@ export interface Invoice{
   packages_qty?:number;
   nett_kgs?:number;
   gross_kgs?:number;
+  total?:number;
+  extra_cost?:number;
+  grand_total?:number;
 }

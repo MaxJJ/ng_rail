@@ -36,6 +36,15 @@
         <mat-form-field fxFlex="80px">
           <input matInput placeholder="Gross, Kgs" [(ngModel)]="i.gross_kgs">
         </mat-form-field>
+        <mat-form-field fxFlex="60px">
+          <input matInput placeholder="Cost, {{i.currency}}" [(ngModel)]="i.total">
+        </mat-form-field>
+        <mat-form-field fxFlex="60px">
+          <input matInput placeholder="Extra, {{i.currency}}" [(ngModel)]="i.extra_cost">
+        </mat-form-field>
+        <mat-form-field fxFlex="60px">
+          <input matInput placeholder="Total, {{i.currency}}" [(ngModel)]="i.grand_total">
+        </mat-form-field>
 
       </div>
 

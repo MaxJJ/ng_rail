@@ -8,11 +8,57 @@
 
         <factura-form [factura]="factura" [shipment]="shipment" [order]="order"></factura-form>
 
-
+       
       </mat-card-content>
       <mat-card-actions>
-        <button mat-button (click)="saveFactura()">Save</button>
+        <button mat-raised-button color="primary" (click)="saveFactura()">Save</button>
+        <button mat-raised-button color="warn" (click)="deleteFactura()">Delete</button>
       </mat-card-actions>
+      
+      <mat-card-footer>
+     <div fxLayout="row"  fxLayoutAlign="space-around center" fxLayoutGap="6px" class="footer">
+
+        <div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="4px">
+            <span class="h">Packages</span>
+            <span class="f">{{factura.places}}</span>
+            <span class="i" [style.color]=" factura.places==inv_packages ? 'green':'red' ">{{inv_packages}}</span>
+          </div>
+
+      <div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="4px">
+        <span class="h">Nett</span>
+        <span class="f">{{factura.nett}}</span>
+        <span class="i" [style.color]=" factura.nett==inv_nett ? 'green':'red' ">{{inv_nett}}</span>
+      </div>
+
+      <div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="4px">
+        <span class="h">Gross</span>
+        <span class="f">{{factura.gross}}</span>
+        <span class="i" [style.color]=" factura.gross==inv_gross ? 'green':'red' ">{{inv_gross}}</span>
+      </div>
+
+      <div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="4px">
+        <span class="h">Cost</span>
+        <span class="f">{{factura.total_amount}}</span>
+        <span class="i" [style.color]=" total_amount==inv_total ? 'green':'red' ">{{inv_total}}</span>
+      </div>
+
+      <div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="4px">
+        <span class="h">Extra Cost</span>
+        <span class="f">{{factura.extra_total}}</span>
+        <span class="i" [style.color]=" factura.extra_total==inv_extra ? 'green':'red' ">{{inv_extra}}</span>
+      </div>
+
+      <div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="4px">
+        <span class="h">Grand Total</span>
+        <span class="f">{{factura.grand_total}}</span>
+        <span class="i" [style.color]=" factura.grand_total==inv_grand ? 'green':'red' ">{{inv_grand}}</span>
+      </div>
+
+
+       
+     </div>
+
+      </mat-card-footer>
     </mat-card>
   </div>
 
