@@ -1,0 +1,33 @@
+.wrapper{
+
+    width: 250px;
+    height:60px;
+    border: 1px solid;
+    padding: 2px;
+    white-space: pre-wrap;
+    position: relative;
+}
+
+.title{
+    font-size: 7px;
+    line-height: 8px;
+    display: block;
+
+}
+
+.rw_code{
+    display: block;
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    font-size: 14px;
+    padding: 2px;
+    border: 1px solid;
+}
+
+.name{
+    display: block;
+    position: absolute;
+    top: 15px;  
+    font-size: 14px;
+}

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FacturaService } from '../services/backend/factura/factura.service';
-import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot, Resolve } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { ShipmentsService } from '../services/backend/shipments/shipments.service';
 import { OrderService } from '../services/backend/order.service';
@@ -19,7 +19,7 @@ export interface FacturaViewData{
 @Injectable({
   providedIn: 'root'
 })
-export class FacturaViewResolver {
+export class FacturaViewResolver implements Resolve<any> {
 
   constructor(private http:HttpClient, 
               private shipment_service:ShipmentsService,

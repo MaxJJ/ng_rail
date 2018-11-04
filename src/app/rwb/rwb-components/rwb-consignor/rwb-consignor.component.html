@@ -1,0 +1,10 @@
+<div class="wrapper">
+  <span class="title">1 Отправитель </span>
+  <div class="rw_code">{{consignor.rail_code}}  </div>
+  <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="1px">
+      <span>{{consignor.name}}</span>
+      <span>{{consignor.street_house}} <span *ngIf="consignor.region">,{{consignor.region}}</span></span>
+      <span>{{consignor.city}} <span *ngIf="consignor.postal_code">,{{consignor.postal_code}}</span>{{consignor.country.name}} <span></span></span>
+      <span><span *ngIf="consignor.inn">ИНН:{{consignor.inn}}</span></span>
+  </div>
+</div>

@@ -3,5 +3,7 @@
   <span rtmeH1 [style.text-align]="'center'">Facturas</span>
   <button mat-button (click)="createFactura()" color="accent">New Factura</button>
   <button *ngFor="let fct of data.facturas" mat-button (click)="toFactura(fct)">f - {{fct.name}}</button>
+  <span rtmeH1 [style.text-align]="'center'">СМГС</span>
+  <button mat-button (click)="toRwb()">RWB {{data.rwb.number}}</button>
 </div>
 

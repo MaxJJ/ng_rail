@@ -7,6 +7,7 @@ import { OrdersSideMenuComponent } from '../../orders-table/side-menu/orders-sid
 import { OrderDetailsSideMenuComponent } from '../../order-details/side-menu/order-details-side-menu/order-details-side-menu.component';
 import { ShipmentViewSideMenuComponent } from '../../shipment/shipment/side-menu/shipment-view-side-menu/shipment-view-side-menu.component';
 import { FacturaViewSideMenuComponent } from '../../factura/factura-side-menu/factura-view-side-menu/factura-view-side-menu.component';
+import { RailbillSideMenuComponent } from '../../rwb/railbill-side-menu/railbill-side-menu.component';
 
 
 @Injectable({
@@ -50,6 +51,10 @@ setShipmentViewSideMenu(){
 
 setFacturaViewSideMenu(){
   this.next_menu.next(FacturaViewSideMenuComponent);
+}
+
+setRwbViewSideMenu(){
+  this.next_menu.next(RailbillSideMenuComponent);
 }
 
 

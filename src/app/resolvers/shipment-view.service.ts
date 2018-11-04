@@ -3,13 +3,17 @@ import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/r
 import { Observable,forkJoin } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ShipmentsService } from '../services/backend/shipments/shipments.service';
-import { Shipment, Order } from '../services/interfaces';
+import { Shipment, Order, Railbill, Invoice, Factura } from '../services/interfaces';
 // import 'rxjs/add/observable/forkJoin';
 import { OrderService } from '../services/backend/order.service';
 import { map } from 'rxjs/operators';
 interface ShipmentViewData{
   shipment:Shipment;
   order:Order;
+  rwb:Railbill;
+  invoices:Invoice[];
+  facturas:Factura[];
+  
 }
 
 @Injectable({
@@ -28,8 +32,9 @@ export class ShipmentViewResolver implements Resolve<any> {
       this.order_service.getOrderById(ord_id),
       this.shipment_service.getShipmentInvoices(id),
       this.shipment_service.getShipmentsFacturas(id),
+      this.shipment_service.getShipmentsRailbill(id),
     ]).pipe(map((res)=>{
-      return {shipment:res[0],order:res[1],invoices:res[2],facturas:res[3]};
+      return {shipment:res[0],order:res[1],invoices:res[2],facturas:res[3],rwb:res[4]};
        }));
     
   }

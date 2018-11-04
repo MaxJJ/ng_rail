@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FacturaService } from '../../../../services/backend/factura/factura.service';
-import { Router } from '@angular/router';
-import { Factura } from '../../../../services/interfaces';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Factura, Railbill } from '../../../../services/interfaces';
 
 @Component({
   selector: 'app-shipment-view-side-menu',
@@ -13,14 +13,17 @@ export class ShipmentViewSideMenuComponent implements OnInit {
   data:any;
   shipment_id:number;
   order_id:number;
+  
  
   constructor(private factura_service:FacturaService,
               private router:Router,
+              private route:ActivatedRoute,
               ) { }
 
   ngOnInit() {
 this.shipment_id=this.data.shipment.id;
 this.order_id=this.data.order.id;
+
   }
 
   createFactura(){
@@ -35,6 +38,10 @@ this.factura_service.createNewFactura(this.shipment_id).subscribe(f=>{
 
   toShipment(){
     this.router.navigate(['order',this.order_id]);
+  }
+
+  toRwb(){
+    this.router.navigate(['order',this.order_id,'shipments',this.shipment_id,'rwb'])
   }
 }
 

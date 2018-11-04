@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Shipment, Invoice, Factura } from '../../interfaces';
+import { Shipment, Invoice, Factura, Railbill } from '../../interfaces';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Urls } from '../api_urls';
@@ -35,6 +35,11 @@ export class ShipmentsService {
     let url = 'api/shipments/'+s.id;
     return this.http.post(url,s,httpOptions);
   }
+
+  deleteShipment(id):Observable<any>{
+    let url = 'api/shipments/'+id;
+    return this.http.delete(url,httpOptions);
+  }
   
   getOrdersShipments(order_id):Observable<Shipment[]>{
     let url = API+order_id+'/shipments';
@@ -67,6 +72,18 @@ export class ShipmentsService {
     let url = 'api/shipments/'+shipment_id+'/facturas';
 
     return this.http.get<Factura[]>(url);
+  }
+
+  getShipmentsRailbill(shipment_id):Observable<Railbill>{
+    let url = 'api/shipments/'+shipment_id+'/rwb';
+
+    return this.http.get<Railbill>(url);
+  }
+
+  createRailbill(shipment_id):Observable<Railbill>{
+    let url = 'api/shipments/'+shipment_id+'/rwb/create';
+
+    return this.http.get<Railbill>(url);
   }
 
 }

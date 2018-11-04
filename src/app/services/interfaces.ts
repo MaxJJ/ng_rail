@@ -25,7 +25,7 @@ export interface Place {
   place_name: string;
   place_type: string;
   place_code: string;
-  is_border: boolean;
+  is_out: boolean;
   road_name: string;
   road_name_abbr: string;
   road_code: string;
@@ -101,7 +101,7 @@ export interface Person{
   postal_code?:string;
   region?:string;
   city?:string;
-  street_house?;string;
+  street_house?:string;
   rail_code?:string;
   country?:{name:string,country_code:string};
 }
@@ -198,4 +198,17 @@ export interface Invoice{
   total?:number;
   extra_cost?:number;
   grand_total?:number;
+}
+
+export interface RoadSection{
+
+  road?:string;
+  in_station?:any;
+  out_station?:any;
+}
+
+export interface Railbill{
+  id?:number;
+  shipment?:any;
+
 }

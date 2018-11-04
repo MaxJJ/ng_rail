@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Shipment, Person, Order, Factura, Cargo, Place, Container, Invoice } from '../../services/interfaces';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Shipment, Person, Order, Factura, Cargo, Place, Container, Invoice, Railbill } from '../../services/interfaces';
 import { ShipmentsService } from '../../services/backend/shipments/shipments.service';
 import { PersonsService } from '../../services/backend/persons/persons.service';
 import { OrderService } from '../../services/backend/order.service';
@@ -36,12 +36,14 @@ export class ShipmentComponent implements OnInit {
   dispatch: Place;
   destination: Place;
   facturas:Factura[];
+  rwb:Railbill;
 
   constructor(private route: ActivatedRoute,
     private service: ShipmentsService,
     private person_service: PersonsService,
     private order_service: OrderService,
     private menu: MenuService,
+    private router:Router,
     ) { 
 
 
@@ -58,6 +60,7 @@ this.route.data.subscribe((data) => {
      this.shipment = data.shipment.shipment;
     this.order = data.shipment.order;
     this.facturas=data.shipment.facturas;
+    this.rwb=data.shipment.rwb;
     
     this.isContainer = !this.shipment.cargo_is_general;
     if(!isNullOrUndefined(this.shipment.container)){
@@ -68,7 +71,7 @@ this.route.data.subscribe((data) => {
     this.shipment.consignee=this.order.consignee;
     this.shipment.consignor=this.order.consignor;
     this.menu.setShipmentViewSideMenu();
-    this.menu.pushData({shipment:this.shipment,order:this.order,facturas:this.facturas});
+    this.menu.pushData({shipment:this.shipment,order:this.order,facturas:this.facturas,rwb:this.rwb});
 });
   }
 
@@ -95,6 +98,14 @@ this.route.data.subscribe((data) => {
     this.shipment.container=this.container
   
     this.service.saveShipment(this.shipment).subscribe(sh=>this.shipment=sh);
+  }
+
+  deleteShipment(){
+
+   this.service.deleteShipment(this.shipment.id).subscribe(res=>{
+     console.log(res);
+    this.router.navigate(['order',this.order.id]);
+   });
   }
 
 

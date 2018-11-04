@@ -1,0 +1,46 @@
+<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="8px">
+
+
+  <div fxFlex="920px">
+    <mat-card>
+
+      <mat-card-content>
+
+  <mat-form-field>
+    <input matInput placeholder="29 Отправка №" [(ngModel)]="rwb.number">
+  </mat-form-field>
+
+<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="20px">
+  <rwb-consignor [consignor]="order.consignor"></rwb-consignor>
+  <rwb-consignee [consignee]="order.consignee"></rwb-consignee>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="20px" [style.margin-top]="'10px'">
+  <rwb-dispatch [station]="order.dispatch_place"></rwb-dispatch>
+  <rwb-destination [station]="order.destination_place"></rwb-destination>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="20px">
+  <person-raw [person]="order.consignor" title="Отправитель" fxFlex="50%"></person-raw>
+  <person-raw [person]="order.consignee" title="Получатель" fxFlex></person-raw>
+</div>
+
+       
+      </mat-card-content>
+      <mat-card-actions align="start">
+        <button mat-button (click)="saveShipment()">Save</button>
+        <button mat-button (click)="deleteShipment()">Delete</button>
+
+      </mat-card-actions>
+
+    </mat-card>
+
+
+
+  </div>
+
+  <div fxFlex>
+    <app-comments [order]="order"></app-comments>
+  </div>
+
+</div>

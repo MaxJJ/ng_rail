@@ -65,7 +65,6 @@ import { ShipmentViewResolver } from './resolvers/shipment-view.service';
 import { PersonComboComponent } from './ui-components/persons/person-combo/person-combo.component';
 import { CargoComboComponent } from './ui-components/facturas/cargo-combo/cargo-combo.component';
 import { CargoModalComponent } from './ui-components/dialogs/cargo/cargo-modal/cargo-modal.component';
-import { RailbillComponent } from './ui-components/railbill/railbill/railbill.component';
 import { SideMenuDirective } from './directives/menu/side-menu/side-menu.directive';
 import { OrdersSideMenuComponent } from './orders-table/side-menu/orders-side-menu/orders-side-menu.component';
 import { OrderDetailsSideMenuComponent } from './order-details/side-menu/order-details-side-menu/order-details-side-menu.component';
@@ -76,6 +75,14 @@ import { FacturaComponent } from './factura/factura/factura.component';
 import { FacturaViewResolver } from './resolvers/factura-view-resolver.service';
 import { FacturaViewSideMenuComponent } from './factura/factura-side-menu/factura-view-side-menu/factura-view-side-menu.component';
 import { CargoSearchComponent } from './ui-components/cargo/cargo-search/cargo-search.component';
+import { RailbillSideMenuComponent } from './rwb/railbill-side-menu/railbill-side-menu.component';
+import { RailbillViewResolver } from './resolvers/railbill-view-resolver.service';
+import { RailbillComponent } from './rwb/railbill/railbill.component';
+import { RwbDestinationComponent } from './rwb/rwb-components/rwb-destination/rwb-destination.component';
+import { RwbConsignorComponent } from './rwb/rwb-components/rwb-consignor/rwb-consignor.component';
+import { RwbDispatchComponent } from './rwb/rwb-components/rwb-dispatch/rwb-dispatch.component';
+import { RwbConsigneeComponent } from './rwb/rwb-components/rwb-consignee/rwb-consignee.component';
+import { RwbRoadSectionsComponent } from './rwb/rwb-components/rwb-road-sections/rwb-road-sections.component';
 
 
 const appRoutes: Routes = [
@@ -100,6 +107,12 @@ const appRoutes: Routes = [
     path: 'order/:id/shipments/:sh_id/facturas/:factura_id',
     component: FacturaComponent,
     resolve: { data: FacturaViewResolver }
+  },
+
+  {
+    path: 'order/:id/shipments/:sh_id/rwb',
+    component: RailbillComponent,
+    resolve: { data: RailbillViewResolver }
   },
 
   { path: 'order/:id/shipments/:sh_id/print', component: RtmePrintComponent },
@@ -199,6 +212,18 @@ const appRoutes: Routes = [
 
     CargoSearchComponent,
 
+    RailbillSideMenuComponent,
+
+    RwbDestinationComponent,
+
+    RwbConsignorComponent,
+
+    RwbDispatchComponent,
+
+    RwbConsigneeComponent,
+
+    RwbRoadSectionsComponent,
+
 
   ],
   entryComponents: [
@@ -212,6 +237,7 @@ const appRoutes: Routes = [
     OrderDetailsSideMenuComponent,
     ShipmentViewSideMenuComponent,
     FacturaViewSideMenuComponent,
+    RailbillSideMenuComponent,
 
   ],
   imports: [
