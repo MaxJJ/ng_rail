@@ -116,7 +116,9 @@ const appRoutes: Routes = [
   },
 
   { path: 'order/:id/shipments/:sh_id/print', component: RtmePrintComponent },
+
   { path: 'places', component: PlaceTableComponent },
+  
   { path: 'test', loadChildren: 'app/modules/rtme-order/rtme-order.module#RtmeOrderModule' },
 
   {

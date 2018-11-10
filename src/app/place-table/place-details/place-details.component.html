@@ -8,15 +8,25 @@
     <mat-form-field>
       <input matInput placeholder="Code" id="place_code" [(ngModel)]="data.place_code">
     </mat-form-field>
+
+    <mat-checkbox [(ngModel)]="data.is_out">Out?</mat-checkbox>
+
     <mat-form-field>
-      <input matInput placeholder="Road name" id="road_name" [(ngModel)]="data.road_name">
+      <mat-select placeholder="Road name" [formControl]="road_fc" (selectionChange)="road_props_handler($event)" name="road">
+        <mat-option *ngFor="let road of roads" [value]="road">
+          {{road.name}}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
+
     <mat-form-field>
       <input matInput placeholder="Road symbol" id="road_name_abbr" [(ngModel)]="data.road_name_abbr">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Road symbol" id="road_operator_name" [(ngModel)]="data.road_operator_name">
+      <input matInput placeholder="Expeditor" id="road_operator_name" [(ngModel)]="data.road_operator_name">
     </mat-form-field>
+
+
     <mat-form-field>
       <input matInput placeholder="Road code" id="road_code" [(ngModel)]="data.road_code">
     </mat-form-field>

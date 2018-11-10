@@ -1,3 +1,64 @@
-<p>
-  rwb-road-sections works!
-</p>
+
+<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="6px">
+  <button mat-button (click)="createRoadSection(-1)">Dispatch</button>
+  <button mat-icon-button (click)="createRoadSection(0)"><mat-icon>add</mat-icon></button>
+  <button mat-button (click)="createRoadSection(1)">Destination</button>
+</div>
+
+
+
+
+<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+
+  <div [formGroup]="road_section_form" fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="8px" fxFlex="50%">
+
+    <input type="hidden" formControlName ="id">
+  
+  <mat-form-field fxFlex>
+    <mat-select placeholder="Road" formControlName ="road" (selectionChange)="roadChange($event)" >
+      <mat-option *ngFor="let road of roads" [value]="road">
+        {{road}}
+      </mat-option>
+   
+    </mat-select>
+    <mat-hint>{{road_section_form.value.in_station?.road_operator_name}}</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field >
+    <mat-select placeholder="In-Station" formControlName="in_station" >
+      <mat-option *ngFor="let place of filtered_in_places" [value]="place">
+        {{place.place_name}}
+      </mat-option>
+   
+    </mat-select>
+    <mat-hint>{{road_section_form.value.in_station?.place_code}}</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field >
+    <mat-select placeholder="Out-Station" formControlName="out_station" >
+      <mat-option *ngFor="let f_place of filtered_out_places" [value]="f_place">
+        {{f_place.place_name}}
+      </mat-option>
+    </mat-select>
+    <mat-hint>{{road_section_form.value.out_station?.place_code}}</mat-hint>
+  </mat-form-field>
+
+</div>
+
+<div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10px" fxFlex>
+
+  <table *ngFor="let s of sections">
+    <tr>
+    <td rowspan="2">{{s.in_station?.road_operator_name}}</td>
+    <td>{{s.in_station?.place_name}}</td>
+    <td>{{s.in_station?.place_code}}</td>
+  </tr>
+    <tr>
+    <!-- <td rowspan="2">rowspan</td> -->
+    <td>{{s.out_station?.place_name}}</td>
+    <td>{{s.out_station?.place_code}}</td>
+  </tr>
+  </table>
+  </div>
+
+</div>
