@@ -1,8 +1,9 @@
 
 <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="6px">
-  <button mat-button (click)="createRoadSection(-1)">Dispatch</button>
-  <button mat-icon-button (click)="createRoadSection(0)"><mat-icon>add</mat-icon></button>
-  <button mat-button (click)="createRoadSection(1)">Destination</button>
+  <button mat-button (click)="createSections()" [disabled]="create_disabled">Create</button>
+  <button mat-button (click)="createRoadSection(-1)" [disabled]="dispatch_disabled">Dispatch</button>
+  <button mat-icon-button (click)="createRoadSection(0)" [disabled]="inner_disabled"><mat-icon>add</mat-icon></button>
+  <button mat-button (click)="createRoadSection(1)" [disabled]="destination_disabled">Destination</button>
 </div>
 
 
@@ -15,8 +16,9 @@
     <input type="hidden" formControlName ="id">
   
   <mat-form-field fxFlex>
-    <mat-select placeholder="Road" formControlName ="road" (selectionChange)="roadChange($event)" >
-      <mat-option *ngFor="let road of roads" [value]="road">
+    <mat-select placeholder="Road" formControlName ="road" (selectionChange)="roadSelectionChange($event)" >
+        <mat-option>--</mat-option>
+      <mat-option *ngFor="let road of filtered_roads" [value]="road">
         {{road}}
       </mat-option>
    
@@ -26,6 +28,7 @@
 
   <mat-form-field >
     <mat-select placeholder="In-Station" formControlName="in_station" >
+        <mat-option>--</mat-option>
       <mat-option *ngFor="let place of filtered_in_places" [value]="place">
         {{place.place_name}}
       </mat-option>
@@ -36,6 +39,7 @@
 
   <mat-form-field >
     <mat-select placeholder="Out-Station" formControlName="out_station" >
+        <mat-option>--</mat-option>
       <mat-option *ngFor="let f_place of filtered_out_places" [value]="f_place">
         {{f_place.place_name}}
       </mat-option>
@@ -45,19 +49,22 @@
 
 </div>
 
-<div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10px" fxFlex>
-
-  <table *ngFor="let s of sections">
+<div fxLayout="column" fxLayoutAlign="stretch" >
+ 
+  <table >
+    <tbody *ngFor="let s of sections" >
     <tr>
-    <td rowspan="2">{{s.in_station?.road_operator_name}}</td>
-    <td>{{s.in_station?.place_name}}</td>
-    <td>{{s.in_station?.place_code}}</td>
+      <td rowspan="2"><button mat-icon-button (click)="edit(s)"><mat-icon>edit</mat-icon></button></td>
+    <td rowspan="2" [style.width]="'130px'">{{s.in_station?.road_operator_name}} {{s.in_station?.road_code}}</td>
+    <td [style.width]="'200px'">{{s.in_station?.place_name}}</td>
+    <td [style.width]="'80px'">{{s.in_station?.place_code}}</td>
   </tr>
     <tr>
     <!-- <td rowspan="2">rowspan</td> -->
     <td>{{s.out_station?.place_name}}</td>
     <td>{{s.out_station?.place_code}}</td>
   </tr>
+    </tbody>
   </table>
   </div>
 

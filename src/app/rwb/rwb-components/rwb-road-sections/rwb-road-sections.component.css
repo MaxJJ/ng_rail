@@ -1,0 +1,20 @@
+table{
+
+    font-size: 12px;
+    /* border: solid 1px; */
+
+    border-collapse: collapse;
+}
+
+table tbody tr{
+    height: 16px;
+   
+}
+
+table td{
+
+    text-align: center;
+    border: solid 1px;
+
+    border-collapse: collapse;
+}

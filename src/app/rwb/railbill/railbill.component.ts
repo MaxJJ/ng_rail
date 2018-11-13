@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MenuService } from '../../services/menu/menu.service';
 import { ActivatedRoute } from '@angular/router';
 import { Shipment, Railbill, Order } from '../../services/interfaces';
+import { RailbillService } from '../../services/backend/rwb/railbill.service';
 
 @Component({
   selector: 'railbill',
@@ -14,7 +15,9 @@ export class RailbillComponent implements OnInit {
   rwb:Railbill;
   order:Order;
 
-  constructor(private menu:MenuService,private route:ActivatedRoute) { }
+  constructor(private menu:MenuService,
+              private route:ActivatedRoute,
+              private rwb_service:RailbillService) { }
 
   ngOnInit() {
 
@@ -29,6 +32,12 @@ export class RailbillComponent implements OnInit {
 
 
 
+  }
+
+  saveRwb(){
+this.rwb_service.saveRailbill(this.rwb).subscribe(res=>{
+  this.rwb=res;
+});
   }
 
 }

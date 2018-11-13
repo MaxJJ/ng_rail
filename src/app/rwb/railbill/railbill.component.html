@@ -20,17 +20,14 @@
   <rwb-destination [station]="order.destination_place"></rwb-destination>
 </div>
 
-<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="20px">
-  <person-raw [person]="order.consignor" title="Отправитель" fxFlex="50%"></person-raw>
-  <person-raw [person]="order.consignee" title="Получатель" fxFlex></person-raw>
-</div>
+{{rwb.road_sections | json}}
 
-<rwb-road-sections></rwb-road-sections>
+<rwb-road-sections [rwb]="rwb"></rwb-road-sections>
 
        
       </mat-card-content>
       <mat-card-actions align="start">
-        <button mat-button (click)="saveShipment()">Save</button>
+        <button mat-button (click)="saveRwb()">Save</button>
         <button mat-button (click)="deleteShipment()">Delete</button>
 
       </mat-card-actions>

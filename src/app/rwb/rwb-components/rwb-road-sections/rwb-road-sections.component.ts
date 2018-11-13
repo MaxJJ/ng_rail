@@ -1,10 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Place, RoadSection, Shipment, Order } from '../../../services/interfaces';
+import { Place, RoadSection, Shipment, Order, Railbill } from '../../../services/interfaces';
 import { PlaceService } from '../../../services/backend/place.service';
 import { MatSelectChange } from '@angular/material';
 import { RailbillService } from '../../../services/backend/rwb/railbill.service';
 import { ActivatedRoute } from '@angular/router';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, AbstractControl } from '@angular/forms';
+import { isNullOrUndefined } from 'util';
 
 export class RoadSectionItem {
 
@@ -28,11 +29,18 @@ export class RwbRoadSectionsComponent implements OnInit {
   filtered_in_places: Place[];
   filtered_out_places: Place[];
   road_symbol: string;
-  sections: RoadSection[] = [];
-  section:RoadSection;
-  rwb_id: number;
+  sections: RoadSection[];
+  section: RoadSection;
+  @Input()
+  rwb: Railbill;
+
+  dispatch_disabled: boolean = true;
+  inner_disabled: boolean = true;
+  destination_disabled: boolean = true;
+  create_disabled: boolean = false;
 
   roads: string[] = [];
+  filtered_roads:string[];
 
   road_section_form: FormGroup = new FormGroup({
     id: new FormControl(),
@@ -41,6 +49,9 @@ export class RwbRoadSectionsComponent implements OnInit {
     out_station: new FormControl(),
   });
 
+  road_c: AbstractControl;
+  in_station_c: AbstractControl;
+  out_station_c: AbstractControl;
 
 
 
@@ -52,11 +63,23 @@ export class RwbRoadSectionsComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe(res => {
       let order: Order;
-      this.rwb_id = res.data.rwb.id;
       order = res.data.order;
+      this.sections = this.rwb.road_sections;
       this.dispatch = order.dispatch_place;
       this.destination = order.destination_place;
-      this.road_section_form.valueChanges.subscribe(res => console.log(res));
+
+      this.in_station_c = this.road_section_form.controls.in_station;
+
+      this.road_section_form.valueChanges.subscribe(res => {
+        console.log('value changes -- '+JSON.stringify(res));
+        if(!isNullOrUndefined(res.road)){this.section.road = res.road; this.roadChange(res.road);} 
+        if(!isNullOrUndefined(res.in_station)){this.section.in_station = res.in_station; this.roadChange(res.in_station.road_name);} 
+        if(!isNullOrUndefined(res.out_station)){this.section.out_station = res.out_station; this.roadChange(res.in_station.road_name);} 
+        if(!isNullOrUndefined(res.id)){this.section.id=res.id;} 
+        this.rwb.road_sections = this.sections;
+        
+
+      });
 
     });
 
@@ -69,11 +92,6 @@ export class RwbRoadSectionsComponent implements OnInit {
       });
     });
 
-    this.road_section_form.valueChanges.subscribe(res=>{
-      this.section.in_station=res.in_station;
-      this.section.out_station=res.out_station;
-      this.section.road=res.road;
-    })
 
   }
 
@@ -86,7 +104,7 @@ export class RwbRoadSectionsComponent implements OnInit {
   }
 
   createRoadSection(index: number) {
-    this.rwb_service.createRoadSection(this.rwb_id).subscribe(res => {
+    this.rwb_service.createRoadSection(this.rwb.id).subscribe(res => {
       this.section = res;
       if (index < 0) { this.createDispatchSection(this.section); }
       if (index > 0) { this.createDestinationSection(this.section); }
@@ -102,51 +120,101 @@ export class RwbRoadSectionsComponent implements OnInit {
     this.sections.splice(0, 0, section);
     let def_place = this.filtered_in_places.find((v, i, a) => { return v.place_code == this.dispatch.place_code; });
     section.in_station = def_place;
+    this.filtered_in_places=[def_place];
+    this.filtered_roads=[def_place.road_name];
     this.road_section_form.setValue(section);
 
-    this.road_section_form.controls.road.disable();
+    this.disable_enable(true,true,true,false);
+
+    
 
   }
 
   createInnerSection(section) {
-    this.enableFields();
-    this.filtered_in_places = this.places;
-    this.filtered_out_places = this.places;
+this.clearForm();
     let length = this.sections.length;
     if (length > 0) {
       this.sections.splice(length - 1, 0, section);
     }
+this.filtered_in_places=this.places.filter((v,i,a)=>{return v.road_code !== this.dispatch.road_code || v.road_code !== this.destination.road_code;});
+this.filtered_out_places=this.places.filter((v,i,a)=>{return v.road_code !== this.destination.road_code;});
+this.filtered_roads=this.roads.filter((v,i,a)=>{return (v !== this.destination.road_name) && (v !== this.dispatch.road_name);});
+this.road_section_form.setValue(section);
 
 
   }
 
   createDestinationSection(section) {
-    section.out_station = this.destination;
+    this.clearForm();
+    
     this.filterPlaces(this.destination);
     section.road = this.destination.road_name;
     let length = this.sections.length;
     this.sections.splice(length, 0, section);
-    this.filtered_out_places.push(this.destination);
     section.out_station = this.destination;
+    this.filtered_out_places=[this.destination];
     this.road_section_form.setValue(section);
+    this.disable_enable(true,true,false,true);
 
-    // this.road_section_form.controls.out_station.disable();
-
-  }
-
-  private enableFields() {
-
-    this.road_section_form.controls.in_station.enable();
-    this.road_section_form.controls.out_station.enable();
-    this.road_section_form.controls.road.enable();
+  
 
   }
 
-  roadChange(ev) {
-    let r = ev.value;
+
+  roadChange(r) {
+    
+    this.filtered_out_places = this.places.filter((v, i, a) => { return v.road_name == r && v.is_out == true });
+    this.filtered_in_places = this.places.filter((v, i, a) => { return v.road_name == r && v.is_out == false });
+  }
+  roadSelectionChange(ev){
+    let r=ev.value;
     this.filtered_out_places = this.places.filter((v, i, a) => { return v.road_name == r && v.is_out == true });
     this.filtered_in_places = this.places.filter((v, i, a) => { return v.road_name == r && v.is_out == false });
   }
 
+  createSections() {
+    this.sections = [];
+    this.rwb.road_sections = [];
+    this.disable_enable(true,false,true,true);
+  }
 
+  edit(s: RoadSection) {
+   
+    let ix = this.sections.indexOf(s);
+
+    this.clearForm();
+
+    
+ this.section=this.sections[ix]; 
+  this.setFormValues(this.section);
+  console.log('after set values section -- '+JSON.stringify(s));
+  }
+
+  disable_enable(create:boolean,dispatch:boolean,inner:boolean,destination:boolean){
+    this.dispatch_disabled = dispatch;
+    this.inner_disabled = inner;
+    this.destination_disabled = destination;
+    this.create_disabled = create;
+
+  }
+
+  clearForm(){
+    // this.road_section_form.setValue({id:'',road:'',in_station:undefined,out_station:undefined,});
+    this.road_section_form.reset();
+    
+    this.filtered_in_places=this.places;
+    this.filtered_out_places=this.places;
+    this.filtered_roads=this.roads;
+  }
+
+  setFormValues(s:RoadSection){
+ 
+ let value:RoadSection=this.road_section_form.value;
+ if(!isNullOrUndefined(s.id)){value.id=s.id};
+ if(!isNullOrUndefined(s.in_station)){value.in_station=this.filtered_in_places.find((v,i,a)=>{return v.place_code==s.in_station.place_code;}); s.road=s.in_station.road_name;};
+ if(!isNullOrUndefined(s.out_station)){value.out_station=this.filtered_out_places.find((v,i,a)=>{return v.place_code==s.out_station.place_code;}); s.road=s.out_station.road_name;};
+ if(!isNullOrUndefined(s.road)){value.road=this.roads.find((v,i,a)=>{return v ==s.road;})};
+
+this.road_section_form.setValue(value);
+  }
 }

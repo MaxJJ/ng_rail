@@ -201,7 +201,7 @@ export interface Invoice{
 }
 
 export interface RoadSection{
-
+id?:number;
   road?:string;
   in_station?:any;
   out_station?:any;
@@ -210,5 +210,9 @@ export interface RoadSection{
 export interface Railbill{
   id?:number;
   shipment?:any;
+  number?:string;
+  dispatch?:any;
+  destination?:any;
+  road_sections?:RoadSection[];
 
 }
