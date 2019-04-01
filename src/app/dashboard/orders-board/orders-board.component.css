@@ -1,0 +1,34 @@
+.leftbar{
+display: block;
+height: 100vh;
+overflow: hidden;
+background-color: #4c4c4c
+}
+
+.main{
+    
+display: block;
+height: 100vh;
+width: 100%;
+background-color: #2b8ac4  
+}
+
+.fixed{
+
+    position: fixed;
+    width: 400px;
+}
+
+.search-field{
+
+    width: 380px;
+    
+}
+
+div#toolbar-wrapper{ min-height:80px;}
+div#search-field-wrapper{ min-height:80px;padding-left: 10px;}
+div#cards-list-wrapper{
+    max-height:calc(100vh - 160px);
+    overflow-y: auto;
+    overflow-x: hidden;
+}

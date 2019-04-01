@@ -83,9 +83,16 @@ import { RwbConsignorComponent } from './rwb/rwb-components/rwb-consignor/rwb-co
 import { RwbDispatchComponent } from './rwb/rwb-components/rwb-dispatch/rwb-dispatch.component';
 import { RwbConsigneeComponent } from './rwb/rwb-components/rwb-consignee/rwb-consignee.component';
 import { RwbRoadSectionsComponent } from './rwb/rwb-components/rwb-road-sections/rwb-road-sections.component';
+import { OrdersBoardComponent } from './dashboard/orders-board/orders-board.component';
+import { OrderCardComponent } from './components/order-card/order-card.component';
 
 
 const appRoutes: Routes = [
+  {
+    path: 'orders_dash',
+    component: OrdersBoardComponent,
+    // resolve: { orders: OrdersTableViewResolver }
+  },
   {
     path: 'orders',
     component: OrdersTableComponent,
@@ -118,12 +125,14 @@ const appRoutes: Routes = [
   { path: 'order/:id/shipments/:sh_id/print', component: RtmePrintComponent },
 
   { path: 'places', component: PlaceTableComponent },
+
   
-  { path: 'test', loadChildren: 'app/modules/rtme-order/rtme-order.module#RtmeOrderModule' },
+  
+  // { path: 'test', loadChildren: 'app/modules/rtme-order/rtme-order.module#RtmeOrderModule' },
 
   {
     path: '',
-    redirectTo: '/orders',
+    redirectTo: '/orders_dash',
     pathMatch: 'full'
   },
   { path: '**', redirectTo: '/orders' }
@@ -225,6 +234,10 @@ const appRoutes: Routes = [
     RwbConsigneeComponent,
 
     RwbRoadSectionsComponent,
+
+    OrdersBoardComponent,
+
+    OrderCardComponent,
 
 
   ],

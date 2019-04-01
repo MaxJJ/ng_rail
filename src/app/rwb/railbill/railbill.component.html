@@ -20,7 +20,9 @@
   <rwb-destination [station]="order.destination_place"></rwb-destination>
 </div>
 
-{{rwb.road_sections | json}}
+{{cargo | json}}
+
+<button mat-button (click)="groupCargo()">group</button>
 
 <rwb-road-sections [rwb]="rwb"></rwb-road-sections>
 

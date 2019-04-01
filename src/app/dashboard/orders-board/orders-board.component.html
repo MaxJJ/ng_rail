@@ -1,0 +1,26 @@
+<div class="leftbar" fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="2px" fxFlex="400px">
+  <div id="toolbar-wrapper">
+    <mat-toolbar color="primary" class="fixed">
+      <span>Orders</span>
+    </mat-toolbar>
+  </div>
+
+  <div id="orders-search-wrapper" fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="4px">
+    <div id="search-field-wrapper">
+      <mat-form-field color="primary" class="search-field fixed">
+        <input matInput placeholder="label" value="value" [ngStyle]="{'color': 'white'}">
+      </mat-form-field>
+    </div>
+
+    <div id="cards-list-wrapper">
+      <order-card *ngFor="let order of orders" [order]="order"></order-card>
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="main" id="content" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="2px">
+  <span>sssfffffffffffffffff</span>
+</div>

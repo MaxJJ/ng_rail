@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable, forkJoin } from 'rxjs';
 import { ShipmentsService } from '../services/backend/shipments/shipments.service';
-import { Shipment, Railbill, Order } from '../services/interfaces';
+import { Shipment, Railbill, Order, Cargo, Factura } from '../services/interfaces';
 import { map } from 'rxjs/operators';
 import { OrderService } from '../services/backend/order.service';
 
@@ -10,6 +10,7 @@ interface RwbViewData {
   shipment?: Shipment;
   rwb?:Railbill;
   order?:Order;
+  facturas?:Factura[];
 
 }
 
@@ -33,6 +34,7 @@ export class RailbillViewResolver implements Resolve<any> {
       this.shipment_service.getShipmentById(sh_id),
       this.shipment_service.getShipmentsRailbill(sh_id),
       this.order_service.getOrderById(ord_id),
+      this.shipment_service.getShipmentsFacturas(sh_id),
 
 
 
@@ -41,9 +43,13 @@ export class RailbillViewResolver implements Resolve<any> {
         shipment: res[0],
         rwb:res[1],
         order:res[2],
+        facturas:res[3],
+
 
 
       };
     }));
   }
+
+
 }

@@ -1,0 +1,28 @@
+.r_card{
+
+    margin: 8px auto;
+    padding: 6px;
+    width: 360px;
+ 
+}
+
+.r_card .title{
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.r_card .eta{
+    font-size: 10px;
+}
+
+.r_card .dispatch{
+    font-size: 10px;
+    
+}
+
+.r_card .destination{
+    font-size: 12px;
+    font-weight: 600;
+    color: #2b8ac4  ;
+}

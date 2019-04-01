@@ -21,6 +21,9 @@
               "src/favicon.ico"
             ],
             "styles": [
+              {
+                "input": "src/app/rtme-theme.scss"
+              },
               "src/styles.css"
             ],
             "scripts": []

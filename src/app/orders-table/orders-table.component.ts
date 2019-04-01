@@ -39,7 +39,7 @@ export class OrdersTableComponent implements OnInit {
   
 
   ngOnInit() {
-   this.menu.setOrderTableSideMenu();
+  //  this.menu.setOrderTableSideMenu();
    this.route.data.subscribe((data)=>{
     this.dataSource=new OrdersTableDataSource(this.paginator,this.sort,data.orders);
    });

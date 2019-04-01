@@ -1,10 +1,13 @@
 <!--The content below is only a placeholder and can be replaced.-->
 
+<!-- fxFlex.gt-md="80%" fxFlex.gt-sm="100%" -->
+<!-- <my-nav></my-nav> -->
+<!-- <div class="content"  [style.margin-left]="(isHandset | async).matches ? '0px' : '300px'"> -->
 
-<my-nav></my-nav>
-<div class="content"  [style.margin-left]="(isHandset | async).matches ? '0px' : '300px'">
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
 
-<router-outlet></router-outlet>
+<div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="0px" fxFlex.gt-md="10%" fxHide.md></div>
+<div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="0px" fxFlex>
+    <router-outlet></router-outlet>
 </div>
-
-
+<div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="0px" fxFlex.gt-md="10%" fxHide.md></div>
