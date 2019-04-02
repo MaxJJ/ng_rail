@@ -26,3 +26,8 @@
     font-weight: 600;
     color: #2b8ac4  ;
 }
+
+
+ ::ng-deep .mat-card-header-text{
+    margin: 0px !important;
+}

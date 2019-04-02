@@ -1,0 +1,18 @@
+<h4>ORDER</h4>
+
+<div *ngIf="order" fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="2px">
+
+  <mat-form-field>
+    <input matInput placeholder="Short description" [formControl]="description">
+  </mat-form-field>
+  <mat-form-field>
+    <textarea matInput placeholder="Description"></textarea>
+  </mat-form-field>
+
+  <h4>Dispatch Place > Destination Place</h4>
+  <order-card [order]="order"></order-card>
+
+  <h4>Consignor / Consignee</h4>
+
+  {{order|json}}
+</div>

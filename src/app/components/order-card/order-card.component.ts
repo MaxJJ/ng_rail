@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Order } from '../../services/interfaces';
 
 @Component({
@@ -10,10 +10,22 @@ export class OrderCardComponent implements OnInit {
 
   @Input()
   order: Order;
+  opened: boolean = false;
+
+  @Output()
+  activateOrder: EventEmitter<Order> = new EventEmitter<Order>();
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  expand_card() {
+    this.opened = this.opened ? false : true;
+  }
+
+  activate() {
+    this.activateOrder.emit(this.order);
   }
 
 }

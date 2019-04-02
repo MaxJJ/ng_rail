@@ -85,6 +85,7 @@ import { RwbConsigneeComponent } from './rwb/rwb-components/rwb-consignee/rwb-co
 import { RwbRoadSectionsComponent } from './rwb/rwb-components/rwb-road-sections/rwb-road-sections.component';
 import { OrdersBoardComponent } from './dashboard/orders-board/orders-board.component';
 import { OrderCardComponent } from './components/order-card/order-card.component';
+import { OrderSingleComponent } from './components/order-single/order-single.component';
 
 
 const appRoutes: Routes = [
@@ -238,6 +239,8 @@ const appRoutes: Routes = [
     OrdersBoardComponent,
 
     OrderCardComponent,
+
+    OrderSingleComponent,
 
 
   ],

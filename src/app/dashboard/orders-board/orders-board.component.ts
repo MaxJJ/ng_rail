@@ -17,6 +17,7 @@ import { Order } from '../../services/interfaces';
 export class OrdersBoardComponent implements OnInit {
 
   orders: Order[];
+  active_order: Order;
 
   constructor(private serv_orders: OrderService) { }
 
@@ -25,4 +26,7 @@ export class OrdersBoardComponent implements OnInit {
 
   }
 
+  onOrderActivated(event) {
+    this.active_order = event;
+  }
 }

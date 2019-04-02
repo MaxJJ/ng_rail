@@ -13,7 +13,7 @@
     </div>
 
     <div id="cards-list-wrapper">
-      <order-card *ngFor="let order of orders" [order]="order"></order-card>
+      <order-card *ngFor="let order of orders" [order]="order" (activateOrder)="onOrderActivated($event)"></order-card>
     </div>
 
   </div>
@@ -21,6 +21,7 @@
 </div>
 
 
-<div class="main" id="content" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="2px">
-  <span>sssfffffffffffffffff</span>
+<div class="main" id="content" fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="2px">
+  <order-single [order]="active_order"></order-single>
+
 </div>
