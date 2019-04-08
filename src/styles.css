@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 /* @import "~@angular/material/prebuilt-themes/indigo-pink.css"; */
 
+
+ /* Typography */
 body {
     margin: 0;
     background-color: #273746;
@@ -13,6 +15,69 @@ h4 {
     border-bottom: 1px solid;
     padding-bottom: 0.6em;
     text-transform: uppercase;
+}
+
+
+/* Left bar */
+
+.leftbar{
+    display: block;
+    min-height: 100vh;
+    overflow: hidden;
+    background-color: #293846
+    }
+
+
+/* Workspace */
+
+.workspace{
+    position: fixed;
+    max-height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-width: 820px;
+    padding-right: 14px;
+}
+
+/* Cards */
+
+.mat-card{
+
+    background-color: #414d58
+}
+
+.mat-card-header-text{
+    margin: 0px !important;
+}
+
+mat-card#workspace-card{
+
+    width:360px;
+    margin-top:4px;
+    /* background: #f9fbe7;
+    color:black; */
+    border-top: 4px solid #f7a307;
+
+}
+
+mat-card#workspace-card .mat-card-title{
+    font-size: 0.8em;
+    /* color: black; */
+}
+
+mat-card#workspace-card .mat-card-subtitle{
+    /* color: black; */
+}
+
+
+
+
+
+/* Workspace */
+
+div#workspace-row{
+
+    margin-top:16px;
 }
 
 @media print {

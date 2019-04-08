@@ -86,13 +86,16 @@ import { RwbRoadSectionsComponent } from './rwb/rwb-components/rwb-road-sections
 import { OrdersBoardComponent } from './dashboard/orders-board/orders-board.component';
 import { OrderCardComponent } from './components/order-card/order-card.component';
 import { OrderSingleComponent } from './components/order-single/order-single.component';
+import { PersonCardComponent } from './components/person-card/person-card.component';
+import { PersonSearchDialogComponent } from './ui-components/dialogs/person-search-dialog/person-search-dialog.component';
+import { PlaceCardComponent } from './components/place-card/place-card.component';
 
 
 const appRoutes: Routes = [
   {
     path: 'orders_dash',
     component: OrdersBoardComponent,
-    // resolve: { orders: OrdersTableViewResolver }
+    resolve: { orders: OrdersTableViewResolver }
   },
   {
     path: 'orders',
@@ -127,8 +130,8 @@ const appRoutes: Routes = [
 
   { path: 'places', component: PlaceTableComponent },
 
-  
-  
+
+
   // { path: 'test', loadChildren: 'app/modules/rtme-order/rtme-order.module#RtmeOrderModule' },
 
   {
@@ -242,6 +245,12 @@ const appRoutes: Routes = [
 
     OrderSingleComponent,
 
+    PersonCardComponent,
+
+    PersonSearchDialogComponent,
+
+    PlaceCardComponent,
+
 
   ],
   entryComponents: [
@@ -256,6 +265,7 @@ const appRoutes: Routes = [
     ShipmentViewSideMenuComponent,
     FacturaViewSideMenuComponent,
     RailbillSideMenuComponent,
+    PersonSearchDialogComponent,
 
   ],
   imports: [

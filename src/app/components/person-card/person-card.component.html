@@ -1,0 +1,37 @@
+<mat-card id="workspace-card" class="mat-elevation-z2">
+  <mat-card-header>
+    <div class="card-icon" fxFlex fxLayoutAlign="end center">
+
+      <button mat-icon-button (click)="expand_card()">
+        <mat-icon>{{(opened ? 'expand_less':'expand_more')}}</mat-icon>
+      </button>
+    </div>
+    <mat-card-title>{{title}}</mat-card-title>
+    <mat-card-subtitle *ngIf="!opened">{{person.name}} </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content [ngStyle]="{'display': (opened?'block':'none')}">
+    <div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="2px">
+      <span matTooltip="Rail Code">{{person.rail_code}}</span>
+      <span matTooltip="Name">{{person.name}}</span>
+      <div fxLayout="row-wrap" fxLayoutAlign="start start" fxLayoutGap="4px" matTooltip="Address">
+        <span>{{person.street_house}}</span>
+        <span>{{person.region}}</span>
+        <span>{{person.city}}</span>
+        <span>{{person.postal_code}}</span>
+        <span>{{person.country?.name_rus}}</span>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions [ngStyle]="{'display': (opened?'block':'none')}">
+    <button mat-icon-button (click)="openPersonDialog()">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-icon-button (click)="openSearchPersonDialog(person)">
+      <mat-icon>find_in_page</mat-icon>
+    </button>
+    <button mat-icon-button (click)="openPersonDialog({})">
+      <mat-icon>add</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

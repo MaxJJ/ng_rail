@@ -7,8 +7,8 @@ const API = "api/persons/"
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type':  'application/json',
-    
+    'Content-Type': 'application/json',
+
   })
 };
 
@@ -18,20 +18,24 @@ const httpOptions = {
 })
 export class PersonsService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-getPerson(id):Observable<Person>{
+  getPerson(id): Observable<Person> {
 
-  return this.http.get<Person>(API+id);
-}
+    return this.http.get<Person>(API + id);
+  }
 
-savePerson(person:Person):Observable<Person>{
-  
-  return this.http.post<Person>(API+'save',person,httpOptions);
-}
+  savePerson(person: Person): Observable<Person> {
 
-searchPerson(qry):Observable<Person[]>{
-  let url = API+'/search';
-  return this.http.get<Person[]>(url,{'params':{"query":qry}});
-}
+    return this.http.post<Person>(API + 'save', person, httpOptions);
+  }
+
+  searchPerson(qry): Observable<Person[]> {
+    let url = API + '/search';
+    return this.http.get<Person[]>(url, { 'params': { "query": qry } });
+  }
+
+  fetchAllPersons(): Observable<Person[]> {
+    return this.http.get<Person[]>(API);
+  }
 }

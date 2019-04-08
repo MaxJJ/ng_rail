@@ -1,18 +1,43 @@
-<h4>ORDER</h4>
+<div class="workspace">
+  <h4 fxFlexFill>ORDER</h4>
+  <!-- *ngIf="order" -->
+  <div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="2px" *ngIf='order'>
 
-<div *ngIf="order" fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="2px">
+    <mat-form-field>
+      <input matInput placeholder="Short description" [formControl]="title">
+    </mat-form-field>
+    <mat-form-field>
+      <textarea matInput placeholder="Description" [formControl]="description"></textarea>
+    </mat-form-field>
 
-  <mat-form-field>
-    <input matInput placeholder="Short description" [formControl]="description">
-  </mat-form-field>
-  <mat-form-field>
-    <textarea matInput placeholder="Description"></textarea>
-  </mat-form-field>
+    <h4>Dispatch Place > Destination Place</h4>
+    <div id="workspace-row" fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="16px">
+      <place-card [place]="order.dispatch_place" title="Dispatch" (onPlace)="onDispatchSelected($event)"></place-card>
+      <place-card [place]="order.destination_place" title="Destination" (onPlace)="onDestinationSelected($event)">
+      </place-card>
 
-  <h4>Dispatch Place > Destination Place</h4>
-  <order-card [order]="order"></order-card>
+    </div>
 
-  <h4>Consignor / Consignee</h4>
 
-  {{order|json}}
+    <h4>Consignor / Consignee</h4>
+    <div id="workspace-row" fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="16px">
+      <person-card [person]="order.consignor" title="Consignor" (onPerson)="onConsignorSelected($event)"></person-card>
+      <person-card [person]="order.consignee" title="Consignee" (onPerson)="onConsigneeSelected($event)"></person-card>
+
+    </div>
+
+    <h4 fxFlex="80%" fxFlexFill>Shipments</h4>
+    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="6px">
+      <button mat-stroked-button>Create Shipment</button>
+    </div>
+
+    {{orders_shipments|json}}
+
+
+
+
+
+
+  </div>
+
 </div>

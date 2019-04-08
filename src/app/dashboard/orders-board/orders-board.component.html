@@ -12,7 +12,7 @@
       </mat-form-field>
     </div>
 
-    <div id="cards-list-wrapper">
+    <div id="cards-list-wrapper" *ngIf="orders">
       <order-card *ngFor="let order of orders" [order]="order" (activateOrder)="onOrderActivated($event)"></order-card>
     </div>
 
@@ -22,6 +22,6 @@
 
 
 <div class="main" id="content" fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="2px">
-  <order-single [order]="active_order"></order-single>
+  <order-single [$obs_order]="$active"></order-single>
 
 </div>

@@ -1,22 +1,23 @@
 import { Moment } from "moment";
+import { Country } from "../interfaces/country";
 
-export interface Totals{
+export interface Totals {
 
-  places?:number;
-  pcs?:number;
-  nett?:number;
-  gross?:number;
-  tnved_codes_qty?:number;
-  gng_codes_qty?:number;
+  places?: number;
+  pcs?: number;
+  nett?: number;
+  gross?: number;
+  tnved_codes_qty?: number;
+  gng_codes_qty?: number;
 
 }
 
-export interface Container{
-  id?:number;
-  name?:string;
-  containers_type?:string;
-  payload?:number;
-  tare?:number;
+export interface Container {
+  id?: number;
+  name?: string;
+  containers_type?: string;
+  payload?: number;
+  tare?: number;
 }
 
 
@@ -38,9 +39,9 @@ export interface Shipment {
   name?: string;
   description?: string;
   order?: number;
-  contract?:string;
-  cargo_is_general?:boolean;
-  container?:Container;
+  contract?: string;
+  cargo_is_general?: boolean;
+  container?: Container;
   consignor?: Person;
   consignee?: Person;
   // seller?:any;
@@ -49,29 +50,28 @@ export interface Shipment {
   // cargo?:Cargo[];
   // rw_bill?:any;
   // invoices?:Invoice[]
-   
+
 }
 
-export interface Package{
-  package_name_rus?:string;
-  package_name_eng?:string;
-  package_code?:string;
-  print_name?:string;
+export interface Package {
+  package_name_rus?: string;
+  package_name_eng?: string;
+  package_code?: string;
+  print_name?: string;
 }
-export interface Unit{
-  name_full?:string;
-  name_full_eng?:string;
-  name_short?:string;
-  name_short_eng?:string;
-  code?:string;
-
+export interface Unit {
+  name_full?: string;
+  name_full_eng?: string;
+  name_short?: string;
+  name_short_eng?: string;
+  code?: string;
 
 }
 
 
 export interface Cargo {
-  id?:number;
-  shipment?:number;
+  id?: number;
+  shipment?: number;
   is_container?: boolean;
   container_tare?: number;
   description?: string;
@@ -86,32 +86,33 @@ export interface Cargo {
   unit_quantity?: number;
   nett_weight?: number;
   gross_weight?: number;
-  invoice_number?:string;
-  unit_price?:number;
-  total?:number;
-  is_indexed?:boolean;
+  invoice_number?: string;
+  unit_price?: number;
+  total?: number;
+  is_indexed?: boolean;
 }
 
-export interface Person{
+export interface Person {
   id?: number;
-  name?:string;
-  inn?:string;
-  okpo?:string;
-  phone?:string;
-  postal_code?:string;
-  region?:string;
-  city?:string;
-  street_house?:string;
-  rail_code?:string;
-  country?:{name:string,country_code:string};
+  name?: string;
+  inn?: string;
+  okpo?: string;
+  phone?: string;
+  postal_code?: string;
+  region?: string;
+  city?: string;
+  street_house?: string;
+  rail_code?: string;
+  country?: Country;
+
 }
 
 export interface InboundDoc {
   id?: number;
-  doc_type?:string;
-  number?:number;
-  places?:number;
-  gross?:number;
+  doc_type?: string;
+  number?: number;
+  places?: number;
+  gross?: number;
 }
 
 
@@ -127,92 +128,92 @@ export interface Order {
   dispatch_place?: Place;
   destination_place?: Place;
   shipments?: Shipment[];
-  consignor:Person;
-  consignee:Person;
-  inbound_bill:string;
-  inbound_docs?:InboundDoc[];
-  transit_or_export:string;
-  inbound_cargo:Cargo[];
-  total_inbound_places:number;
-  total_inbound_gross:number;
-  comments:OrderComment[];
+  consignor: Person;
+  consignee: Person;
+  inbound_bill: string;
+  inbound_docs?: InboundDoc[];
+  transit_or_export: string;
+  inbound_cargo: Cargo[];
+  total_inbound_places: number;
+  total_inbound_gross: number;
+  comments: OrderComment[];
 
 }
 
-export interface OrderComment{
+export interface OrderComment {
   id?: number;
-  created?:string;
-  comment?:string;
-  order?:number;
+  created?: string;
+  comment?: string;
+  order?: number;
 }
 
-export interface Factura{
-  id?:number;
-  shipment?:any;
-  doc_name?:string;
-  name?:string;
-  date?:Date;
-  buyer?:Person;
-  seller?:Person;
-  consignee?:Person;
-  consignor?:Person;
-  delivery_terms_str_code?:any;
-  delivery_terms_place?:any;
-  cargo?:Cargo[];
-  places?:number;
-  pcs?:number;
-  nett?:number;
-  gross?:number;
-  price?:number;
-  total_amount?:number;
-  currency?:string;
-  contract_name?:string;
-  footer?:any;
-  footer_first_str?:string;
+export interface Factura {
+  id?: number;
+  shipment?: any;
+  doc_name?: string;
+  name?: string;
+  date?: Date;
+  buyer?: Person;
+  seller?: Person;
+  consignee?: Person;
+  consignor?: Person;
+  delivery_terms_str_code?: any;
+  delivery_terms_place?: any;
+  cargo?: Cargo[];
+  places?: number;
+  pcs?: number;
+  nett?: number;
+  gross?: number;
+  price?: number;
+  total_amount?: number;
+  currency?: string;
+  contract_name?: string;
+  footer?: any;
+  footer_first_str?: string;
 
-  extra_total_description?:string;
-  extra_total?:number;
-  grand_total?:number;
-  sign?:string;
+  extra_total_description?: string;
+  extra_total?: number;
+  grand_total?: number;
+  sign?: string;
 
 
 }
 
-export interface Invoice{
-  id?:number;
-  shipment:any;
-  number?:string;
-  date?:any;
-  currency?:string;
-  incoterms_place?:string;
-  incoterms_code?:string;
-  buyer?:Person;
-  seller?:Person;
-  consignee?:Person;
-  unit?:Unit;
-  units_qty?:number;
-  package?:Package;
-  packages_qty?:number;
-  nett_kgs?:number;
-  gross_kgs?:number;
-  total?:number;
-  extra_cost?:number;
-  grand_total?:number;
+export interface Invoice {
+  id?: number;
+  shipment: any;
+  number?: string;
+  date?: any;
+  currency?: string;
+  incoterms_place?: string;
+  incoterms_code?: string;
+  buyer?: Person;
+  seller?: Person;
+  consignee?: Person;
+  unit?: Unit;
+  units_qty?: number;
+  package?: Package;
+  packages_qty?: number;
+  nett_kgs?: number;
+  gross_kgs?: number;
+  total?: number;
+  extra_cost?: number;
+  grand_total?: number;
 }
 
-export interface RoadSection{
-id?:number;
-  road?:string;
-  in_station?:any;
-  out_station?:any;
+export interface RoadSection {
+  id?: number;
+  road?: string;
+  in_station?: any;
+  out_station?: any;
 }
 
-export interface Railbill{
-  id?:number;
-  shipment?:any;
-  number?:string;
-  dispatch?:any;
-  destination?:any;
-  road_sections?:RoadSection[];
+export interface Railbill {
+  id?: number;
+  shipment?: any;
+  number?: string;
+  dispatch?: any;
+  destination?: any;
+  road_sections?: RoadSection[];
 
 }

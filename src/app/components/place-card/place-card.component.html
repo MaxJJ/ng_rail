@@ -1,0 +1,35 @@
+<mat-card id="workspace-card" class="mat-elevation-z2">
+  <mat-card-header>
+    <div class="card-icon" fxFlex fxLayoutAlign="end center">
+
+      <button mat-icon-button (click)="expand_card()">
+        <mat-icon>{{(opened ? 'expand_less':'expand_more')}}</mat-icon>
+      </button>
+    </div>
+    <mat-card-title>{{title}}</mat-card-title>
+    <mat-card-subtitle *ngIf="!opened">{{place.place_name}} {{place.place_code}} </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content [ngStyle]="{'display': (opened?'block':'none')}">
+    <div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="2px">
+      <span>{{place.place_name}} {{place.place_code}} </span>
+      <span [ngStyle]="{'font-size': '0.8em'}">{{place.road_code}} {{place.road_operator_name}} {{place.road_name_abbr}}
+      </span>
+
+      <mat-divider [inset]="true">
+      </mat-divider>
+
+      <mat-form-field [ngStyle]="{'margin-top': '16px'}">
+        <input matInput placeholder="Search Place" [formControl]="fc" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onPlaceSelected($event)">
+          <mat-option *ngFor="let p of filtered_places | async" [value]="p">
+            {{p.place_name}} ({{p.place_code}})
+          </mat-option>
+
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+
+  </mat-card-content>
+
+</mat-card>

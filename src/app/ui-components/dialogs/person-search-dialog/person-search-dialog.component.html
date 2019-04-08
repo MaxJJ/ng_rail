@@ -1,0 +1,16 @@
+<div fxLayout="column" fxLayoutAlign="sretch" fxLayoutGap="10px">
+  <mat-form-field fxFlex>
+    <input matInput placeholder="Person search" [formControl]="fc">
+
+  </mat-form-field>
+
+  <mat-nav-list dense class="list">
+    <mat-list-item *ngFor="let p of filtered_persons | async" (click)="onClick(p)">
+      <h3 matLine>{{p.name}}</h3>
+      <span matLine>line</span>
+      <span matLine>line</span>
+      <span matLine>line</span>
+      <span matLine>line</span>
+    </mat-list-item>
+  </mat-nav-list>
+</div>
