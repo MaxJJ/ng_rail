@@ -1,0 +1,15 @@
+<mat-card id="workspace-card" class="mat-elevation-z2">
+  <mat-card-header>
+    <div class="card-icon" fxFlex fxLayoutAlign="end center">
+
+      <button mat-icon-button (click)="edit_shipment()">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </div>
+    <mat-card-title>{{shipment?.name}}</mat-card-title>
+    <mat-card-subtitle>{{shipment?.description}}</mat-card-subtitle>
+    <mat-card-subtitle *ngIf="!is_general">{{shipment.container?.name}} {{shipment.container?.tare}}</mat-card-subtitle>
+  </mat-card-header>
+
+
+</mat-card>

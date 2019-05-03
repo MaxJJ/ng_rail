@@ -3,6 +3,12 @@
         "target": "http://localhost:8000",
         "secure": false,
         "logLevel": "debug",
-    "changeOrigin": true
+        "changeOrigin": true
+    },
+    "*://tkps-http.ldz.lv/kpsws-webapp/*": {
+        "target": "https://tkps-http.ldz.lv",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true
     }
-} 
+}

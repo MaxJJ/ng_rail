@@ -23,7 +23,7 @@
       </div>
     </div>
   </mat-card-content>
-  <mat-card-actions [ngStyle]="{'display': (opened?'block':'none')}">
+  <mat-card-actions [ngStyle]="{'display': (opened?'block':'none')}" *ngIf="!is_raw">
     <button mat-icon-button (click)="openPersonDialog()">
       <mat-icon>edit</mat-icon>
     </button>

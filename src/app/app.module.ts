@@ -89,7 +89,12 @@ import { OrderSingleComponent } from './components/order-single/order-single.com
 import { PersonCardComponent } from './components/person-card/person-card.component';
 import { PersonSearchDialogComponent } from './ui-components/dialogs/person-search-dialog/person-search-dialog.component';
 import { PlaceCardComponent } from './components/place-card/place-card.component';
-
+import { ShipmentDialogComponent } from './ui-components/dialogs/shipment-dialog/shipment-dialog.component';
+import { ShipmentCardComponent } from './components/shipment-card/shipment-card.component';
+import { ShipmentSingleComponent } from './components/shipment-single/shipment-single.component';
+import { NgxSoapModule } from 'ngx-soap';
+import { KpsTestComponent } from './kps-test/kps-test.component';
+import { KpsFindStationComponent } from './components/kps/kps-find-station/kps-find-station.component';
 
 const appRoutes: Routes = [
   {
@@ -110,8 +115,9 @@ const appRoutes: Routes = [
 
   {
     path: 'order/:id/shipments/:sh_id',
-    component: ShipmentComponent,
-    resolve: { shipment: ShipmentViewResolver }
+    // component: ShipmentComponent,
+    component: ShipmentSingleComponent,
+    resolve: { data: ShipmentViewResolver }
   },
 
   {
@@ -129,6 +135,8 @@ const appRoutes: Routes = [
   { path: 'order/:id/shipments/:sh_id/print', component: RtmePrintComponent },
 
   { path: 'places', component: PlaceTableComponent },
+
+  { path: 'kpstest', component: KpsTestComponent },
 
 
 
@@ -251,6 +259,16 @@ const appRoutes: Routes = [
 
     PlaceCardComponent,
 
+    ShipmentDialogComponent,
+
+    ShipmentCardComponent,
+
+    ShipmentSingleComponent,
+
+    KpsTestComponent,
+
+    KpsFindStationComponent,
+
 
   ],
   entryComponents: [
@@ -266,6 +284,7 @@ const appRoutes: Routes = [
     FacturaViewSideMenuComponent,
     RailbillSideMenuComponent,
     PersonSearchDialogComponent,
+    ShipmentDialogComponent,
 
   ],
   imports: [
@@ -307,12 +326,10 @@ const appRoutes: Routes = [
     MatMenuModule,
     MatSnackBarModule,
     RtmeDirectoriesModule,
-
+    NgxSoapModule,
   ],
   providers: [
     MatDialog,
-
-
   ],
   bootstrap: [AppComponent]
 })

@@ -1,5 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Order } from '../../services/interfaces';
+import { OrderService } from '../../services/backend/order.service';
+import { Observable, Subject } from 'rxjs';
+import { StateService } from '../../services/state/state.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'order-card',
@@ -8,24 +12,37 @@ import { Order } from '../../services/interfaces';
 })
 export class OrderCardComponent implements OnInit {
 
-  @Input()
   order: Order;
-  opened: boolean = false;
+
 
   @Output()
   activateOrder: EventEmitter<Order> = new EventEmitter<Order>();
 
-  constructor() { }
+  constructor(private service: OrderService,
+    private state: StateService,
+    private router: Router,
+  ) { }
 
   ngOnInit() {
+    this.order = <Order>{
+      "short_description": "Order in work",
+      "will_arrive": "Please select",
+
+    };
+
+    this.state.last_active_order$.subscribe(ao => {
+      if (ao.id) {
+        this.order = ao;
+      }
+    });
   }
 
-  expand_card() {
-    this.opened = this.opened ? false : true;
-  }
 
-  activate() {
-    this.activateOrder.emit(this.order);
+  onSave() {
+    this.service.postOrder(this.order).subscribe(res => {
+      this.state.last_active_order = res;
+      this.router.navigate(['orders_dash'], { queryParams: { active: res.id } });
+    });
   }
 
 }

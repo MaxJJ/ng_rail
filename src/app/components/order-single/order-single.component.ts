@@ -5,6 +5,10 @@ import { isNullOrUndefined } from 'util';
 import { Subject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ShipmentsService } from '../../services/backend/shipments/shipments.service';
+import { StateService } from '../../services/state/state.service';
+import { StorageService } from '../../services/state/storage.service';
+import { MatDialog } from '@angular/material';
+import { ShipmentDialogComponent } from '../../ui-components/dialogs/shipment-dialog/shipment-dialog.component';
 
 @Component({
   selector: 'order-single',
@@ -25,14 +29,20 @@ export class OrderSingleComponent implements OnInit {
 
 
 
-  constructor(private shipments: ShipmentsService) { }
+  constructor(private shipments: ShipmentsService,
+    private state: StateService,
+    private dialog: MatDialog
+  ) { }
 
   ngOnInit() {
 
-    this.$obs_order.subscribe(ord => {
-      this.order = ord;
-      this._setControls();
-      this.shipments.getOrdersShipments(ord.id).subscribe(ss => this.orders_shipments = ss);
+    this.state.last_active_order$.subscribe(ord => {
+      if (ord.id) {
+        this.order = ord;
+        this._setControls();
+        this.shipments.getOrdersShipments(ord.id).subscribe(ss => this.orders_shipments = ss);
+      }
+
 
     });
 
@@ -70,6 +80,24 @@ export class OrderSingleComponent implements OnInit {
     this.order.consignee = person;
   }
 
+  private onETAChanged(date) {
+    this.order.will_arrive = date;
+  }
+
+  private onNewShipment() {
+
+    let dialogRef = this.dialog.open(ShipmentDialogComponent,
+      {
+        width: '300px',
+        data: this.order.id
+      });
+
+    dialogRef.afterClosed().subscribe(data => {
+      this.orders_shipments.push(data);
+    });
+
+
+  }
 
 
 }

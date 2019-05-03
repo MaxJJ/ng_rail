@@ -8,20 +8,15 @@
 
 <mat-card [ngStyle]="{'margin-bottom': '4px'}">
   <mat-card-header>
-    <div class="card-icon" fxFlex fxLayoutAlign="end center">
-
-      <button mat-icon-button (click)="expand_card()">
-        <mat-icon>{{(opened ? 'expand_less':'expand_more')}}</mat-icon>
-      </button>
-    </div>
     <mat-card-title>{{order.short_description}}</mat-card-title>
-    <mat-card-subtitle>{{order.will_arrive}} -- {{order.dispatch_place.place_name}} </mat-card-subtitle>
+    <mat-card-subtitle>{{order.will_arrive}} -- {{order.dispatch_place?.place_name}} </mat-card-subtitle>
   </mat-card-header>
-  <mat-card-content [ngStyle]="{'display': (opened?'block':'none')}">
-    {{order|json}}
 
-  </mat-card-content>
-  <mat-card-actions [ngStyle]="{'display': (opened?'block':'none')}">
-    <button mat-button (click)="activate()">Ok</button>
+  <mat-card-actions>
+    <div fxLayout="row" fxLayoutAlign="end start" fxLayoutGap="4px">
+      <button mat-button (click)="onSave()">Save</button>
+      <button mat-button (click)="onSave()">Create</button>
+    </div>
+
   </mat-card-actions>
 </mat-card>

@@ -4,17 +4,37 @@
       <span>Orders</span>
     </mat-toolbar>
   </div>
+  <div id="active-card-wrapper">
+    <order-card class="fixed"></order-card>
+  </div>
 
   <div id="orders-search-wrapper" fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="4px">
     <div id="search-field-wrapper">
-      <mat-form-field color="primary" class="search-field fixed">
-        <input matInput placeholder="label" value="value" [ngStyle]="{'color': 'white'}">
-      </mat-form-field>
+      <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="2px" class="fixed">
+        <button mat-icon-button [matMenuTriggerFor]="filter_options">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <mat-menu #filter_options="matMenu">
+          <span mat-menu-item (click)="getAllOrders()">ALL</span>
+        </mat-menu>
+        <mat-form-field color="primary" class="search-field" fxFlex>
+          <input matInput placeholder="Search orders" [ngStyle]="{'color': 'white'}">
+        </mat-form-field>
+      </div>
+
     </div>
 
-    <div id="cards-list-wrapper" *ngIf="orders">
-      <order-card *ngFor="let order of orders" [order]="order" (activateOrder)="onOrderActivated($event)"></order-card>
+    <div id="cards-list-wrapper">
+      <mat-nav-list dense>
+        <mat-list-item *ngFor="let item of orders" (click)=onOrderActivated(item)>{{ item.short_description }}
+        </mat-list-item>
+      </mat-nav-list>
     </div>
+
+
+    <!-- <div id="cards-list-wrapper" *ngIf="orders">
+      <order-card *ngFor="let order of orders" [order]="order" (activateOrder)="onOrderActivated($event)"></order-card>
+    </div> -->
 
   </div>
 

@@ -1,0 +1,47 @@
+<div class='leftbar' fxLayout='column' fxLayoutAlign='stretch' fxLayoutGap='2px' fxFlex='400px'>
+  <div id='toolbar-wrapper'>
+    <mat-toolbar color='primary' class='fixed'>
+      <span>Shipment {{shipment.name}}</span>
+    </mat-toolbar>
+  </div>
+
+  <mat-nav-list>
+    <mat-list-item (click)="toOrder()">Order {{order.short_description}}</mat-list-item>
+
+    <mat-list-item [matMenuTriggerFor]="menu">Create</mat-list-item>
+    <mat-list-item *ngFor="let f of facturas" (click)="toFactura(f.id)">
+      <p matLine>{{f.name}}</p>
+      <p matLine>{{f.doc_name}}</p>
+
+    </mat-list-item>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>Item 1</button>
+      <button mat-menu-item>Item 2</button>
+    </mat-menu>
+  </mat-nav-list>
+</div>
+<div class='main' id='content' fxLayout='column' fxLayoutAlign='stretch' fxLayoutGap='2px'>
+
+  <h4>Consignee/consignor</h4>
+  <div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="16px">
+    <person-card [person]="order.consignor" title="Consignor" [is_raw]="true"></person-card>
+    <person-card [person]="order.consignee" title="Consignee" [is_raw]="true"></person-card>
+  </div>
+
+  <h4>Facturas</h4>
+  <mat-nav-list>
+    <mat-list-item>Create</mat-list-item>
+    <mat-list-item *ngFor="let f of facturas" (click)="toFactura(f.id)">
+      <p matLine>{{f.name}}</p>
+      <p matLine>{{f.doc_name}}</p>
+
+    </mat-list-item>
+  </mat-nav-list>
+
+
+  <p> {{shipment|json}} </p>
+  <p> {{order|json}} </p>
+  <p> {{facturas|json}} </p>
+  <p> {{invoices|json}} </p>
+  <p> {{rwb|json}} </p>
+</div>

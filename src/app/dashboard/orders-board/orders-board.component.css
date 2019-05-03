@@ -18,14 +18,15 @@ padding-left:1em;
 
 .search-field{
 
-    width: 380px;
+    /* width: 380px; */
     
 }
 
 div#toolbar-wrapper{ min-height:80px;}
+div#active-card-wrapper{min-height:180px;}
 div#search-field-wrapper{ min-height:80px;padding-left: 10px;}
 div#cards-list-wrapper{
-    max-height:calc(100vh - 160px);
+    max-height:calc(100vh - 340px);
     overflow-y: auto;
     overflow-x: hidden;
 }

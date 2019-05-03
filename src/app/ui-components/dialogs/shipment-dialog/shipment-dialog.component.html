@@ -1,0 +1,31 @@
+<form [formGroup]="fg" (ngSubmit)="onSubmit()">
+  <mat-form-field>
+    <input matInput placeholder="id" formControlName="name">
+  </mat-form-field>
+
+  <mat-checkbox formControlName="is_container">In Container</mat-checkbox>
+  <div *ngIf="new_shipment.container">
+    <mat-form-field>
+      <input matInput placeholder="Container" formControlName="container_name">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Type" formControlName="container_type">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Payload" formControlName="container_payload">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Tare" formControlName="container_tare">
+    </mat-form-field>
+  </div>
+
+  <div mat-dialog-actions>
+
+    <button type="submit" mat-button cdkFocusInitial>Submit</button>
+  </div>
+
+
+</form>
+
+
+{{new_shipment | json}}

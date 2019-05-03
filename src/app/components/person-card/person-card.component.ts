@@ -21,6 +21,9 @@ export class PersonCardComponent implements OnInit {
   @Input()
   title: string;
 
+  @Input()
+  is_raw: boolean = false;
+
   @Output()
   onPerson: EventEmitter<Person> = new EventEmitter<Person>()
 

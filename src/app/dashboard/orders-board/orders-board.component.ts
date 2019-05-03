@@ -5,6 +5,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, Subscriber, of, Subject } from 'rxjs';
 import { AotCompiler } from '@angular/compiler';
 import { map } from 'rxjs/operators';
+import { StateService } from '../../services/state/state.service';
+import { routerNgProbeToken } from '@angular/router/src/router_module';
 
 
 
@@ -20,25 +22,25 @@ import { map } from 'rxjs/operators';
 })
 export class OrdersBoardComponent implements OnInit {
 
-  orders: Order[];
+  orders: Order[] = [];
   active_order: Order;
-  $active: Subject<Order> = new Subject<Order>();
 
-
-
-  constructor(private serv_orders: OrderService, private route: ActivatedRoute) { }
+  constructor(private serv_orders: OrderService,
+    private route: ActivatedRoute,
+    private state: StateService,
+  ) { }
 
   ngOnInit() {
-
-
-    this.route.data.subscribe((data) => {
-      this.orders = data.orders;
+    this.state.last_active_order$.subscribe(ord => {
+      this.active_order = ord;
+    });
+    this.route.queryParamMap.subscribe(params => {
+      if (params.has('active')) {
+        let order_id = params.get('active');
+        this.serv_orders.getOrderById(order_id).subscribe(ao => this.state.last_active_order = ao);
+      }
     });
 
-
-
-
-    // this.serv_orders.getOrders().subscribe(o => { this.orders = o });
 
   }
 
@@ -49,8 +51,17 @@ export class OrdersBoardComponent implements OnInit {
 
   onOrderActivated(event) {
 
-    this.active_order = event;
-    this.$active.next(event);
+    this.orders = [];
+
+    this.state.last_active_order = event;
+
+  }
+
+  getAllOrders() {
+
+    this.route.data.subscribe((data) => {
+      this.orders = data.orders;
+    });
 
   }
 }

@@ -1,4 +1,5 @@
 <div class="workspace">
+  <kps-find-station></kps-find-station>
   <h4 fxFlexFill>ORDER</h4>
   <!-- *ngIf="order" -->
   <div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="2px" *ngIf='order'>
@@ -10,10 +11,16 @@
       <textarea matInput placeholder="Description" [formControl]="description"></textarea>
     </mat-form-field>
 
+    <h4>ETA</h4>
+    <rtme-datepicker [date]="order.will_arrive" (new_date)="onETAChanged($event)">
+    </rtme-datepicker>
+
     <h4>Dispatch Place > Destination Place</h4>
     <div id="workspace-row" fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="16px">
-      <place-card [place]="order.dispatch_place" title="Dispatch" (onPlace)="onDispatchSelected($event)"></place-card>
-      <place-card [place]="order.destination_place" title="Destination" (onPlace)="onDestinationSelected($event)">
+      <place-card [place]="order.dispatch_place" title="Dispatch" (onPlace)="onDispatchSelected($event)">
+      </place-card>
+      <place-card [place]="order.destination_place" title="Destination" (onPlace)="onDestinationSelected($event)"
+        *ngIf="order">
       </place-card>
 
     </div>
@@ -21,15 +28,25 @@
 
     <h4>Consignor / Consignee</h4>
     <div id="workspace-row" fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="16px">
-      <person-card [person]="order.consignor" title="Consignor" (onPerson)="onConsignorSelected($event)"></person-card>
-      <person-card [person]="order.consignee" title="Consignee" (onPerson)="onConsigneeSelected($event)"></person-card>
+      <person-card [person]="order.consignor" title="Consignor" (onPerson)="onConsignorSelected($event)">
+      </person-card>
+      <person-card [person]="order.consignee" title="Consignee" (onPerson)="onConsigneeSelected($event)">
+      </person-card>
 
     </div>
 
     <h4 fxFlex="80%" fxFlexFill>Shipments</h4>
     <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="6px">
-      <button mat-stroked-button>Create Shipment</button>
+      <button mat-stroked-button (click)="onNewShipment()">Create Shipment</button>
     </div>
+
+    <div id="workspace-row" fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="16px">
+      <shipment-card *ngFor="let sh of orders_shipments" [shipment]='sh'></shipment-card>
+    </div>
+
+
+
+
 
     {{orders_shipments|json}}
 
