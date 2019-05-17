@@ -9,11 +9,10 @@ import { Client } from 'ngx-soap';
 })
 export class KpsTestComponent implements OnInit {
   login: Client;
-  constructor(private kps: KpsService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.login = this.kps.login_client;
-    console.log('login-client', this.login)
+
   }
 
 }

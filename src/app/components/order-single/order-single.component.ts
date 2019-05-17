@@ -26,6 +26,7 @@ export class OrderSingleComponent implements OnInit {
   description: FormControl = new FormControl('');
 
   orders_shipments: Shipment[];
+  cli: FormControl = new FormControl('')
 
 
 
@@ -97,6 +98,15 @@ export class OrderSingleComponent implements OnInit {
     });
 
 
+  }
+
+  commandHandler(ev) {
+    console.log(this.cli.value.split(' '));
+    let commands: string[] = this.cli.value.split(' ');
+
+
+
+    console.log(commands.filter((v, i, a) => v !== ''));
   }
 
 

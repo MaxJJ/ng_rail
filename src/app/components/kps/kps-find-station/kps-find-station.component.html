@@ -5,3 +5,7 @@
 <mat-form-field>
   <input matInput placeholder="Code" [formControl]="code_input">
 </mat-form-field>
+
+<div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10px" *ngFor="let item of stations | async">
+  {{item|json}}
+</div>

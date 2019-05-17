@@ -1,47 +1,44 @@
-<div class="leftbar" fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="2px" fxFlex="400px">
-  <div id="toolbar-wrapper">
-    <mat-toolbar color="primary" class="fixed">
-      <span>Orders</span>
-    </mat-toolbar>
+<mat-toolbar appFixedToolbar>
+  <span>Order</span>
+  <div fxFlex="60%" fxFlexFill>
   </div>
-  <div id="active-card-wrapper">
-    <order-card class="fixed"></order-card>
-  </div>
+  <button mat-button [matMenuTriggerFor]="orders_select">ORDERS</button>
+  <button mat-button [matMenuTriggerFor]="shipments_select">SHIPMENTS</button>
+</mat-toolbar>
 
-  <div id="orders-search-wrapper" fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="4px">
-    <div id="search-field-wrapper">
-      <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="2px" class="fixed">
-        <button mat-icon-button [matMenuTriggerFor]="filter_options">
-          <mat-icon>menu</mat-icon>
-        </button>
-        <mat-menu #filter_options="matMenu">
-          <span mat-menu-item (click)="getAllOrders()">ALL</span>
-        </mat-menu>
-        <mat-form-field color="primary" class="search-field" fxFlex>
-          <input matInput placeholder="Search orders" [ngStyle]="{'color': 'white'}">
-        </mat-form-field>
-      </div>
 
+
+<mat-menu #orders_select="matMenu">
+  <button mat-menu-item (click)="show()">All</button>
+  <button mat-menu-item>Like</button>
+
+</mat-menu>
+
+<mat-menu #shipments_select="matMenu">
+  <button mat-menu-item (click)="showShipments()">All</button>
+  <button mat-menu-item>Like</button>
+
+</mat-menu>
+
+<app-search-row (result)="onShowList($event)" appFixedBlock top='70'></app-search-row>
+
+<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+  <div fxFlex="900px">
+    <div class="list_portal">
+      <ng-template [cdkPortalOutlet]="selectedPortal"></ng-template>
     </div>
-
-    <div id="cards-list-wrapper">
-      <mat-nav-list dense>
-        <mat-list-item *ngFor="let item of orders" (click)=onOrderActivated(item)>{{ item.short_description }}
-        </mat-list-item>
-      </mat-nav-list>
-    </div>
-
-
-    <!-- <div id="cards-list-wrapper" *ngIf="orders">
-      <order-card *ngFor="let order of orders" [order]="order" (activateOrder)="onOrderActivated($event)"></order-card>
-    </div> -->
-
   </div>
-
+  <div fxFlex>
+    <div class="card_portal">
+      <ng-template [cdkPortalOutlet]="sidePortal"></ng-template>
+    </div>
+  </div>
 </div>
 
 
-<div class="main" id="content" fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="2px">
+
+
+<!-- <div class="main" id="content" fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="2px">
   <order-single [$obs_order]="$active"></order-single>
 
-</div>
+</div> -->

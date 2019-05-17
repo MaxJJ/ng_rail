@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, Inject } from '@angular/core';
 import { Order } from '../../services/interfaces';
 import { OrderService } from '../../services/backend/order.service';
 import { Observable, Subject } from 'rxjs';
 import { StateService } from '../../services/state/state.service';
 import { Router } from '@angular/router';
+import { DASHBOARD_DATA, DashData, ORDERS } from '../../dashboard/tokens';
 
 @Component({
   selector: 'order-card',
@@ -21,6 +22,7 @@ export class OrderCardComponent implements OnInit {
   constructor(private service: OrderService,
     private state: StateService,
     private router: Router,
+    @Inject(ORDERS) public d: Order
   ) { }
 
   ngOnInit() {
@@ -35,6 +37,8 @@ export class OrderCardComponent implements OnInit {
         this.order = ao;
       }
     });
+
+    this.order = this.d;
   }
 
 

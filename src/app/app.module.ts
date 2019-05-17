@@ -95,6 +95,12 @@ import { ShipmentSingleComponent } from './components/shipment-single/shipment-s
 import { NgxSoapModule } from 'ngx-soap';
 import { KpsTestComponent } from './kps-test/kps-test.component';
 import { KpsFindStationComponent } from './components/kps/kps-find-station/kps-find-station.component';
+import { PortalModule } from '@angular/cdk/portal';
+import { OrdersListComponent } from './dashboard/orders-list/orders-list.component';
+import { ShipmentsListComponent } from './dashboard/shipments-list/shipments-list.component';
+import { SearchRowComponent } from './components/search-row/search-row.component';
+import { FixedToolbarDirective } from './directives/fixed-toolbar/fixed-toolbar.directive';
+import { FixedBlockDirective } from './directives/fixed-block/fixed-block.directive';
 
 const appRoutes: Routes = [
   {
@@ -269,6 +275,16 @@ const appRoutes: Routes = [
 
     KpsFindStationComponent,
 
+    OrdersListComponent,
+
+    ShipmentsListComponent,
+
+    SearchRowComponent,
+
+    FixedToolbarDirective,
+
+    FixedBlockDirective,
+
 
   ],
   entryComponents: [
@@ -285,7 +301,9 @@ const appRoutes: Routes = [
     RailbillSideMenuComponent,
     PersonSearchDialogComponent,
     ShipmentDialogComponent,
-
+    OrdersListComponent,
+    ShipmentsListComponent,
+    OrderCardComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes, { enableTracing: true, onSameUrlNavigation: 'reload' }),
@@ -327,6 +345,8 @@ const appRoutes: Routes = [
     MatSnackBarModule,
     RtmeDirectoriesModule,
     NgxSoapModule,
+    PortalModule,
+
   ],
   providers: [
     MatDialog,

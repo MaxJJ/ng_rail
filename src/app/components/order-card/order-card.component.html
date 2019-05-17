@@ -11,7 +11,7 @@
     <mat-card-title>{{order.short_description}}</mat-card-title>
     <mat-card-subtitle>{{order.will_arrive}} -- {{order.dispatch_place?.place_name}} </mat-card-subtitle>
   </mat-card-header>
-
+  <mat-card-content> {{order|json}}</mat-card-content>
   <mat-card-actions>
     <div fxLayout="row" fxLayoutAlign="end start" fxLayoutGap="4px">
       <button mat-button (click)="onSave()">Save</button>

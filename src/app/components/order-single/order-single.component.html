@@ -1,5 +1,8 @@
 <div class="workspace">
   <kps-find-station></kps-find-station>
+  <mat-form-field>
+    <input matInput placeholder="Command" [formControl]="cli" (keydown.enter)="commandHandler($event)">
+  </mat-form-field>
   <h4 fxFlexFill>ORDER</h4>
   <!-- *ngIf="order" -->
   <div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="2px" *ngIf='order'>
