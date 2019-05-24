@@ -102,3 +102,21 @@ app-root *:none(#factura){display:none !important;};
 
 
 }
+
+
+/* Toolbars */
+
+.mat-toolbar {
+    background: #273746;
+    color: white;
+    border-bottom: 1px solid;
+}
+
+
+/* BUTTONS  */
+
+/* .mat-mini-fab{
+    width:1em !important;
+    height:1em !important;
+    margin:0.25em !important;
+} */

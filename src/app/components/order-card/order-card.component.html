@@ -1,21 +1,52 @@
-<!-- <mat-card class="r_card" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="2px">
-  <span class="title">{{order.short_description}}</span>
-  <span class="eta">{{order.will_arrive}}</span>
-  <span class="dispatch">{{order.dispatch_place.place_name}}</span>
-  <span class="destination">{{order.destination_place.place_name}}</span>
-
-</mat-card> -->
-
-<mat-card [ngStyle]="{'margin-bottom': '4px'}">
+<mat-card>
   <mat-card-header>
     <mat-card-title>{{order.short_description}}</mat-card-title>
-    <mat-card-subtitle>{{order.will_arrive}} -- {{order.dispatch_place?.place_name}} </mat-card-subtitle>
   </mat-card-header>
-  <mat-card-content> {{order|json}}</mat-card-content>
+  <mat-card-content>
+    <div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="2px">
+      <table (dblclick)="goToOrder()">
+        <tr>
+          <td>ETA:</td>
+          <td>{{order.will_arrive}}</td>
+        </tr>
+        <tr>
+          <td>From:</td>
+          <td>{{order.dispatch_place?.place_name}}</td>
+        </tr>
+        <tr>
+          <td>To:</td>
+          <td>{{order.destination_place?.place_name}}</td>
+        </tr>
+        <tr>
+          <td>Consignor:</td>
+          <td>{{order.consignor.name}}</td>
+        </tr>
+        <tr>
+          <td>Consignee:</td>
+          <td>{{order.consignee.name}}</td>
+        </tr>
+        <tr>
+          <td>Note:</td>
+          <td>{{order.description}}</td>
+        </tr>
+        <tr>
+          <td>Shipments:</td>
+          <td>
+            <mat-nav-list>
+              <mat-list-item *ngFor="let item of shipments" (click)="goToShipment(item.id)">
+                <span matLine>{{ item.name }} {{item.description}}</span>
+              </mat-list-item>
+            </mat-nav-list>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <!-- {{order|j?son}} -->
+  </mat-card-content>
   <mat-card-actions>
     <div fxLayout="row" fxLayoutAlign="end start" fxLayoutGap="4px">
-      <button mat-button (click)="onSave()">Save</button>
-      <button mat-button (click)="onSave()">Create</button>
+      <button mat-button>Save</button>
+      <button mat-button>Create</button>
     </div>
 
   </mat-card-actions>

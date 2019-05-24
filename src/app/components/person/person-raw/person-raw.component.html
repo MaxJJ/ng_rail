@@ -1,0 +1,26 @@
+<div class="wrp" [ngStyle]="{'padding-right': paddingRight+'em'}">
+    <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="2px">
+
+        <span class="code" *ngIf="person.rail_code">{{person.rail_code}}</span>
+        <span class="name">{{person.name}}</span>
+
+        <div fxLayout="row" fxLayoutAlign="start start" class="line">
+            <span>{{person.street_house}} </span>
+
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start start" class="line">
+            <span *ngIf="person.region">{{person.region}}, </span>
+            <span *ngIf="person.city">{{person.city}}, </span>
+            <span *ngIf="person.postal_code">{{person.postal_code}}</span>
+            <span *ngIf="person.country">, {{person.country.name_rus}}</span>
+
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start start" class="line">
+            <span *ngIf="person.inn">ИНН: {{person.inn}} </span>
+            <span *ngIf="person.okpo">ОКПО: {{person.okpo}} </span>
+            <span *ngIf="person.phone">ТЕЛ: {{person.phone}} </span>
+        </div>
+
+    </div>
+    <button mat-mini-fab *ngIf="editable" appTopRight (click)="onEdit()"> </button>
+</div>

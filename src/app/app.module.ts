@@ -21,7 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { OrdersTableComponent } from './orders-table/orders-table.component';
 import { RouterModule, Routes } from '@angular/router';
-import { OrderDetailsComponent } from './order-details/order-details.component';
+import { OrderDetailsComponent } from './views/order/order-details/order-details.component';
 import { FormsModule, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule, MatDatepicker } from '@angular/material/datepicker';
 import { MatMomentDateModule, MomentDateAdapter } from '@angular/material-moment-adapter';
@@ -48,9 +48,9 @@ import { PersonExpPanelFormComponent } from './ui-components/persons/person-exp-
 
 import { RtmeDirectoriesModule } from './modules/rtme-directories/rtme-directories.module';
 import { ShipmentFacturasComponent } from './ui-components/facturas/shipment-facturas/shipment-facturas.component';
-import { PersonRawComponent } from './ui-components/persons/person-raw/person-raw.component';
+import { PersonRawComponent } from './components/person/person-raw/person-raw.component';
 import { PersonSearchComponent } from './ui-components/persons/person-search/person-search.component';
-import { PersonDialogComponent } from './ui-components/dialogs/person-dialog/person-dialog.component';
+import { PersonDialogComponent } from './components/person/person-edit-portal/person-dialog.component';
 import { FacturaShowComponent } from './ui-components/facturas/factura-show/factura-show.component';
 import { FacturaFormComponent } from './ui-components/facturas/factura-form/factura-form.component';
 import { FacturaPersonComponent } from './ui-components/facturas/factura-person/factura-person.component';
@@ -58,7 +58,7 @@ import { RtmePrintComponent } from './rtme-print/rtme-print.component';
 
 import { RtmeH1Directive } from './directives/rtme-h1.directive';
 import { InboundDocsComponent } from './ui-components/order/inbound-docs/inbound-docs.component';
-import { PlaceRawComponent } from './ui-components/places/place-raw/place-raw.component';
+import { PlaceRawComponent } from './components/place/place-raw/place-raw.component';
 import { ShipmentInvoicesComponent } from './ui-components/shipments/shipment-invoices/shipment-invoices.component';
 
 import { ShipmentViewResolver } from './resolvers/shipment-view.service';
@@ -67,7 +67,7 @@ import { CargoComboComponent } from './ui-components/facturas/cargo-combo/cargo-
 import { CargoModalComponent } from './ui-components/dialogs/cargo/cargo-modal/cargo-modal.component';
 import { SideMenuDirective } from './directives/menu/side-menu/side-menu.directive';
 import { OrdersSideMenuComponent } from './orders-table/side-menu/orders-side-menu/orders-side-menu.component';
-import { OrderDetailsSideMenuComponent } from './order-details/side-menu/order-details-side-menu/order-details-side-menu.component';
+import { OrderDetailsSideMenuComponent } from './views/order/order-details/side-menu/order-details-side-menu/order-details-side-menu.component';
 import { OrdersTableViewResolver } from './resolvers/orders-table-view-resolver.service';
 import { OrderDetailsResolver } from './resolvers/order-details-resolver.service';
 import { ShipmentViewSideMenuComponent } from './shipment/shipment/side-menu/shipment-view-side-menu/shipment-view-side-menu.component';
@@ -83,7 +83,7 @@ import { RwbConsignorComponent } from './rwb/rwb-components/rwb-consignor/rwb-co
 import { RwbDispatchComponent } from './rwb/rwb-components/rwb-dispatch/rwb-dispatch.component';
 import { RwbConsigneeComponent } from './rwb/rwb-components/rwb-consignee/rwb-consignee.component';
 import { RwbRoadSectionsComponent } from './rwb/rwb-components/rwb-road-sections/rwb-road-sections.component';
-import { OrdersBoardComponent } from './dashboard/orders-board/orders-board.component';
+import { OrdersBoardComponent } from './views/dashboard/orders-board/orders-board.component';
 import { OrderCardComponent } from './components/order-card/order-card.component';
 import { OrderSingleComponent } from './components/order-single/order-single.component';
 import { PersonCardComponent } from './components/person-card/person-card.component';
@@ -96,11 +96,13 @@ import { NgxSoapModule } from 'ngx-soap';
 import { KpsTestComponent } from './kps-test/kps-test.component';
 import { KpsFindStationComponent } from './components/kps/kps-find-station/kps-find-station.component';
 import { PortalModule } from '@angular/cdk/portal';
-import { OrdersListComponent } from './dashboard/orders-list/orders-list.component';
-import { ShipmentsListComponent } from './dashboard/shipments-list/shipments-list.component';
+import { OrdersListComponent } from './views/dashboard/orders-list/orders-list.component';
+import { ShipmentsListComponent } from './views/dashboard/shipments-list/shipments-list.component';
 import { SearchRowComponent } from './components/search-row/search-row.component';
 import { FixedToolbarDirective } from './directives/fixed-toolbar/fixed-toolbar.directive';
 import { FixedBlockDirective } from './directives/fixed-block/fixed-block.directive';
+import { TopRightDirective } from './directives/editable-block/top-right.directive';
+import { PlaceEditPortalComponent } from './components/place/place-edit-portal/place-edit-portal.component';
 
 const appRoutes: Routes = [
   {
@@ -285,6 +287,10 @@ const appRoutes: Routes = [
 
     FixedBlockDirective,
 
+    TopRightDirective,
+
+    PlaceEditPortalComponent,
+
 
   ],
   entryComponents: [
@@ -303,7 +309,8 @@ const appRoutes: Routes = [
     ShipmentDialogComponent,
     OrdersListComponent,
     ShipmentsListComponent,
-    OrderCardComponent
+    OrderCardComponent,
+    PlaceEditPortalComponent,
   ],
   imports: [
     RouterModule.forRoot(appRoutes, { enableTracing: true, onSameUrlNavigation: 'reload' }),

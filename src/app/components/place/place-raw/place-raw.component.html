@@ -1,0 +1,16 @@
+<div class="wrp" [ngStyle]="{'padding-right': paddingRight+'em'}">
+    <div fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="2px">
+
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
+            <span>{{place.place_name}}</span>
+            <span>{{place.place_code}}</span>
+            <span>{{place.road_name_abbr}}</span>
+            <span>{{place.road_code}}</span>
+        </div>
+    </div>
+
+
+    <button mat-mini-fab *ngIf="editable" appTopRight (click)="onEdit()"> </button>
+
+
+</div>

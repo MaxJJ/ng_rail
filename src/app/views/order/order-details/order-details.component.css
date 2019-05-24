@@ -1,0 +1,49 @@
+.order_wrap{
+  margin-top:80px;
+}
+.left_container{
+  width: 800px;
+  position: fixed;
+  
+  height: calc(100vh - 70px);
+  overflow-y: auto;
+}
+
+.right_container{
+  width: 600px;
+  position: fixed;
+  
+  height: calc(100vh - 70px);
+  overflow-y: auto;
+}
+.example-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .example-container > * {
+    width: 100%;
+  }
+
+  .left_pane{
+    width:320px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .right_pane{
+    /* width:520px; */
+   
+  }
+
+.nopad{
+  padding: 0;
+}
+
+.cont_align{
+
+  position: absolute;
+  left: 0;
+  width: 100%;
+}
+

@@ -1,0 +1,25 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>title</mat-card-title>
+    <mat-card-subtitle>subtitle</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="fg">
+      <mat-form-field>
+        <input matInput placeholder="Place Name" formControlName="place_name">
+        <button mat-icon-button matSuffix (click)="findStationsInKps('place_name')">
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+    </form>
+
+    {{place|json}}
+
+    {{kpss|json}}
+
+
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button (click)="getFromKps()">Fill From KPS</button>
+  </mat-card-actions>
+</mat-card>

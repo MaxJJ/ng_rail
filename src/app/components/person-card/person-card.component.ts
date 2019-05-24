@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Person, Order } from '../../services/interfaces';
 import { MatDialog } from '@angular/material';
-import { PersonDialogComponent } from '../../ui-components/dialogs/person-dialog/person-dialog.component';
+import { PersonDialogComponent } from '../person/person-edit-portal/person-dialog.component';
 import { Observable } from 'rxjs';
 import { PersonSearchComponent } from '../../ui-components/persons/person-search/person-search.component';
 import { PersonSearchDialogComponent } from '../../ui-components/dialogs/person-search-dialog/person-search-dialog.component';

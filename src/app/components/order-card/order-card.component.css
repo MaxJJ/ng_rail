@@ -27,4 +27,15 @@
     color: #2b8ac4  ;
 }
 
+table{
+    border-collapse: collapse;
+}
+td {
+    vertical-align: text-top;
+    white-space: pre-line;
+    border-bottom: 1px solid;
+
+}
+
+
 

@@ -1,10 +1,11 @@
 import { Component, OnInit, Input, Output, EventEmitter, Inject } from '@angular/core';
-import { Order } from '../../services/interfaces';
+import { Order, Shipment } from '../../services/interfaces';
 import { OrderService } from '../../services/backend/order.service';
 import { Observable, Subject } from 'rxjs';
 import { StateService } from '../../services/state/state.service';
 import { Router } from '@angular/router';
-import { DASHBOARD_DATA, DashData, ORDERS } from '../../dashboard/tokens';
+import { DASHBOARD_DATA, DashData, ORDER } from '../../services/portals/tokens';
+import { ShipmentsService } from '../../services/backend/shipments/shipments.service';
 
 @Component({
   selector: 'order-card',
@@ -14,39 +15,32 @@ import { DASHBOARD_DATA, DashData, ORDERS } from '../../dashboard/tokens';
 export class OrderCardComponent implements OnInit {
 
   order: Order;
-
+  shipments: Shipment[];
 
   @Output()
   activateOrder: EventEmitter<Order> = new EventEmitter<Order>();
 
-  constructor(private service: OrderService,
-    private state: StateService,
+  constructor(
+    private service: OrderService,
+    private shipments_service: ShipmentsService,
     private router: Router,
-    @Inject(ORDERS) public d: Order
+    @Inject(ORDER) public d: Order
   ) { }
 
   ngOnInit() {
-    this.order = <Order>{
-      "short_description": "Order in work",
-      "will_arrive": "Please select",
-
-    };
-
-    this.state.last_active_order$.subscribe(ao => {
-      if (ao.id) {
-        this.order = ao;
-      }
-    });
 
     this.order = this.d;
+    this.shipments_service.
+      getOrdersShipments(this.order.id).
+      subscribe(v => this.shipments = v);
   }
 
+  goToShipment(id) {
+    this.router.navigate(['order', this.order.id, 'shipments', id]);
+  }
 
-  onSave() {
-    this.service.postOrder(this.order).subscribe(res => {
-      this.state.last_active_order = res;
-      this.router.navigate(['orders_dash'], { queryParams: { active: res.id } });
-    });
+  goToOrder() {
+    this.router.navigate(['order', this.order.id]);
   }
 
 }

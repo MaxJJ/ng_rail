@@ -1,0 +1,22 @@
+<mat-toolbar appFixedToolbar>
+  <span>RTME</span>
+  <div fxFlex="80%" fxFlexFill>
+  </div>
+  <button mat-button (click)="createOrder()">CREATE ORDER</button>
+</mat-toolbar>
+
+
+<app-search-row (result)="onShowList($event)" appFixedBlock top='70'></app-search-row>
+
+<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+  <div fxFlex="900px">
+    <div class="list_portal">
+      <ng-template [cdkPortalOutlet]="listPortal"></ng-template>
+    </div>
+  </div>
+  <div fxFlex>
+    <div class="card_portal">
+      <ng-template [cdkPortalOutlet]="sidePortal"></ng-template>
+    </div>
+  </div>
+</div>

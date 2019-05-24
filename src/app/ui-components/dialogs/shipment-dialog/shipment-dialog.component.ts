@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { PersonDialogComponent } from '../person-dialog/person-dialog.component';
+import { PersonDialogComponent } from '../../../components/person/person-edit-portal/person-dialog.component';
 import { Shipment, Container } from '../../../services/interfaces';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ShipmentsService } from '../../../services/backend/shipments/shipments.service';
