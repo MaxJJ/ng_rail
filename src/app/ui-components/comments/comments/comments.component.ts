@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Order, OrderComment } from '../../../services/interfaces';
+import { Order, OrderComment } from '../../../interfaces/interfaces';
 import { FormControl } from '@angular/forms';
 import { CommentsService } from '../../../services/backend/comments/comments.service';
 

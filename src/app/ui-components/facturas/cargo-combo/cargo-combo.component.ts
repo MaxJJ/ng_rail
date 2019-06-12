@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CargoService } from '../../../services/backend/cargo/cargo.service';
-import { Cargo } from '../../../services/interfaces';
+import { Cargo } from '../../../interfaces/interfaces';
 import { MatDialog, MatTableDataSource, MatSnackBar } from '@angular/material';
 import { OrderInboundCargoComponent } from '../../dialogs/order-inbound-cargo/order-inbound-cargo.component';
 import { CargoModalComponent } from '../../dialogs/cargo/cargo-modal/cargo-modal.component';

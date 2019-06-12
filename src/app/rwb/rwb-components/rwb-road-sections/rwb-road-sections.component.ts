@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Place, RoadSection, Shipment, Order, Railbill } from '../../../services/interfaces';
+import { Place, RoadSection, Shipment, Order, Railbill } from '../../../interfaces/interfaces';
 import { PlaceService } from '../../../services/backend/place.service';
 import { MatSelectChange } from '@angular/material';
 import { RailbillService } from '../../../services/backend/rwb/railbill.service';

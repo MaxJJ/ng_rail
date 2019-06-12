@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuService } from '../../services/menu/menu.service';
 import { ActivatedRoute } from '@angular/router';
-import { Shipment, Railbill, Order, Factura, Cargo } from '../../services/interfaces';
+import { Shipment, Railbill, Order, Factura, Cargo } from '../../interfaces/interfaces';
 import { RailbillService } from '../../services/backend/rwb/railbill.service';
 import { CargoService } from '../../services/backend/cargo/cargo.service';
 import { FacturaService } from '../../services/backend/factura/factura.service';

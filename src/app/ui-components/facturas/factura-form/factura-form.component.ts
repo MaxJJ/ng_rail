@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef, Input } from '@angular/core';
 import { Renderer3 } from '@angular/core/src/render3/interfaces/renderer';
-import { Factura, Shipment, Person, Order, Invoice, Cargo } from '../../../services/interfaces';
+import { Factura, Shipment, Person, Order, Invoice, Cargo } from '../../../interfaces/interfaces';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { OrderService } from '../../../services/backend/order.service';

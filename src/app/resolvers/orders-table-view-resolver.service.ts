@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Order } from '../services/interfaces';
+import { Order } from '../interfaces/interfaces';
 import { OrderService } from '../services/backend/order.service';
 import { map } from 'rxjs/operators';
 

@@ -6,7 +6,7 @@ import { MatDatepicker } from '@angular/material/datepicker';
 import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
 import { default as _rollupMoment, Moment } from 'moment';
-import { Order, Cargo, Shipment } from '../../../services/interfaces';
+import { Order, Cargo, Shipment } from '../../../interfaces/interfaces';
 import { OrderService } from '../../../services/backend/order.service';
 import { MatDialog } from '@angular/material';
 import { RtmeDatepickerComponent } from '../../date/rtme-datepicker/rtme-datepicker.component';

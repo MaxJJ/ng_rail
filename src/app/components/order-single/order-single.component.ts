@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Order, Person, Shipment } from '../../services/interfaces';
+import { Order, Person, Shipment } from '../../interfaces/interfaces';
 import { FormControl } from '@angular/forms';
 import { isNullOrUndefined } from 'util';
 import { Subject, Observable } from 'rxjs';

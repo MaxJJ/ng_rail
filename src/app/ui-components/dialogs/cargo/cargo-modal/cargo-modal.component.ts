@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { OrderInboundCargoComponent } from '../../order-inbound-cargo/order-inbound-cargo.component';
 import { CargoService } from '../../../../services/backend/cargo/cargo.service';
-import { Cargo } from '../../../../services/interfaces';
+import { Cargo } from '../../../../interfaces/interfaces';
 import { FormControl } from '@angular/forms';
 
 @Component({

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Shipment } from '../../services/interfaces';
+import { Shipment } from '../../interfaces/interfaces';
 import { Router } from '@angular/router';
 import { StateService } from '../../services/state/state.service';
 

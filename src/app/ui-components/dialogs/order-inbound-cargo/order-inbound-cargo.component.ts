@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatRadioChange } from '@angular/material';
 import { OrderService } from '../../../services/backend/order.service';
-import { Cargo } from '../../../services/interfaces';
+import { Cargo } from '../../../interfaces/interfaces';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({

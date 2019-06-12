@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, Inject } from '@angular/core';
-import { Order, Shipment } from '../../services/interfaces';
+import { Order, Shipment } from '../../interfaces/interfaces';
 import { OrderService } from '../../services/backend/order.service';
 import { Observable, Subject } from 'rxjs';
 import { StateService } from '../../services/state/state.service';

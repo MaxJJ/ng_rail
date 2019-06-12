@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Builder,Parser,OptionsV2} from 'xml2js';
-import { Cargo, Factura } from '../../interfaces';
+import { Cargo, Factura } from '../../../interfaces/interfaces';
 import { saveAs } from 'file-saver/dist/FileSaver';
 import { isNullOrUndefined } from 'util';
 import { CargoService } from '../../backend/cargo/cargo.service';

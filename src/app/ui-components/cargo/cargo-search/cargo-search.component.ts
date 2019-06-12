@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Cargo } from '../../../services/interfaces';
+import { Cargo } from '../../../interfaces/interfaces';
 import { CargoService } from '../../../services/backend/cargo/cargo.service';
 import { Observable } from 'rxjs';
 import { flatMap } from 'rxjs/operators';

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Shipment, Invoice, Unit } from '../../../services/interfaces';
+import { Shipment, Invoice, Unit } from '../../../interfaces/interfaces';
 import { ShipmentsService } from '../../../services/backend/shipments/shipments.service';
 import { ActivatedRoute } from '@angular/router';
 import { InvoiceService } from '../../../services/backend/shipments/invoice.service';

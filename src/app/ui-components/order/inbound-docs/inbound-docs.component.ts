@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { InboundDoc } from '../../../services/interfaces';
+import { InboundDoc } from '../../../interfaces/interfaces';
 import { OrderService } from '../../../services/backend/order.service';
 import { ActivatedRoute } from '@angular/router';
 import { emit } from 'cluster';

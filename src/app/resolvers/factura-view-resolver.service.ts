@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { ShipmentsService } from '../services/backend/shipments/shipments.service';
 import { OrderService } from '../services/backend/order.service';
 import { Observable, forkJoin } from 'rxjs';
-import { Factura, Shipment, Order } from '../services/interfaces';
+import { Factura, Shipment, Order } from '../interfaces/interfaces';
 import { map } from 'rxjs/operators';
 
 export interface FacturaViewData{

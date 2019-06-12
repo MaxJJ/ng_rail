@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Place } from '../../services/interfaces';
+import { Place } from '../../interfaces/interfaces';
 import { MatDialog, MatAutocompleteSelectedEvent } from '@angular/material';
 import { PlaceService } from '../../services/backend/place.service';
 import { DirectoriesService } from '../../services/backend/directories/directories.service';

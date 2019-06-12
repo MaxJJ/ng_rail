@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Place } from '../../../services/interfaces';
+import { Place } from '../../../interfaces/interfaces';
 
 @Component({
   selector: 'rwb-destination',

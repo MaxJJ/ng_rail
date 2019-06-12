@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../../../services/backend/order.service';
 import { ActivatedRoute } from '@angular/router';
-import { Order, Cargo, OrderComment, Person, Place } from '../../../services/interfaces';
+import { Order, Cargo, OrderComment, Person, Place } from '../../../interfaces/interfaces';
 import { FormControl } from '@angular/forms';
 import { CommentsService } from '../../../services/backend/comments/comments.service';
 import { isNullOrUndefined } from 'util';
@@ -9,7 +9,7 @@ import { MenuService } from '../../../services/menu/menu.service';
 import { ShipmentsService } from '../../../services/backend/shipments/shipments.service';
 import { MatSnackBar } from '@angular/material';
 import { Portal } from '@angular/cdk/portal';
-import { PortalsService } from '../../../services/portals/services/portals.service';
+import { PortalsService, PortalAndData } from '../../../services/portals/services/portals.service';
 import { BehaviorSubject } from 'rxjs';
 import { skip } from 'rxjs/operators';
 
@@ -96,31 +96,34 @@ export class OrderDetailsComponent implements OnInit {
   }
 
   consignorHandler(val) {
-    this.order.consignor = val;
-    this.showPersonPortal(val);
+
+    let pd = this.showPersonPortal(val);
+    pd.portal_data.change.pipe(skip(1)).subscribe(v => {
+      this.order.consignor = v;
+      this.sidePortal.detach();
+    });
   }
 
 
   consigneeHandler(val) {
-    this.order.consignee = val;
-    this.showPersonPortal(val);
-  }
-
-  showPersonPortal(val: Person) {
-    this.person_emitter = new BehaviorSubject<Person>(val);
-    this.sidePortal = this.portals.personEditPortal(this.person_emitter);
-    this.person_emitter.pipe(skip(1)).subscribe(v => {
-      console.log(v);
+    let pd = this.showPersonPortal(val);
+    pd.portal_data.change.pipe(skip(1)).subscribe(v => {
+      this.order.consignee = v;
       this.sidePortal.detach();
     });
   }
 
-  showPlacePortal(val: Place) {
+  showPersonPortal(val: Person): PortalAndData {
+    let pd = this.portals.personEditPortal(val);
+    this.sidePortal = pd.portal;
+    return pd;
+  }
+
+  showPlacePortal(val: Place): PortalAndData {
     let pd = this.portals.placeEditPortal(val);
     this.sidePortal = pd.portal;
-    pd.portal_data.change.pipe(skip(1)).subscribe(v => {
-      this.sidePortal.detach();
-    });
+    return pd;
+
   }
 
 
@@ -131,14 +134,22 @@ export class OrderDetailsComponent implements OnInit {
 
   placeOfDispatchHandler(val) {
     this.order.dispatch_place = val;
-    this.showPlacePortal(val);
+    let pd = this.showPlacePortal(val);
+
+    pd.portal_data.change.pipe(skip(1)).subscribe(v => {
+      this.order.dispatch_place = v;
+      this.sidePortal.detach();
+    });
 
   }
 
   placeOfDestinationHandler(val) {
     this.order.destination_place = val;
-    this.showPlacePortal(val);
-
+    let pd = this.showPlacePortal(val);
+    pd.portal_data.change.pipe(skip(1)).subscribe(v => {
+      this.order.destination_place = v;
+      this.sidePortal.detach();
+    });
   }
 
 

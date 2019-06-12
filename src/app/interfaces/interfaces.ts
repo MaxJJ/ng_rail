@@ -1,5 +1,5 @@
 import { Moment } from "moment";
-import { Country } from "../interfaces/country";
+import { Country } from "./country";
 
 export interface Totals {
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Unit, Package, Place } from '../../interfaces';
+import { Unit, Package, Place } from '../../../interfaces/interfaces';
 import { Observable } from 'rxjs';
 
 const API = "api/directories/";

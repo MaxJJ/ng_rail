@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject, BehaviorSubject } from 'rxjs';
-import { Order } from '../interfaces';
+import { Order } from '../../interfaces/interfaces';
 import { StorageService } from './storage.service';
 
 

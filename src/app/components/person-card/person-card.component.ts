@@ -1,9 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Person, Order } from '../../services/interfaces';
+import { Person, Order } from '../../interfaces/interfaces';
 import { MatDialog } from '@angular/material';
-import { PersonDialogComponent } from '../person/person-edit-portal/person-dialog.component';
+import { PersonEditPortal } from '../person/person-edit-portal/person-edit-portal.component';
 import { Observable } from 'rxjs';
-import { PersonSearchComponent } from '../../ui-components/persons/person-search/person-search.component';
 import { PersonSearchDialogComponent } from '../../ui-components/dialogs/person-search-dialog/person-search-dialog.component';
 import { PersonsService } from '../../services/backend/persons/persons.service';
 import { isNullOrUndefined } from 'util';
@@ -46,7 +45,7 @@ export class PersonCardComponent implements OnInit {
     this.service.getPerson(0).subscribe(p => {
       let new_person_to_edit = this._updatePerson(this.person, p);
 
-      const dialogRef = this.dialog.open(PersonDialogComponent, {
+      const dialogRef = this.dialog.open(PersonEditPortal, {
         width: '420px',
         data: new_person_to_edit
       });

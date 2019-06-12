@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Shipment, Person, Order, Factura, Cargo, Place, Container, Invoice, Railbill } from '../../services/interfaces';
+import { Shipment, Person, Order, Factura, Cargo, Place, Container, Invoice, Railbill } from '../../interfaces/interfaces';
 import { ShipmentsService } from '../../services/backend/shipments/shipments.service';
 import { PersonsService } from '../../services/backend/persons/persons.service';
 import { OrderService } from '../../services/backend/order.service';

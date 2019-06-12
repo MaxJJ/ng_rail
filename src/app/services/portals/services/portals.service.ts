@@ -4,11 +4,10 @@ import { OrdersListComponent } from '../../../views/dashboard/orders-list/orders
 import { ORDER, SHIPMENT, DASHBOARD_DATA, DashData, PERSON, PLACE, PortalsData } from '../tokens';
 import { ShipmentsListComponent } from '../../../views/dashboard/shipments-list/shipments-list.component';
 import { OrderCardComponent } from '../../../components/order-card/order-card.component';
-import { Person, Place } from '../../interfaces';
-import { PersonDialogComponent } from '../../../components/person/person-edit-portal/person-dialog.component';
+import { Person, Place } from '../../../interfaces/interfaces';
 import { BehaviorSubject } from 'rxjs';
-import { PlaceAutocompleteComponent } from '../../../ui-components/places/place-autocomplete/place-autocomplete.component';
 import { PlaceEditPortalComponent } from '../../../components/place/place-edit-portal/place-edit-portal.component';
+import { PersonEditPortal } from '../../../components/person/person-edit-portal/person-edit-portal.component';
 
 export class PortalAndData {
   portal: ComponentPortal<any>;
@@ -57,13 +56,9 @@ export class PortalsService {
     return portal;
   }
 
-  personEditPortal(emitter: BehaviorSubject<Person>): ComponentPortal<PersonDialogComponent> {
+  personEditPortal(data: Person): PortalAndData {
 
-    injectorTokens.set(PERSON, emitter);
-    console.log(emitter.getValue());
-    let inj = new PortalInjector(this._injector, injectorTokens);
-    let portal = new ComponentPortal(PersonDialogComponent, null, inj);
-    return portal;
+    return this.createPortal(PERSON, data, PersonEditPortal);
   }
 
   placeEditPortal(data: Place): PortalAndData {

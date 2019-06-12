@@ -37,7 +37,7 @@ import { CardModule } from 'primeng/card';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { MatExpansionModule } from '@angular/material/expansion';
-import { PlaceAutocompleteComponent } from './ui-components/places/place-autocomplete/place-autocomplete.component';
+import { PlaceAutocompleteComponent } from './components/place/place-autocomplete/place-autocomplete.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTabsModule } from '@angular/material/tabs';
 import { OrderDetailsShipmentsComponent } from './ui-components/shipments/order_details_shipments/order-details-shipments/order-details-shipments.component';
@@ -49,8 +49,8 @@ import { PersonExpPanelFormComponent } from './ui-components/persons/person-exp-
 import { RtmeDirectoriesModule } from './modules/rtme-directories/rtme-directories.module';
 import { ShipmentFacturasComponent } from './ui-components/facturas/shipment-facturas/shipment-facturas.component';
 import { PersonRawComponent } from './components/person/person-raw/person-raw.component';
-import { PersonSearchComponent } from './ui-components/persons/person-search/person-search.component';
-import { PersonDialogComponent } from './components/person/person-edit-portal/person-dialog.component';
+import { PersonSearchComponent } from './components/person/person-search/person-search.component';
+import { PersonEditPortal } from './components/person/person-edit-portal/person-edit-portal.component';
 import { FacturaShowComponent } from './ui-components/facturas/factura-show/factura-show.component';
 import { FacturaFormComponent } from './ui-components/facturas/factura-form/factura-form.component';
 import { FacturaPersonComponent } from './ui-components/facturas/factura-person/factura-person.component';
@@ -202,7 +202,7 @@ const appRoutes: Routes = [
 
     PersonSearchComponent,
 
-    PersonDialogComponent,
+    PersonEditPortal,
 
     FacturaShowComponent,
 
@@ -298,7 +298,7 @@ const appRoutes: Routes = [
     PlaceDetailsComponent,
     OrderIninfoComponent,
     OrderInboundCargoComponent,
-    PersonDialogComponent,
+    PersonEditPortal,
     CargoModalComponent,
     OrdersSideMenuComponent,
     OrderDetailsSideMenuComponent,

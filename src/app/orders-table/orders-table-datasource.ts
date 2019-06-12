@@ -3,7 +3,7 @@ import { MatPaginator, MatSort } from '@angular/material';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
 import { OrderService } from '../services/backend/order.service';
-import { Order } from '../services/interfaces';
+import { Order } from '../interfaces/interfaces';
 
 
 // TODO: Replace this with your own data model type
@@ -21,7 +21,7 @@ import { Order } from '../services/interfaces';
 //   destination_place:string;
 //   shipments:Shipment[];
 
- 
+
 
 // }
 
@@ -57,9 +57,9 @@ import { Order } from '../services/interfaces';
 export class OrdersTableDataSource extends DataSource<Order> {
   // data: OrdersTableItem[] = EXAMPLE_DATA;
   data: Order[];
-  constructor(private paginator: MatPaginator, private sort: MatSort,private orders_data) {
+  constructor(private paginator: MatPaginator, private sort: MatSort, private orders_data) {
     super();
-    this.data=orders_data;
+    this.data = orders_data;
   }
 
   // getOrders(){
@@ -94,7 +94,7 @@ export class OrdersTableDataSource extends DataSource<Order> {
    *  Called when the table is being destroyed. Use this function, to clean up
    * any open connections or free any held resources that were set up during connect.
    */
-  disconnect() {}
+  disconnect() { }
 
   /**
    * Paginate the data (client-side). If you're using server-side pagination,

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Factura, Person } from '../../../services/interfaces';
+import { Factura, Person } from '../../../interfaces/interfaces';
 
 @Component({
   selector: 'factura-show',

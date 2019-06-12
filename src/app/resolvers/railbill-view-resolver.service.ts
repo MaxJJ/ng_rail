@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable, forkJoin } from 'rxjs';
 import { ShipmentsService } from '../services/backend/shipments/shipments.service';
-import { Shipment, Railbill, Order, Cargo, Factura } from '../services/interfaces';
+import { Shipment, Railbill, Order, Cargo, Factura } from '../interfaces/interfaces';
 import { map } from 'rxjs/operators';
 import { OrderService } from '../services/backend/order.service';
 

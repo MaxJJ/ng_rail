@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { RoadSection, Railbill } from '../../interfaces';
+import { RoadSection, Railbill } from '../../../interfaces/interfaces';
 import { Observable } from 'rxjs';
 
 const httpOptions = {

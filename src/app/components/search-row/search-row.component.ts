@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { OrderService } from '../../services/backend/order.service';
-import { Order } from '../../services/interfaces';
+import { Order } from '../../interfaces/interfaces';
 
 export interface SearchResult {
   type: string,

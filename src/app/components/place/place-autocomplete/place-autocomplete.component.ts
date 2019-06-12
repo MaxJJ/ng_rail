@@ -1,11 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter, Inject } from '@angular/core';
-import { FormControl } from '../../../../../node_modules/@angular/forms/forms';
+import { FormControl } from '@angular/forms';
 import { Place } from '../../../interfaces/interfaces';
 
 import { PlaceService } from '../../../services/backend/place.service';
-import { Observable, BehaviorSubject } from '../../../../../node_modules/rxjs';
-import { MatAutocompleteSelectedEvent, MatDialog } from '../../../../../node_modules/@angular/material/material';
-import { OrderIninfoComponent } from '../../../ui-components/dialogs/order-ininfo/order-ininfo.component';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { MatAutocompleteSelectedEvent, MatDialog } from '@angular/material';
 import { PLACE, PortalsData } from '../../../services/portals/tokens';
 
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Person } from '../../../services/interfaces';
+import { Person } from '../../../interfaces/interfaces';
 
 @Component({
   selector: 'rwb-consignee',

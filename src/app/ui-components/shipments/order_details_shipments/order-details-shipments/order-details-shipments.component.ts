@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Shipment, Cargo, Order, Totals } from '../../../../services/interfaces';
+import { Shipment, Cargo, Order, Totals } from '../../../../interfaces/interfaces';
 import { ShipmentsService } from '../../../../services/backend/shipments/shipments.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';

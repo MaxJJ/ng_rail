@@ -6,7 +6,7 @@ import {MatDatepicker, MatDatepickerInputEvent} from '@angular/material/datepick
 import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
 import { default as _rollupMoment, Moment} from 'moment';
-import { Order } from '../../../services/interfaces';
+import { Order } from '../../../interfaces/interfaces';
 
 const moment = _rollupMoment || _moment;
 

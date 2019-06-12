@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Person } from '../../../services/interfaces';
+import { Person } from '../../../interfaces/interfaces';
 import { FormControl, FormGroup } from '@angular/forms';
 import { PersonsService } from '../../../services/backend/persons/persons.service';
 import { Observable } from 'rxjs';

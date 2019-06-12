@@ -21,7 +21,7 @@ export class TopRightDirective implements AfterViewChecked {
   }
 
   ngAfterViewChecked(): void {
-    let btn = this.el.getElementsByClassName('mat-button-wrapper')[0];
-    console.log('after view checked ---', btn);
+    // let btn = this.el.getElementsByClassName('mat-button-wrapper')[0];
+    // console.log('after view checked ---', btn);
   }
 }

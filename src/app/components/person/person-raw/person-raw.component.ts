@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Person } from '../../../services/interfaces';
+import { Person } from '../../../interfaces/interfaces';
 
 
 @Component({

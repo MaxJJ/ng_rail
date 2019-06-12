@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { Package } from '../../../../services/interfaces';
+import { Package } from '../../../../interfaces/interfaces';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { DirectoriesService } from '../../../../services/backend/directories/directories.service';

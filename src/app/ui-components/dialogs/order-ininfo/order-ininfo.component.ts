@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatAutocompleteSelectedEvent, } from '@angular/material';
-import { Order, Place } from '../../../services/interfaces';
+import { Order, Place } from '../../../interfaces/interfaces';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports

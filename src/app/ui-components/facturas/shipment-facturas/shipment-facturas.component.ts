@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Shipment, Cargo, Factura, Order } from '../../../services/interfaces';
+import { Shipment, Cargo, Factura, Order } from '../../../interfaces/interfaces';
 import { CargoService } from '../../../services/backend/cargo/cargo.service';
 import { FacturaService } from '../../../services/backend/factura/factura.service';
 import { ActivatedRoute } from '@angular/router';

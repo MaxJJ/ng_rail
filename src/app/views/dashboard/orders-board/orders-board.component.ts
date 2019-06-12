@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Order } from '../../../services/interfaces';
+import { Order } from '../../../interfaces/interfaces';
 import { Portal } from '@angular/cdk/portal';
 import { DashData } from '../../../services/portals/tokens';
 import { PortalsService } from '../../../services/portals/services/portals.service';

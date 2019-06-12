@@ -1,0 +1,80 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Person edit/create</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="6px">
+      <person-search [person]="initial_person" fxFlex="80%"></person-search>
+      <button mat-button fxFlex (click)="createPerson()">Create</button>
+    </div>
+
+
+    <form [formGroup]="fg" (ngSubmit)="onSubmit()">
+
+
+      <mat-form-field fxFill>
+
+        <input matInput placeholder="id" formControlName="id">
+      </mat-form-field>
+      <mat-form-field fxFill>
+
+        <input matInput placeholder="Name" formControlName="name">
+      </mat-form-field>
+
+      <mat-form-field fxFill>
+
+        <input matInput placeholder="Sreet " formControlName="street_house">
+      </mat-form-field>
+
+      <mat-form-field fxFill>
+
+        <input matInput placeholder="Region " formControlName="region">
+      </mat-form-field>
+
+      <mat-form-field fxFill>
+
+        <input matInput placeholder="City " formControlName="city">
+      </mat-form-field>
+
+      <mat-form-field fxFill>
+
+        <input matInput placeholder="Postal Code " formControlName="postal_code">
+      </mat-form-field>
+
+
+      <mat-form-field>
+        <input matInput placeholder="Country" formControlName="country" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="countrySelected($event)">
+          <mat-option *ngFor="let country of filtered_list_of_countries | async" [value]="country">
+            {{country.name_rus}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+
+      <mat-form-field fxFill>
+
+        <input matInput placeholder="INN " formControlName="inn">
+      </mat-form-field>
+
+      <mat-form-field fxFill>
+
+        <input matInput placeholder="OKPO " formControlName="okpo">
+      </mat-form-field>
+
+      <mat-form-field fxFill>
+
+        <input matInput placeholder="Phone " formControlName="phone">
+      </mat-form-field>
+
+
+
+
+
+    </form>
+
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button>Ok</button>
+  </mat-card-actions>
+</mat-card>

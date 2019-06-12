@@ -1,10 +1,12 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { PLACE, PortalsData } from '../../../services/portals/tokens';
-import { Place } from '../../../services/interfaces';
+import { Place } from '../../../interfaces/interfaces';
 import { BehaviorSubject } from 'rxjs';
 import { FormGroup, FormControl } from '@angular/forms';
 import { FormsUtilService } from '../../../services/forms/forms-util.service';
 import { KpsService } from '../../../services/kps/kps.service';
+import { KpsStation } from '../../../interfaces/kps_interfaces';
+import { PlaceService } from '../../../services/backend/place.service';
 
 @Component({
   selector: 'app-place-edit-portal',
@@ -18,12 +20,14 @@ export class PlaceEditPortalComponent implements OnInit {
 
   fg: FormGroup;
 
+  kps_stations: KpsStation[];
   kpss: any[];
 
   constructor(
     @Inject(PLACE) public place_data: PortalsData,
     private forms: FormsUtilService,
     private kps: KpsService,
+    private service: PlaceService,
   ) { }
 
   ngOnInit() {
@@ -43,7 +47,41 @@ export class PlaceEditPortalComponent implements OnInit {
 
   findStationsInKps(key) {
     let qry = this.fg.get(key).value;
-    this.kps.findStation(qry).subscribe(v => this.kpss = v);
+    this.kps.findStation(qry).subscribe(v => this.kps_stations = v);
+
   }
 
+  placeSelected(val) {
+
+    this.fg = this.forms.createFormGroup(val);
+
+
+  }
+
+  kpsStationHandler(item: KpsStation) {
+
+    this.fg.get('place_name').setValue(item.Name);
+    this.fg.get('place_code').setValue(item.Code);
+    this.fg.get('kps_fields').setValue(item);
+    this.fg.get('road_name').setValue(item.RailwayName);
+    this.fg.get('road_name_abbr').setValue(item.AdministrationShortname);
+
+    console.log(item);
+  }
+
+  createPlace() {
+    this.service.createPlace().subscribe(v => {
+      this.fg = this.forms.createFormGroup(v);
+    })
+
+  }
+
+  submitChanges() {
+
+    this.change.next(this.fg.getRawValue());
+  }
+
+  cancelChanges() {
+    this.change.next(this.place);
+  }
 }

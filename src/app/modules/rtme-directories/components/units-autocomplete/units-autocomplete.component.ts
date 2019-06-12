@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DirectoriesService } from '../../../../services/backend/directories/directories.service';
 import { Observable } from 'rxjs';
-import { Unit } from '../../../../services/interfaces';
+import { Unit } from '../../../../interfaces/interfaces';
 import { FormControl } from '@angular/forms';
 import { isNullOrUndefined } from 'util';
 

@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { PersonDialogComponent } from '../../../components/person/person-edit-portal/person-dialog.component';
-import { Shipment, Container } from '../../../services/interfaces';
+import { PersonEditPortal } from '../../../components/person/person-edit-portal/person-edit-portal.component';
+import { Shipment, Container } from '../../../interfaces/interfaces';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ShipmentsService } from '../../../services/backend/shipments/shipments.service';
 import { StateService } from '../../../services/state/state.service';
@@ -28,7 +28,7 @@ export class ShipmentDialogComponent implements OnInit {
 
   });
 
-  constructor(public dialogRef: MatDialogRef<PersonDialogComponent>,
+  constructor(public dialogRef: MatDialogRef<PersonEditPortal>,
     @Inject(MAT_DIALOG_DATA) public data,
     private service: ShipmentsService,
     private state: StateService

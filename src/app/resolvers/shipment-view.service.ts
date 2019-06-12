@@ -3,7 +3,7 @@ import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/r
 import { Observable,forkJoin } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ShipmentsService } from '../services/backend/shipments/shipments.service';
-import { Shipment, Order, Railbill, Invoice, Factura } from '../services/interfaces';
+import { Shipment, Order, Railbill, Invoice, Factura } from '../interfaces/interfaces';
 // import 'rxjs/add/observable/forkJoin';
 import { OrderService } from '../services/backend/order.service';
 import { map } from 'rxjs/operators';

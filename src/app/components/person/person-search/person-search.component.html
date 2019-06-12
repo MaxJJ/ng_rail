@@ -1,0 +1,11 @@
+<mat-form-field fxFlex>
+  <input matInput [placeholder]="title" [matAutocomplete]="auto" [formControl]="persons_fc">
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="optionSelectedHandler($event)">
+    <mat-option *ngFor="let pers of filteredPersons" [value]="pers">
+
+      <span [style.font-size]="'12px'">{{pers.name}}</span>
+
+    </mat-option>
+  </mat-autocomplete>
+
+</mat-form-field>

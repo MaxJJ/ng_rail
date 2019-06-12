@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Person } from '../../../services/interfaces';
+import { Person } from '../../../interfaces/interfaces';
 import { PersonsService } from '../../../services/backend/persons/persons.service';
 import { Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';

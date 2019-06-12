@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Place } from '../../services/interfaces';
+import { Place } from '../../interfaces/interfaces';
 import { FormControl } from '@angular/forms';
 
 const EXPEDITORS:string[]=[

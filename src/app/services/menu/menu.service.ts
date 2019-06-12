@@ -2,7 +2,7 @@ import { Injectable, Type } from '@angular/core';
 import { Observable, Subject, Subscriber } from '../../../../node_modules/rxjs';
 import { Router } from '../../../../node_modules/@angular/router';
 import { OrderService } from '../backend/order.service';
-import { Order } from '../interfaces';
+import { Order } from '../../interfaces/interfaces';
 import { OrdersSideMenuComponent } from '../../orders-table/side-menu/orders-side-menu/orders-side-menu.component';
 import { OrderDetailsSideMenuComponent } from '../../views/order/order-details/side-menu/order-details-side-menu/order-details-side-menu.component';
 import { ShipmentViewSideMenuComponent } from '../../shipment/shipment/side-menu/shipment-view-side-menu/shipment-view-side-menu.component';

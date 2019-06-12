@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Factura, Shipment, Order, Cargo, Invoice } from '../../services/interfaces';
+import { Factura, Shipment, Order, Cargo, Invoice } from '../../interfaces/interfaces';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FacturaService } from '../../services/backend/factura/factura.service';
 import { FacturaViewData } from '../../resolvers/factura-view-resolver.service';

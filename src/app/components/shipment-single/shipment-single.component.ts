@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Shipment, Order, Railbill, Invoice, Factura } from '../../services/interfaces';
+import { Shipment, Order, Railbill, Invoice, Factura } from '../../interfaces/interfaces';
 
 @Component({
   selector: 'shipment-single',
