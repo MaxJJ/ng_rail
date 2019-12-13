@@ -42,7 +42,7 @@
     "moment": "^2.24.0",
     "ngx-soap": "^0.6.0",
     "node-pdftk": "^2.0.2",
-    "npm": "^6.9.0",
+    "npm": "^6.13.4",
     "path": "^0.12.7",
     "pdffiller": "0.0.10",
     "primeicons": "^1.0.0",
